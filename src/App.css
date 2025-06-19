@@ -1,0 +1,179 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+/* 원문 강조 */
+.original-text {
+  font-size: 1.5rem;
+  font-weight: 700;
+  background: #e6f0fa;
+  color: #1a237e;
+  padding: 1.5rem 1rem;
+  border-radius: 1rem;
+  box-shadow: 0 2px 12px rgba(30,64,175,0.07);
+  margin-bottom: 1.2rem;
+  text-align: left;
+}
+
+/* 주요 어휘 */
+.keywords-row {
+  display: flex;
+  gap: 0.7rem;
+  margin-bottom: 1.2rem;
+  flex-wrap: wrap;
+}
+.keyword-icon {
+  color: #1976d2;
+  margin-right: 0.2rem;
+}
+.keyword-tooltip {
+  position: relative;
+  cursor: pointer;
+  font-size: 0.95rem;
+  color: #1976d2;
+  border-bottom: 1px dotted #1976d2;
+}
+.keyword-tooltip:hover .tooltip-content {
+  display: block;
+}
+.tooltip-content {
+  display: none;
+  position: absolute;
+  left: 0;
+  top: 1.5rem;
+  background: #fff;
+  color: #222;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.5rem;
+  padding: 0.7rem 1rem;
+  font-size: 0.95rem;
+  z-index: 10;
+  min-width: 180px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+/* 난이도/분야 */
+.meta-info {
+  display: flex;
+  gap: 1.2rem;
+  align-items: center;
+  font-size: 1rem;
+  color: #607d8b;
+  margin-bottom: 0.5rem;
+}
+.difficulty {
+  font-weight: 600;
+  color: #388e3c;
+}
+.domain {
+  color: #1976d2;
+}
+
+/* 버튼 */
+.submit-btn {
+  background: #43a047;
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: 700;
+  padding: 0.9rem 0;
+  border: none;
+  border-radius: 0.7rem;
+  box-shadow: 0 2px 8px rgba(67,160,71,0.13);
+  margin-bottom: 1rem;
+  width: 100%;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+.submit-btn:hover {
+  background: #388e3c;
+  box-shadow: 0 4px 16px rgba(67,160,71,0.18);
+}
+.next-btn {
+  background: #1976d2;
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 600;
+  padding: 0.7rem 2.2rem;
+  border: none;
+  border-radius: 0.7rem;
+  box-shadow: 0 2px 8px rgba(25,118,210,0.13);
+  margin-left: 1rem;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+.next-btn:hover {
+  background: #1565c0;
+  box-shadow: 0 4px 16px rgba(25,118,210,0.18);
+}
+
+/* AI/피드백 영역 */
+.ai-section {
+  background: #f5faff;
+  border-radius: 1rem;
+  padding: 1.5rem 1rem;
+  margin-top: 2rem;
+  box-shadow: 0 2px 8px rgba(25,118,210,0.07);
+}
+.feedback-section {
+  background: #fffde7;
+  border-radius: 1rem;
+  padding: 1.5rem 1rem;
+  margin-top: 1.5rem;
+  box-shadow: 0 2px 8px rgba(255,193,7,0.07);
+  font-size: 1.05rem;
+}
+.feedback-highlight {
+  color: #d32f2f;
+  font-weight: 700;
+}
+.feedback-suggestion {
+  color: #388e3c;
+  font-style: italic;
+  font-weight: 600;
+}
+
+/* fade-in 애니메이션 */
+.fade-in {
+  animation: fadeIn 0.7s;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
