@@ -4,8 +4,7 @@ import { collection, getDocs, QuerySnapshot, type DocumentData } from 'firebase/
 import { db } from './firebase'
 import './index.css'
 import './App.css'
-import { Route, Routes, useNavigate } from 'react-router-dom'
-import FeedbackPage from './FeedbackPage'
+import { useNavigate } from 'react-router-dom'
 
 interface TranslationProblem {
   id: string;
@@ -125,43 +124,50 @@ function App() {
       const feedbackPrompt = `
 당신은 숙련된 번역가입니다. 학생의 번역에 대해 구체적인 피드백을 아래 6개 항목으로 나눠서 작성해 주세요.
 
-[중요 지시]
-- 각 항목은 반드시 "1. 종합 평가", "2. 좋은 점", "3. 아쉬운 점", "4. 추천 표현/개선", "5. 학습 제안", "6. 주요 표현/예문"처럼 번호+제목(마크다운 굵게)으로 시작해 주세요.
-- 각 항목의 내용은 반드시 ● 기호로 시작하는 문장(●와 문장 사이에 공백)으로 한 줄씩 나열해 주세요.
-- 각 항목의 ● 문장들은 줄바꿈(엔터)로 구분해 주세요.
-- "2. 좋은 점", "3. 아쉬운 점", "4. 추천 표현/개선"에서는 AI번역, 원문과의 비교를 통해 구체적 예시를 들어주세요.
-- 마크다운에서 굵게(**), 기울임(*), 따옴표(")는 번역/원문 표현에만 사용하고, 그 외에는 사용하지 마세요.
-- 각 항목의 제목과 ● 문장 사이에는 빈 줄(한 줄 띄우기)을 넣지 마세요.
+[CRITICAL 형식 규칙 - 절대 변경 금지]
+- 각 항목은 정확히 "1. 종합 평가", "2. 좋은 점", "3. 아쉬운 점", "4. 추천 표현/개선", "5. 학습 제안", "6. 주요 표현/예문" 형식으로 시작
+- 번호와 제목 사이에 점(.) 하나만 사용, 다른 기호나 별표(**) 절대 사용 금지
+- 각 항목의 내용은 반드시 ‧ 기호로 시작하는 줄로 구성
+- 각 ‧ 줄은 독립된 줄바꿈으로 구분
+- "6. 주요 표현/예문"에서는 반드시 아래 형식 준수:
+  * ‧ 중요 표현: 한국어표현 → 중국어표현
+  * ‧ 원문 예문 1: 한국어 예문
+  * ‧ 예문 번역 1: 중국어 번역
+  * ‧ 원문 예문 2: 한국어 예문
+  * ‧ 예문 번역 2: 중국어 번역
+  * (예문은 최소 2개, 최대 3개)
 
-[출력 예시]
+[출력 형식 예시]
 1. 종합 평가
-● 학생 번역은 원문의 의미를 잘 전달함
-● 전달력이 좋고 자연스러움 유지 (8.5/10)
+‧ 학생 번역은 원문의 의미를 잘 전달함
+‧ 전달력이 좋고 자연스러움 유지 (8.5/10)
 
 2. 좋은 점
-● 어휘를 문맥에 맞게 잘 선택했어요
-● "경제 통계" → "经济统计"를 올바르게 번역했어요.
+‧ 어휘를 문맥에 맞게 잘 선택했어요
+‧ "경제 통계" → "经济统计"를 올바르게 번역했어요
 
 3. 아쉬운 점
-● "혁신 기술"이 "기술 변화"로 번역되어 의미가 약화됨
+‧ "혁신 기술"이 "기술 변화"로 번역되어 의미가 약화됨
 
 4. 추천 표현/개선
-● "경제 회복" → "经济复苏"가 더 자연스러움
+‧ "경제 회복" → "经济复苏"가 더 자연스러움
 
 5. 학습 제안
-● 접속사 사용과 문장 분리 연습 권장
+‧ 접속사 사용과 문장 분리 연습 권장
 
 6. 주요 표현/예문
-● 중요 표현: **경제 회복**
-  원문 예문: "정부는 경제 회복을 최우선 과제로 삼고 있다."
-  예문 번역: "政府将经济复苏作为首要任务。"
+‧ 중요 표현: 경제 회복 → 经济复苏(jīng jì fù sū)
+‧ 원문 예문 1: 정부는 경제 회복을 최우선 과제로 삼고 있다.
+‧ 예문 번역 1: 政府将经济复苏作为首要任务。
+‧ 원문 예문 2: 경제 회복 속도가 예상보다 빠르다.
+‧ 예문 번역 2: 经济复苏的速度比预期的要快。
 
 [입력 데이터]
 - 원문 언어: ${sourceLanguage}
 - 번역 언어: ${targetLanguage}
 
 원문:
-${sourceLanguage}
+${problem["한국어"]}
 
 학생 번역문:
 ${userTranslation}
@@ -169,7 +175,7 @@ ${userTranslation}
 AI 번역문:
 ${aiTranslations["ChatGPT_번역"] || aiTranslations["Gemini_번역"] || ''}
 
-위 데이터를 참고하여 위 예시와 완전히 동일한 마크다운 형식으로 피드백을 작성해 주세요.`;
+위 데이터를 참고하여 위 예시와 완전히 동일한 형식으로 피드백을 작성해 주세요.`;
       const data = {
         contents: [
           { parts: [ { text: feedbackPrompt } ] }
@@ -178,13 +184,16 @@ ${aiTranslations["ChatGPT_번역"] || aiTranslations["Gemini_번역"] || ''}
       const response = await axios.post(url, data, { headers: { 'Content-Type': 'application/json' } });
       const feedbackText = response.data.candidates?.[0]?.content?.parts?.[0]?.text || '피드백을 받아오지 못했습니다.';
       setFeedback(feedbackText)
-      // localStorage에 데이터 저장
+      
+      // localStorage에 최신 데이터 저장 (navigate 전에 반드시 완료)
       localStorage.setItem('feedback', feedbackText)
       localStorage.setItem('original', problem["한국어"])
       localStorage.setItem('user', userTranslation)
       localStorage.setItem('ai', aiTranslations["ChatGPT_번역"] || aiTranslations["Gemini_번역"] || '')
       localStorage.setItem('sourceLanguage', sourceLanguage)
       localStorage.setItem('targetLanguage', targetLanguage)
+      
+      // 저장 완료 후 페이지 이동
       navigate('/feedback')
     } catch (err: any) {
       setFeedbackError('피드백 요청에 실패했습니다.')
@@ -207,174 +216,112 @@ ${aiTranslations["ChatGPT_번역"] || aiTranslations["Gemini_번역"] || ''}
   }
 
   return (
-    <div className="min-h-screen bg-[#f4f6f8] py-8">
-      <div className="max-w-4xl w-full mx-auto px-8">
-        <h1 className="text-3xl font-bold text-center mb-8">번역 연습</h1>
-        {/* 난이도/도착언어/분야 선택 */}
-        <div className="flex flex-col md:flex-row gap-6 mb-6">
-          <div className="flex-1">
-            <label className="font-semibold mb-1 block" htmlFor="difficulty">난이도 선택</label>
-            <select
-              id="difficulty"
-              className="w-full bg-white text-black border rounded shadow-sm p-2"
-              value={difficulty}
-              onChange={handleDifficultyChange}
-            >
-              {availableDifficulties.map((d, i) => (
-                <option key={i} value={d}>{d}</option>
-              ))}
-            </select>
-          </div>
-          <div className="flex-1">
-            <label className="font-semibold mb-1 block" htmlFor="domain">분야 선택</label>
-            <select
-              id="domain"
-              className="w-full bg-white text-black border rounded shadow-sm p-2"
-              value={domain}
-              onChange={handleDomainChange}
-            >
-              {availableDomains.map((d, i) => (
-                <option key={i} value={d}>{d}</option>
-              ))}
-            </select>
-          </div>
-          <div className="flex-1">
-            <label className="font-semibold mb-1 block" htmlFor="language-pair">언어쌍</label>
-            <select
-              id="language-pair"
-              className="w-full bg-white text-black border rounded shadow-sm p-2"
-              value={targetLanguage}
-              onChange={handleTargetLanguageChange}
-            >
-              {languagePairs.map((pair, i) => (
-                <option key={i} value={pair}>{pair}</option>
-              ))}
-            </select>
-          </div>
+    <div className="min-h-screen bg-slate-50 py-10 px-2" style={{ fontFamily: `'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', 'SimSun', 'Noto Sans KR', 'Apple SD Gothic Neo', Arial, sans-serif` }}>
+      <div className="w-full max-w-6xl mx-auto" style={{ minWidth: '1152px' }}>
+        {/* 필터 영역 */}
+        <div className="flex flex-wrap gap-4 mb-6">
+          <select className="bg-white text-black px-3 py-2 rounded-md border border-gray-300 appearance-none" value={difficulty} onChange={handleDifficultyChange}>
+            {availableDifficulties.map((d, i) => (
+              <option key={i} value={d}>{d === '전체' ? '난이도: 전체' : d}</option>
+            ))}
+          </select>
+          <select className="bg-white text-black px-3 py-2 rounded-md border border-gray-300 appearance-none" value={domain} onChange={handleDomainChange}>
+            {availableDomains.map((d, i) => (
+              <option key={i} value={d}>{d === '전체' ? '분야: 전체' : d}</option>
+            ))}
+          </select>
+          <select className="bg-white text-black px-3 py-2 rounded-md border border-gray-300 appearance-none" value={targetLanguage} onChange={handleTargetLanguageChange}>
+            {languagePairs.map((pair, i) => (
+              <option key={i} value={pair}>{i === 0 ? '언어쌍: ' + pair : pair}</option>
+            ))}
+          </select>
         </div>
-        {/* 문제 표시 */}
         {problem ? (
           <>
-            {/* 난이도/분야 */}
-            <div className="meta-info mb-1">
-              <span className="difficulty">난이도: {problem["난이도"]}</span>
-              {problem["분야"] && <span className="domain ml-2">분야: {problem["분야"]}</span>}
-            </div>
-            {/* 원문 강조 + 하이라이트 */}
-            <div className="original-text fade-in mb-2 text-lg">
-              {renderOriginalTextWithHighlight(problem["한국어"])}
-            </div>
-            {/* 힌트 보기 버튼 및 주요 어휘 */}
-            {problem["주요어휘"] && Array.isArray(problem["주요어휘"]) && (
-              <div className="mb-4">
+            {/* 문제 카드 */}
+            <div className="bg-white border border-gray-200 rounded-xl p-8 mb-6 shadow" style={{ minWidth: 0 }}>
+              <p className="font-bold mb-4 text-gray-700 text-xl">아래 문장을 번역해 보세요.</p>
+              <div className="bg-blue-100 border border-blue-300 rounded-lg px-6 py-4 text-blue-900 text-base flex items-center justify-between gap-4 mb-6" style={{minHeight:'120px'}}>
+                <span className="font-medium text-lg flex-1" style={{whiteSpace:'normal', display:'flex', alignItems:'center'}}>{renderOriginalTextWithHighlight(problem["한국어"])}</span>
                 <button
-                  className="bg-blue-100 text-blue-700 px-4 py-2 rounded shadow-sm font-semibold mb-2 hover:bg-blue-200 transition"
+                  className="bg-blue-400 text-white px-4 py-2 rounded-md text-sm hover:bg-blue-500 flex items-center gap-1"
                   onClick={() => setShowHints(v => !v)}
+                  type="button"
                 >
-                  {showHints ? '힌트 닫기' : '힌트 보기'}
+                  <span className="mr-1">🔍</span> 힌트 보기
                 </button>
-                {showHints && (
-                  <div className="flex flex-wrap gap-2 mt-2">
-                    {problem["주요어휘"].map((vocab: any, idx: number) => (
-                      <button
-                        key={idx}
-                        className={`px-3 py-1 rounded-full border border-blue-200 bg-blue-50 text-blue-800 text-sm font-medium hover:bg-blue-200 transition ${highlightWord === vocab.korean ? 'ring-2 ring-yellow-400' : ''}`}
-                        onClick={() => {
-                          if (highlightWord === vocab.korean) {
-                            setHighlightWord(null); setSelectedVocab(null);
-                          } else {
-                            setHighlightWord(vocab.korean); setSelectedVocab(vocab);
-                          }
-                        }}
-                        type="button"
-                      >
-                        {vocab.korean}
-                      </button>
-                    ))}
-                  </div>
-                )}
-                {/* 어휘 상세 정보 카드 */}
-                {selectedVocab && (
-                  <div className="mt-3 p-4 bg-blue-50 border border-blue-200 rounded shadow-sm w-full max-w-md">
-                    <div className="font-bold text-blue-900 mb-1">{selectedVocab.korean}</div>
-                    <div className="text-sm mb-1"><b>중국어:</b> {selectedVocab.chinese}</div>
-                    <div className="text-sm mb-1"><b>Pinyin:</b> {selectedVocab.pinyin}</div>
-                    <div className="text-sm"><b>중요도:</b> {selectedVocab.importance}</div>
-                  </div>
-                )}
               </div>
-            )}
-            {/* 나의 번역 입력 */}
-            <label className="font-semibold mb-1 block text-left" htmlFor="user-translation">나의 번역</label>
-            <textarea
-              id="user-translation"
-              className="w-full border rounded p-2 mb-2 min-h-[100px]"
-              value={userTranslation}
-              onChange={e => setUserTranslation(e.target.value)}
-              placeholder="여기에 번역을 입력하세요..."
-              required
-            />
-            {/* 버튼 그룹: 모두 동일한 스타일(노란색, 흰색 텍스트, 굵은 글씨, 크기 동일) */}
-            <div className="btn-group flex justify-between mt-6 mb-2 gap-4">
-              <button
-                className="submit-btn flex-1 bg-yellow-400 hover:bg-yellow-500 text-white font-bold py-3 rounded text-lg transition"
-                onClick={() => setCurrentIndex(i => i - 1)}
-                disabled={currentIndex === 0}
-                type="button"
-                style={{ minWidth: 0 }}
-              >
-                이전 문제
-              </button>
-              <button
-                className="submit-btn flex-1 bg-yellow-400 hover:bg-yellow-500 text-white font-bold py-3 rounded text-lg transition"
-                type="submit"
-                onClick={handleSubmit}
-                disabled={loading}
-                style={{ minWidth: 0 }}
-              >
-                {loading ? 'AI 번역 결과 가져오는 중...' : '내 번역 제출하기'}
-              </button>
-              <button
-                className="submit-btn flex-1 bg-yellow-400 hover:bg-yellow-500 text-white font-bold py-3 rounded text-lg transition"
-                onClick={() => setCurrentIndex(i => i + 1)}
-                disabled={currentIndex === problems.length - 1}
-                type="button"
-                style={{ minWidth: 0 }}
-              >
-                다음 문제
-              </button>
+              {/* 힌트/어휘 */}
+              {showHints && problem["주요어휘"] && Array.isArray(problem["주요어휘"]) && (
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {problem["주요어휘"].map((vocab: any, idx: number) => (
+                    <button
+                      key={idx}
+                      className={`px-3 py-1 rounded-full border border-blue-200 bg-blue-50 text-blue-800 text-sm font-medium hover:bg-blue-200 transition ${highlightWord === vocab.korean ? 'ring-2 ring-yellow-400' : ''}`}
+                      onClick={() => {
+                        if (highlightWord === vocab.korean) {
+                          setHighlightWord(null); setSelectedVocab(null);
+                        } else {
+                          setHighlightWord(vocab.korean); setSelectedVocab(vocab);
+                        }
+                      }}
+                      type="button"
+                    >
+                      {vocab.korean}
+                    </button>
+                  ))}
+                </div>
+              )}
+              {/* 어휘 상세 */}
+              {showHints && selectedVocab && (
+                <div className="mt-3 p-4 bg-blue-50 border border-blue-200 rounded shadow-sm w-full max-w-md">
+                  <div className="font-bold text-blue-900 mb-1">{selectedVocab.korean}</div>
+                  <div className="text-sm mb-1"><b>중국어:</b> {selectedVocab.chinese}</div>
+                  <div className="text-sm mb-1"><b>Pinyin:</b> {selectedVocab.pinyin}</div>
+                  <div className="text-sm"><b>중요도:</b> {selectedVocab.importance}</div>
+                </div>
+              )}
+              {/* 번역 입력 */}
+              <textarea
+                id="user-translation"
+                className="w-full border border-gray-300 rounded-md p-3 mt-2 resize-y focus:outline-none focus:ring-2 focus:ring-blue-300"
+                rows={3}
+                value={userTranslation}
+                onChange={e => setUserTranslation(e.target.value)}
+                placeholder="여기에 번역 입력..."
+                required
+                style={{fontFamily: `'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', 'SimSun', 'Noto Sans KR', 'Apple SD Gothic Neo', Arial, sans-serif`}}
+              />
+              {/* 버튼 그룹 */}
+              <div className="flex justify-center gap-3 mt-6">
+                <button className="bg-white border border-gray-300 px-6 py-2 rounded-md text-gray-700 hover:bg-gray-100" onClick={() => setCurrentIndex(i => i - 1)} disabled={currentIndex === 0} type="button">← 이전 문제</button>
+                <button className="bg-blue-600 text-white px-8 py-2 rounded-md font-bold hover:bg-blue-700" type="submit" onClick={handleSubmit} disabled={loading}>{loading ? 'AI 번역 결과 가져오는 중...' : '내 번역 제출하기'}</button>
+                <button className="bg-white border border-gray-300 px-6 py-2 rounded-md text-gray-700 hover:bg-gray-100" onClick={() => setCurrentIndex(i => i + 1)} disabled={currentIndex === problems.length - 1} type="button">다음 문제 →</button>
+              </div>
+              <div className="text-center text-gray-500 mb-4">{currentIndex + 1} / {problems.length}</div>
+              {error && <div className="text-red-500 mb-4">{error}</div>}
             </div>
-            <div className="text-center text-gray-500 mb-4">{currentIndex + 1} / {problems.length}</div>
-            {error && <div className="text-red-500 mb-4">{error}</div>}
-            {/* AI/피드백 영역 */}
+            {/* AI 번역 결과 카드 */}
             {Object.keys(aiTranslations).length > 0 && (
-              <div className="ai-section fade-in mt-8">
-                <div className="font-semibold mb-2">AI 번역 결과</div>
-                <div className="flex flex-row gap-4 mb-6">
-                  {/* ChatGPT 번역 */}
-                  <div className="flex-1 bg-gray-50 border rounded p-4">
-                    <div className="text-xs text-gray-500 mb-1 font-bold">ChatGPT 번역</div>
-                    <div>{aiTranslations["ChatGPT_번역"]}</div>
+              <div className="bg-white border border-gray-200 rounded-xl p-6 shadow mb-8">
+                <h3 className="font-bold text-lg mb-4">AI 번역 결과</h3>
+                <div className="flex flex-wrap gap-4 mt-2">
+                  <div className="flex-1 min-w-[220px] bg-sky-50 border-2 border-sky-200 rounded-lg p-4">
+                    <span className="font-bold block mb-2 text-gray-700">ChatGPT 번역</span>
+                    <p className="text-gray-900 whitespace-pre-line">{aiTranslations["ChatGPT_번역"]}</p>
                   </div>
-                  {/* Gemini 번역 */}
-                  <div className="flex-1 bg-gray-50 border rounded p-4">
-                    <div className="text-xs text-gray-500 mb-1 font-bold">Gemini 번역</div>
-                    <div>{aiTranslations["Gemini_번역"]}</div>
+                  <div className="flex-1 min-w-[220px] bg-sky-50 border-2 border-sky-200 rounded-lg p-4">
+                    <span className="font-bold block mb-2 text-gray-700">Gemini 번역</span>
+                    <p className="text-gray-900 whitespace-pre-line">{aiTranslations["Gemini_번역"]}</p>
                   </div>
-                  {/* 나의 번역 */}
-                  <div className="flex-1 bg-blue-50 border rounded p-4">
-                    <div className="text-xs text-blue-700 mb-1 font-bold">나의 번역</div>
-                    <div>{userTranslation}</div>
+                  <div className="flex-1 min-w-[220px] bg-rose-50 border-2 border-rose-200 rounded-lg p-4">
+                    <span className="font-bold block mb-2 text-gray-700">나의 번역</span>
+                    <p className="text-gray-900 whitespace-pre-line">{userTranslation}</p>
                   </div>
                 </div>
-                {/* 비교 분석 피드백 받기 버튼 및 결과 */}
-                <div className="mt-8 feedback-section fade-in">
-                  <button
-                    className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition"
-                    onClick={fetchGeminiFeedback}
-                    disabled={feedbackLoading}
-                  >
-                    {feedbackLoading ? '피드백 생성 중...' : '비교 분석 피드백 받기'}
+                <div className="text-center mt-6">
+                  <button className="bg-blue-600 text-white px-6 py-2 rounded-md font-bold flex items-center justify-center gap-2 mx-auto hover:bg-blue-700" onClick={fetchGeminiFeedback} disabled={feedbackLoading}>
+                    <span>📊</span> {feedbackLoading ? '피드백 생성 중...' : '비교 분석 피드백 받기'}
                   </button>
                   {feedbackError && <div className="text-red-500 mt-2">{feedbackError}</div>}
                   {feedback && (
