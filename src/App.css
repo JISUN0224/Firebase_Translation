@@ -177,3 +177,127 @@
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
 }
+
+.custom-radio {
+  width: 0.6rem !important;
+  height: 0.6rem !important;
+  min-width: 0.6rem !important;
+  min-height: 0.6rem !important;
+  max-width: 0.6rem !important;
+  max-height: 0.6rem !important;
+  border-radius: 50% !important;
+  aspect-ratio: 1 / 1 !important;
+  flex-shrink: 0 !important;
+  display: block !important;
+  position: relative !important;
+  border: 2px solid #d1d5db !important; /* gray-300 */
+  background: #fff !important;
+  transition: border-color 0.2s, background 0.2s;
+}
+.custom-radio:checked {
+  border-color: #ec4899 !important; /* pink-500 */
+  background: #ec4899 !important;
+}
+
+/* 5단계 개선된 스타일 */
+.star-filled {
+  color: #fbbf24 !important; /* yellow-400 */
+  text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+.star-empty {
+  color: #d1d5db !important; /* gray-300 */
+}
+
+/* 애니메이션 효과 */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.slide-in {
+  animation: slideIn 0.5s ease-out;
+}
+
+/* 호버 효과 */
+.hover-lift {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+
+/* 그라데이션 배경 */
+.gradient-bg {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+/* 점수 표시 개선 */
+.score-badge {
+  background: linear-gradient(45deg, #4f46e5, #7c3aed);
+  color: white;
+  font-weight: bold;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* 5단계 비교 섹션 높이 통일 */
+.comparison-container {
+  align-items: stretch;
+}
+
+.comparison-container > div {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+/* 대응되는 섹션들의 높이를 맞추기 위한 JavaScript 연동용 클래스 */
+.comparison-section {
+  min-height: var(--section-min-height, auto);
+}
+
+/* 개선 제안 세부 항목들 높이 매칭 */
+.improvement-problems-user,
+.improvement-problems-ai,
+.improvement-suggestion-user,
+.improvement-suggestion-ai,
+.improvement-reasoning-user,
+.improvement-reasoning-ai {
+  display: flex;
+  flex-direction: column;
+  min-height: var(--item-min-height, auto);
+  transition: min-height 0.2s ease;
+}
+
+/* 개선 제안 세부 항목들의 콘텐츠 영역 */
+.improvement-problems-user > div:last-child,
+.improvement-problems-ai > div:last-child,
+.improvement-suggestion-user > div:last-child,
+.improvement-suggestion-ai > div:last-child,
+.improvement-reasoning-user > div:last-child,
+.improvement-reasoning-ai > div:last-child {
+  flex: 1;
+  display: flex;
+  align-items: stretch;
+}
+
+/* 개선된 호버 효과 */
+.comparison-section {
+  transition: all 0.2s ease;
+}
+
+.comparison-section:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}

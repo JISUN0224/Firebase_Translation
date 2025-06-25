@@ -99,3 +99,12 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+input[type="radio"] {
+  padding: 0 !important;
+  border-radius: 50% !important;
+  border-width: initial !important;
+  font-size: initial !important;
+  width: auto;
+  height: auto;
+}
