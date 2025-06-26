@@ -35,34 +35,20 @@ interface TranslationProblem {
 // Gemini API 호출 (실제 평가)
 async function callGeminiEvaluation(originalText: string, translations: any, userEval: any) {
   const prompt = `
-당신은 한국어-중국어 번역 전문가입니다. 다음 번역 평가를 수행해주세요.
+한국어-중국어 번역 전문가로서 다음 번역을 평가해주세요. 피드백 설명은 한국어로 해주세요. 인용을 위한 중국어 사용은 괜찮아요.
 
 **원문:** ${originalText}
+**번역문 A:** ${translations.A}
+**번역문 B:** ${translations.B}
+**번역문 C:** ${translations.C}
 
-**번역문들:**
-- 번역문 A: ${translations.A}
-- 번역문 B: ${translations.B}
-- 번역문 C: ${translations.C}
-
-**평가 기준:**
-1. 어휘 선택의 정확성과 적절성
-2. 문법적 정확성과 구조
-3. 자연스러운 표현과 유창성
-4. 맞춤법과 표기법
-
-**요구사항:**
-1. 각 번역문을 1-5점으로 정확히 평가
-2. 가장 문제가 많은 번역문을 선택하고 구체적인 문제점 3가지 이상 제시
-3. 실제로 개선된 번역문을 제시 (추상적 설명 금지)
-4. 순위를 매기고 각각에 대한 구체적인 근거 제시
-
-**응답 형식:**
+다음 JSON 형식으로 응답:
 {
   "improvement": {
     "worstTranslation": "A|B|C",
-    "problems": "• 문제점 1\n• 문제점 2\n• 문제점 3",
-    "suggestion": "실제 개선된 번역문 전체",
-    "reasoning": "• 근거 1\n• 근거 2\n"
+    "problems": "• 문제점1\n• 문제점2\n",
+    "suggestion": "개선된 번역문 전체",
+    "reasoning": "• 개선 근거1\n• 개선 근거2\n"
   },
   "scores": {
     "A": {"vocab": 점수, "grammar": 점수, "naturalness": 점수, "spelling": 점수},
@@ -70,13 +56,16 @@ async function callGeminiEvaluation(originalText: string, translations: any, use
     "C": {"vocab": 점수, "grammar": 점수, "naturalness": 점수, "spelling": 점수}
   },
   "ranking": {
-    "first": {"translation": "A|B|C", "reason": "• 이유 1\n• 이유 2"},
-    "second": {"translation": "A|B|C", "reason": "• 이유 1\n• 이유 2"},
-    "third": {"translation": "A|B|C", "reason": "• 이유 1\n• 이유 2"}
+    "first": {"translation": "A|B|C", "reason": "한 문장으로 이유 설명"},
+    "second": {"translation": "A|B|C", "reason": "한 문장으로 이유 설명"},
+    "third": {"translation": "A|B|C", "reason": "한 문장으로 이유 설명"}
   }
 }
 
-**중요:** 모든 문자열 값에서 문제점과 이유는 '• '로 시작하는 불릿 포인트 형식으로 작성해주세요.
+**중요:** 
+- problems와 reasoning은 '• '로 시작하는 불릿 포인트로 작성
+- ranking의 reason은 각각 한 문장으로만 작성
+- 점수는 1-5점 사이 정수
 `;
 
   const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
@@ -87,7 +76,7 @@ async function callGeminiEvaluation(originalText: string, translations: any, use
     console.log('Gemini API 호출 시도 1/3');
     const response = await axios.post(url, data, { 
       headers: { 'Content-Type': 'application/json' },
-      timeout: 30000
+      timeout: 60000
     });
     const text = response.data.candidates?.[0]?.content?.parts?.[0]?.text || '';
     // Gemini가 코드블록(```json ... ```)으로 감싸는 경우도 있으니 파싱
@@ -484,7 +473,7 @@ export default function GradingPage() {
               <span>💡</span>근거
             </div>
             <div className="bg-white p-3 rounded border text-sm text-gray-600 italic">
-              {improvement.reasoning}
+              {renderBulletPoints(improvement.reasoning)}
             </div>
           </div>
         </div>
@@ -678,18 +667,18 @@ export default function GradingPage() {
     const translatorLabels = {
       'ChatGPT_번역': 'ChatGPT',
       'Gemini_번역': 'Gemini',
-      'human': '인간 번역자',
+      '중국어': '인간 번역자',
     };
     const translatorIcons = {
       'ChatGPT_번역': '🤖',
       'Gemini_번역': '✨',
-      'human': '👤',
+      '중국어': '👤',
     };
-    // 번역문 A: ChatGPT, B: Gemini, C: 인간 번역자(예시)
+    // 번역문 A: ChatGPT, B: Gemini, C: 중국어(인간번역)
     const mapping = [
       { key: 'A', trKey: 'ChatGPT_번역' },
       { key: 'B', trKey: 'Gemini_번역' },
-      { key: 'C', trKey: 'human' },
+      { key: 'C', trKey: '중국어' },
     ];
     return (
       <div className="p-4 bg-green-50 rounded-lg border border-green-200">

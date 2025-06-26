@@ -286,10 +286,10 @@ ${userTranslation}
             {/* 문제 카드 */}
             <div className="bg-white border border-gray-200 rounded-xl p-8 mb-6 shadow" style={{ minWidth: 0 }}>
               <p className="font-bold mb-4 text-gray-700 text-xl">아래 문장을 번역해 보세요.</p>
-              <div className="bg-blue-100 border border-blue-300 rounded-lg px-6 py-4 text-blue-900 text-base flex items-center justify-between gap-4 mb-6" style={{minHeight:'120px'}}>
-                <span className="font-medium text-lg flex-1" style={{whiteSpace:'normal', display:'flex', alignItems:'center'}}>{renderOriginalTextWithHighlight(problem["한국어"])}</span>
+              <div className="bg-blue-100 border border-blue-300 rounded-lg px-6 py-4 text-blue-900 text-base flex items-center gap-4 mb-6" style={{minHeight:'120px'}}>
+                <span className="font-medium text-lg flex-1">{renderOriginalTextWithHighlight(problem["한국어"])}</span>
                 <button
-                  className="bg-blue-400 text-white px-4 py-2 rounded-md text-sm hover:bg-blue-500 flex items-center gap-1"
+                  className="bg-blue-400 text-white px-4 py-2 rounded-md text-sm hover:bg-blue-500 flex items-center gap-1 flex-shrink-0"
                   onClick={() => setShowHints(v => !v)}
                   type="button"
                 >
