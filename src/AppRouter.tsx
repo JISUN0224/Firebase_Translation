@@ -7,7 +7,8 @@ import SimilarityAnalysis from './components/Translation/SimilarityAnalysis';
 import GradingPage from './components/Translation/GradingPage';
 import TimedTranslationGame from './components/Trans_Training/TimedTranslationGame';
 import ContextVocabQuizGame from './components/Trans_Training/ContextVocabQuizGame';
-import ReverseTranslationChallengeMenu from './components/Trans_Training/ReverseTranslationChallengeMenu';
+import ReverseTranslation from './components/Trans_Training/reverseTranslation';
+import SubtitleTranslation from './components/Trans_Training/SubtitleTranslation';
 
 function AppRouter() {
   return (
@@ -19,7 +20,8 @@ function AppRouter() {
       <Route path="/translation/grading" element={<GradingPage />} />
       <Route path="/practice/timed" element={<TimedTranslationGame />} />
       <Route path="/practice/vocabquiz" element={<ContextVocabQuizGame />} />
-      <Route path="/practice/reverse-challenge" element={<ReverseTranslationChallengeMenu />} />
+      <Route path="/practice/reverse-translation" element={<ReverseTranslation />} />
+      <Route path="/practice/subtitle-translation" element={<SubtitleTranslation />} />
       {/* 추후: /translation/grading 등 추가 */}
     </Routes>
   );

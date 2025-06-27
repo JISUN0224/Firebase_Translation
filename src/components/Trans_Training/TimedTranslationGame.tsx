@@ -1000,6 +1000,10 @@ const TimedTranslationGame: React.FC = () => {
       </div>
       {/* 오른쪽: 시간 안내 박스 */}
       <div className="w-full md:w-80 flex-shrink-0">
+        {/* 왼쪽과 동일한 상단 여백 추가 */}
+        <div className="w-full flex items-center mb-2" style={{visibility: 'hidden', height: 'auto'}}>
+          <div>placeholder</div>
+        </div>
         <GuidePanel />
       </div>
     </div>

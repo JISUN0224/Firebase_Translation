@@ -28,6 +28,7 @@ const menuCards = [
     description: '다양한 방식으로 번역 실력을 향상시켜보세요',
     links: [
       { label: '시간제한 번역', to: '/practice/timed' },
+      { label: '자막 번역 연습', to: '/practice/subtitle-translation' },
     ] as MenuLink[],
     border: 'border-yellow-400',
     hover: 'hover:border-yellow-500',
@@ -68,7 +69,7 @@ function GoogleLoginButton() {
       <button onClick={handleLogout} className="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300 text-sm">로그아웃</button>
     </div>
   ) : (
-    <div style={{ position: 'absolute', top: '2rem', right: '2rem', zIndex: 50 }}>
+    <div style={{ position: 'absolute', top: '4.5rem', right: '2rem', zIndex: 50 }}>
       <button
         onClick={handleLogin}
         className="flex flex-col items-center px-6 py-3 bg-white border border-gray-300 rounded-xl shadow hover:shadow-md hover:bg-gray-50 transition-all"
@@ -99,7 +100,7 @@ const MainDashboard: React.FC = () => {
   const navigate = useNavigate();
   const [showGameMenu, setShowGameMenu] = useState(false);
   return (
-    <div className="w-full max-w-5xl mx-auto py-8 px-2">
+    <div className="w-full h-screen py-8 px-2">
       <GoogleLoginButton />
       <div className="text-center mb-6">
         <div className="text-3xl md:text-4xl font-bold text-blue-800 flex items-center justify-center gap-2 mb-2">
@@ -158,10 +159,10 @@ const MainDashboard: React.FC = () => {
                       <li>
                         <button
                           className="flex items-center gap-2 text-blue-700 hover:underline text-base"
-                          onClick={e => { e.stopPropagation(); navigate('/practice/reverse-challenge'); }}
+                          onClick={e => { e.stopPropagation(); navigate('/practice/reverse-translation'); }}
                           type="button"
                         >
-                          <span className="text-xs">🔄</span> 역반향 번역 챌린지
+                          <span className="text-xs">🔄</span> 역방향 번역 챌린지
                         </button>
                       </li>
                     </ul>
@@ -172,7 +173,7 @@ const MainDashboard: React.FC = () => {
           </div>
         ))}
       </div>
-      <div className="bg-blue-50 rounded-xl p-6 mt-8 max-w-3xl mx-auto">
+      <div className="bg-blue-50 rounded-xl p-6 mt-8">
         <div className="font-bold text-blue-700 mb-2 flex items-center gap-2">
           <span role="img" aria-label="bulb">💡</span> 추천 학습 경로
         </div>
