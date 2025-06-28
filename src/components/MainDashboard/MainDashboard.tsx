@@ -28,7 +28,7 @@ const menuCards = [
     description: '다양한 방식으로 번역 실력을 향상시켜보세요',
     links: [
       { label: '시간제한 번역', to: '/practice/timed' },
-      { label: '자막 번역 연습', to: '/practice/subtitle-translation' },
+      { label: '자막 번역 연습', to: '/subtitle-intro' },
     ] as MenuLink[],
     border: 'border-yellow-400',
     hover: 'hover:border-yellow-500',

@@ -25,8 +25,40 @@ const ChatbotWidget: React.FC<ChatbotWidgetProps> = ({ initialContext }) => {
     setLoading(true);
     setError(null);
     try {
-      // prompt: 피드백 내용 + 사용자의 질문
-      const prompt = `아래는 번역 피드백입니다.\n${initialContext}\n\n질문: ${userMessage}`;
+      // 현재 자막 정보에서 데이터 추출
+      const contextParts = initialContext.split('\n');
+      const currentText = contextParts.find(line => line.startsWith('현재 자막:'))?.replace('현재 자막:', '').trim() || '';
+      const referenceTranslation = contextParts.find(line => line.startsWith('번역:'))?.replace('번역:', '').trim() || '';
+      const userTranslation = contextParts.find(line => line.startsWith('내 번역:'))?.replace('내 번역:', '').trim() || '';
+
+      // 개선된 프롬프트
+      const prompt = `당신은 중국어-한국어 자막 번역 전문가입니다.
+
+【현재 자막 정보】
+• 중국어 원문: ${currentText}
+• 정답 번역: ${referenceTranslation}
+• 사용자 번역: ${userTranslation || '(아직 번역하지 않음)'}
+
+【자막 번역 규칙】
+• 글자 수: 30자 이하 권장 (최대 45자)
+• 구어체 사용, 자연스러운 대화체
+• 핵심 의미 전달, 불필요한 표현 생략
+• 읽기 속도 고려
+• 정답 번역을 기준으로, 격식체 또는 반말을 사용했는지 고려할 것
+
+【답변 규칙】
+- 간결하고 실용적으로 답변
+- 불필요한 설명 최소화
+- "**" 같은 강조 기호 사용 금지
+- 번호나 • 기호로 구조화할 것
+- 한 줄당 최대 30자 내외로 작성
+
+【출력 예시】
+• "입니다~"보다는 편한 말투가 더 적합합니다
+• 글자수가 비교적 깁니다. 자막이라는 걸 고려하여 더 핵심 내용만 번역하도록 하세요
+
+질문: ${userMessage}`;
+      
       const data = {
         contents: [
           { parts: [ { text: prompt } ] }
@@ -60,7 +92,7 @@ const ChatbotWidget: React.FC<ChatbotWidgetProps> = ({ initialContext }) => {
   // 최소화/닫기
   if (!open) {
     return (
-      <div style={{ position: 'fixed', right: 32, bottom: 110, zIndex: 1000, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+      <div style={{ position: 'fixed', right: 32, bottom: '50%', transform: 'translateY(50%)', zIndex: 1000, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
         <div style={{ marginBottom: 8, color: '#2563eb', fontWeight: 600, fontSize: '1.05rem', background: 'rgba(237,242,255,0.95)', borderRadius: 8, padding: '4px 14px', boxShadow: '0 2px 8px #2563eb11' }}>
           무엇이든 질문하세요
         </div>
@@ -90,7 +122,8 @@ const ChatbotWidget: React.FC<ChatbotWidgetProps> = ({ initialContext }) => {
       style={{
         position: 'fixed',
         right: 32,
-        bottom: 32,
+        bottom: '50%',
+        transform: 'translateY(50%)',
         width: 360,
         maxWidth: '90vw',
         height: 600,
@@ -155,7 +188,7 @@ const ChatbotWidget: React.FC<ChatbotWidgetProps> = ({ initialContext }) => {
         {error && <div style={{ color: 'red', marginTop: 8 }}>{error}</div>}
       </div>
       {/* 입력창 */}
-      <form onSubmit={handleSend} style={{ display: 'flex', borderTop: '1px solid #e5e7eb', background: '#f1f5f9', padding: 10 }}>
+      <form onSubmit={handleSend} style={{ display: 'flex', borderTop: '1px solid #e5e7eb', background: '#ffffff', padding: 10 }}>
         <input
           ref={inputRef}
           type="text"
@@ -164,11 +197,15 @@ const ChatbotWidget: React.FC<ChatbotWidgetProps> = ({ initialContext }) => {
           placeholder="질문을 입력하세요..."
           style={{
             flex: 1,
-            border: 'none',
+            border: '1px solid #d1d5db',
             outline: 'none',
-            background: 'transparent',
+            background: '#ffffff',
             fontSize: '1em',
-            padding: '8px 10px',
+            padding: '8px 12px',
+            color: '#111827',
+            borderRadius: '6px',
+            marginRight: '8px',
+            boxShadow: 'inset 0 1px 2px rgba(0, 0, 0, 0.1)',
           }}
           disabled={loading}
         />
@@ -181,7 +218,6 @@ const ChatbotWidget: React.FC<ChatbotWidgetProps> = ({ initialContext }) => {
             borderRadius: 8,
             padding: '8px 16px',
             fontWeight: 700,
-            marginLeft: 8,
             cursor: loading ? 'not-allowed' : 'pointer',
             opacity: loading ? 0.6 : 1,
             fontSize: '1em',
