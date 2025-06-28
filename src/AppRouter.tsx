@@ -20,6 +20,7 @@ const AppRouter = () => (
     <Route path="/translation/grading" element={<GradingPage />} />
     <Route path="/translation/similarity" element={<SimilarityAnalysis />} />
     <Route path="/practice/vocabquiz" element={<ContextVocabQuizGame />} />
+    <Route path="/practice/timed" element={<TimedTranslationGame />} />
     <Route path="/practice/reverse-translation" element={<ReverseTranslation />} />
     <Route path="/subtitle-intro" element={<SubtitleIntro />} />
     <Route path="/subtitle-translation" element={<SubtitleTranslation />} />
