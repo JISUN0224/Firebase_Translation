@@ -1,8 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { collection, getDocs, QuerySnapshot, type DocumentData } from 'firebase/firestore';
-import { db } from '../../firebase';
+import { db, auth } from '../../firebase';
 import { useNavigate } from 'react-router-dom';
 import ChatbotWidget from '../../ChatbotWidget';
+import { saveStudySession } from '../Analysis/studyDataUtils';
 
 interface Vocab {
   chinese: string;
@@ -348,6 +349,41 @@ const ContextVocabQuizGame: React.FC<{onBack?: () => void}> = ({ onBack }) => {
       const accuracy = total > 0 ? Math.round((correct / total) * 100) : 0;
       setGameResults({total, correct, wrong, score: score + scoreGain, accuracy});
       setGameStatus('results');
+      
+      // 게임 결과 저장
+      setTimeout(() => {
+        saveGameResults();
+      }, 100);
+    }
+  };
+
+  // 게임 결과 저장 함수
+  const saveGameResults = async () => {
+    if (!auth.currentUser || gameResults.total === 0) return;
+    
+    try {
+      const sessionData = {
+        date: new Date().toISOString().split('T')[0], // "2025-01-20"
+        gameType: '어휘_퀴즈',
+        totalScore: gameResults.score,
+        problemCount: gameResults.total,
+        studyTime: Math.floor((Date.now() - questionStartTime) / 1000),
+        averageScore: gameResults.score / gameResults.total,
+        metadata: {
+          difficulty: settings.difficulty,
+          domain: settings.category,
+          targetLanguage: '중국어',
+          questionCount: settings.questionCount,
+          accuracy: gameResults.accuracy,
+          correctCount: gameResults.correct,
+          wrongCount: gameResults.wrong
+        }
+      };
+      
+      await saveStudySession(sessionData);
+      console.log('게임 결과 저장 완료:', sessionData);
+    } catch (error) {
+      console.error('게임 결과 저장 실패:', error);
     }
   };
 

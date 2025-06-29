@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { collection, getDocs, query, orderBy } from 'firebase/firestore';
-import { db } from '../../firebase';
+import { db, auth } from '../../firebase';
 import ChatbotWidget from '../../ChatbotWidget';
+import { saveStudySession } from '../Analysis/studyDataUtils';
 
 // YouTube iframe CSS 전역 스타일 추가
 const injectYouTubeCSS = () => {
@@ -149,7 +150,7 @@ const SubtitleTranslation: React.FC = () => {
                   try {
                     const time = event.target.getCurrentTime();
                     const syncedTime = time + syncOffset;
-                    setCurrentTime(syncedTime); // 자막 동기화용
+                    setCurrentTime(syncedTime);
                     const foundIndex = getCurrentDisplaySubtitleIndex(syncedTime);
                     setDisplaySubtitleIndex(foundIndex);
                     if (foundIndex !== null) {
@@ -520,7 +521,7 @@ const SubtitleTranslation: React.FC = () => {
   };
 
   // 번역 제출 함수 (로컬 상태만 업데이트)
-  const handleSubmitTranslation = () => {
+  const handleSubmitTranslation = async () => {
     if (!subtitles[currentSubtitleIndex] || !userTranslation.trim()) {
       alert('번역을 입력해주세요.');
       return;
@@ -536,6 +537,14 @@ const SubtitleTranslation: React.FC = () => {
     setSubtitles(updatedSubtitles);
 
     alert('번역이 저장되었습니다!');
+    
+    // 모든 자막이 완료되었는지 확인
+    const allCompleted = updatedSubtitles.every(s => s.completed);
+    if (allCompleted) {
+      // 학습 결과 저장
+      await saveStudyResults();
+      alert('🎉 모든 자막 번역이 완료되었습니다! 학습 데이터가 저장되었습니다.');
+    }
     
     // 다음 자막으로 자동 이동
     if (currentSubtitleIndex < subtitles.length - 1) {
@@ -570,6 +579,38 @@ const SubtitleTranslation: React.FC = () => {
   const calculateProgress = () => {
     const completed = subtitles.filter(s => s.completed).length;
     return subtitles.length > 0 ? (completed / subtitles.length) * 100 : 0;
+  };
+
+  // 학습 결과 저장 함수
+  const saveStudyResults = async () => {
+    if (!auth.currentUser || subtitles.length === 0) return;
+    
+    try {
+      const completedCount = subtitles.filter(s => s.completed).length;
+      const accuracy = calculateAccuracy();
+      
+      const sessionData = {
+        date: new Date().toISOString().split('T')[0], // "2025-01-20"
+        gameType: '자막_번역',
+        totalScore: completedCount * 10, // 완료된 자막당 10점
+        problemCount: subtitles.length,
+        studyTime: Math.floor((Date.now() - (window as any).sessionStartTime || Date.now()) / 1000),
+        averageScore: completedCount > 0 ? (completedCount * 10) / subtitles.length : 0,
+        metadata: {
+          difficulty: '중급',
+          domain: '자막번역',
+          targetLanguage: '중국어',
+          completedCount: completedCount,
+          accuracy: accuracy,
+          totalSubtitles: subtitles.length
+        }
+      };
+      
+      await saveStudySession(sessionData);
+      console.log('자막 번역 결과 저장 완료:', sessionData);
+    } catch (error) {
+      console.error('자막 번역 결과 저장 실패:', error);
+    }
   };
 
   const handleShowHint = () => {

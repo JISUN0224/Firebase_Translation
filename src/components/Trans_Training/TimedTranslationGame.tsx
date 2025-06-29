@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { collection, getDocs, QuerySnapshot, type DocumentData } from 'firebase/firestore';
-import { db } from '../../firebase';
+import { db, auth } from '../../firebase';
 import ChatbotWidget from '../../ChatbotWidget';
 import { useNavigate } from 'react-router-dom';
+import { saveStudySession } from '../Analysis/studyDataUtils';
 
 interface Problem {
   id: string;
@@ -408,6 +409,13 @@ const TimedTranslationGame: React.FC = () => {
     return () => { if (timerRef.current) clearInterval(timerRef.current); };
   }, [gameState.gameStatus, gameState.currentProblemIndex, gameState.totalTime]);
 
+  // 게임 종료 시 자동 저장
+  useEffect(() => {
+    if (gameState.gameStatus === 'finished' && gameState.evaluationHistory.length > 0) {
+      saveGameResults();
+    }
+  }, [gameState.gameStatus, gameState.evaluationHistory.length]);
+
   // 문제 시작 시 동적 시간 계산 및 타이머/아이템 상태 초기화
   const startNewProblem = (problemIndex: number, status: 'ready' | 'playing' = 'ready') => {
     const currentProblem = gameState.problems[problemIndex];
@@ -459,6 +467,34 @@ const TimedTranslationGame: React.FC = () => {
   const showNotification = (message: string, type: string) => {
     setNotification({ message, type });
     setTimeout(() => setNotification(null), 1500);
+  };
+
+  // 게임 결과 저장 함수
+  const saveGameResults = async () => {
+    if (!auth.currentUser || gameState.evaluationHistory.length === 0) return;
+    
+    try {
+      const sessionData = {
+        date: new Date().toISOString().split('T')[0], // "2025-01-20"
+        gameType: '시간제한_번역',
+        totalScore: gameState.currentScore,
+        problemCount: gameState.evaluationHistory.length,
+        studyTime: Math.floor((Date.now() - gameState.problemStartTime) / 1000),
+        averageScore: gameState.currentScore / gameState.evaluationHistory.length,
+        metadata: {
+          difficulty: difficulty,
+          domain: domain,
+          targetLanguage: targetLanguage
+        }
+      };
+      
+      await saveStudySession(sessionData);
+      console.log('게임 결과 저장 완료:', sessionData);
+      showNotification('🎉 학습 데이터가 저장되었습니다!', 'success');
+    } catch (error) {
+      console.error('게임 결과 저장 실패:', error);
+      showNotification('❌ 데이터 저장에 실패했습니다.', 'error');
+    }
   };
 
   // 시간연장 사용
@@ -594,7 +630,12 @@ const TimedTranslationGame: React.FC = () => {
   };
 
   // 컨트롤 버튼 핸들러 (기존 유지)
-  const handleStart = () => {
+  const handleStart = async () => {
+    // 이전 게임 결과가 있으면 저장
+    if (gameState.evaluationHistory.length > 0) {
+      await saveGameResults();
+    }
+    
     if (gameState.problems.length > 0) {
       startNewProblem(gameState.currentProblemIndex, 'playing');
     }

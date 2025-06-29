@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { collection, getDocs } from 'firebase/firestore';
-import { db } from '../../firebase';
+import { db, auth } from '../../firebase';
 import ChatbotWidget from '../../ChatbotWidget';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { saveStudySession } from '../Analysis/studyDataUtils';
 
 // 단계 상수
 const STEPS = {
@@ -477,12 +478,47 @@ const ReverseTranslation: React.FC = () => {
       setStep(STEPS.START);
       setScore(0);
       setStreak(0);
+      
+      // 게임 결과 저장
+      setTimeout(() => {
+        saveGameResults();
+      }, 100);
+      
       setCompletedTranslations([]);
     }
     setActiveTab('result');
   };
 
   const sessionStats = calculateSessionStats(completedTranslations);
+
+  // 게임 결과 저장 함수
+  const saveGameResults = async () => {
+    if (!auth.currentUser || completedTranslations.length === 0) return;
+    
+    try {
+      const sessionData = {
+        date: new Date().toISOString().split('T')[0], // "2025-01-20"
+        gameType: '양방향_번역',
+        totalScore: sessionStats.totalScore,
+        problemCount: sessionStats.totalProblems,
+        studyTime: sessionStats.timeSpent,
+        averageScore: sessionStats.averageScore,
+        metadata: {
+          difficulty: '혼합',
+          domain: '양방향번역',
+          targetLanguage: '중국어',
+          accuracyRate: sessionStats.accuracyRate,
+          bestStreak: sessionStats.bestStreak,
+          completedCount: completedTranslations.length
+        }
+      };
+      
+      await saveStudySession(sessionData);
+      console.log('양방향 번역 결과 저장 완료:', sessionData);
+    } catch (error) {
+      console.error('양방향 번역 결과 저장 실패:', error);
+    }
+  };
 
   // 최근 번역 결과 요약 (간단 버전)
   const lastFeedback = completedTranslations.length > 0

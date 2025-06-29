@@ -38,8 +38,8 @@ const menuCards = [
     title: '학습 분석',
     description: '나의 번역 학습 데이터를 분석해보세요',
     links: [
-      { label: '학습 통계', to: '/analysis/stats', disabled: true },
-      { label: 'AI 분석', to: '/analysis/ai', disabled: true },
+      { label: '학습 통계', to: '/analysis/stats' },
+      { label: 'AI 분석', to: '/analysis/ai' },
     ] as MenuLink[],
     border: 'border-green-400',
     hover: 'hover:border-green-500',

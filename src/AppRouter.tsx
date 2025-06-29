@@ -11,6 +11,8 @@ import ContextVocabQuizGame from './components/Trans_Training/ContextVocabQuizGa
 import ReverseTranslation from './components/Trans_Training/reverseTranslation';
 import SubtitleIntro from './components/Trans_Training/SubtitleIntro';
 import SubtitleTranslation from './components/Trans_Training/SubtitleTranslation';
+import StudyStats from './components/Analysis/StudyStats';
+import AIAnalysis from './components/Analysis/AIAnalysis';
 
 const AppRouter = () => (
   <Routes>
@@ -24,6 +26,8 @@ const AppRouter = () => (
     <Route path="/practice/reverse-translation" element={<ReverseTranslation />} />
     <Route path="/subtitle-intro" element={<SubtitleIntro />} />
     <Route path="/subtitle-translation" element={<SubtitleTranslation />} />
+    <Route path="/analysis/stats" element={<StudyStats />} />
+    <Route path="/analysis/ai" element={<AIAnalysis />} />
     {/* 기타 라우트 추가 */}
   </Routes>
 );
