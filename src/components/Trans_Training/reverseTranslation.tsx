@@ -4,7 +4,7 @@ import { db, auth } from '../../firebase';
 import ChatbotWidget from '../../ChatbotWidget';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { saveStudySession } from '../Analysis/studyDataUtils';
+import { saveStudySession } from '../Tran_Analysis/studyDataUtils';
 
 // 단계 상수
 const STEPS = {

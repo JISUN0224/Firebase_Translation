@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { collection, getDocs, query, orderBy } from 'firebase/firestore';
 import { db, auth } from '../../firebase';
 import ChatbotWidget from '../../ChatbotWidget';
-import { saveStudySession } from '../Analysis/studyDataUtils';
+import { saveStudySession } from '../Tran_Analysis/studyDataUtils';
 
 // YouTube iframe CSS 전역 스타일 추가
 const injectYouTubeCSS = () => {

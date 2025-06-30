@@ -3,7 +3,7 @@ import { collection, getDocs, QuerySnapshot, type DocumentData } from 'firebase/
 import { db, auth } from '../../firebase';
 import { useNavigate } from 'react-router-dom';
 import ChatbotWidget from '../../ChatbotWidget';
-import { saveStudySession } from '../Analysis/studyDataUtils';
+import { saveStudySession } from '../Tran_Analysis/studyDataUtils';
 
 interface Vocab {
   chinese: string;
@@ -62,6 +62,25 @@ const sampleProblems: ProblemData[] = [
 ];
 
 const optionLabels = ['A', 'B', 'C', 'D'];
+
+// 선택지 랜덤 섞기 함수
+function shuffleOptionsAndSetAnswer(quiz: VocabQuiz): VocabQuiz {
+  const shuffled = [...quiz.quiz.options];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  // 정답이 섞인 배열에서 몇 번째인지 찾기
+  const correctIdx = shuffled.findIndex(opt => opt === quiz.quiz.options[optionLabels.indexOf(quiz.quiz.correct_answer)]);
+  return {
+    ...quiz,
+    quiz: {
+      ...quiz.quiz,
+      options: shuffled,
+      correct_answer: optionLabels[correctIdx] || 'A',
+    }
+  };
+}
 
 // 문제 필터링 함수
 const filterProblems = (allProblems: ProblemData[], settings: QuizSettings): ProblemData[] => {
@@ -156,9 +175,11 @@ const filterProblems = (allProblems: ProblemData[], settings: QuizSettings): Pro
   
   // 설정된 문제 수만큼 자르기
   const result = filtered.slice(0, settings.questionCount);
-  console.log(`최종 선택된 문제 수: ${result.length}`);
-  
-  return result;
+  // 각 문제의 어휘퀴즈 선택지 랜덤 섞기
+  return result.map(problem => ({
+    ...problem,
+    어휘퀴즈: problem.어휘퀴즈?.map(q => shuffleOptionsAndSetAnswer(q)) || []
+  }));
 };
 
 const ContextVocabQuizGame: React.FC<{onBack?: () => void}> = ({ onBack }) => {
@@ -182,6 +203,8 @@ const ContextVocabQuizGame: React.FC<{onBack?: () => void}> = ({ onBack }) => {
   const [isCorrect, setIsCorrect] = useState(false);
   const [timeLeft, setTimeLeft] = useState<number | null>(null);
   const [questionStartTime, setQuestionStartTime] = useState<number>(Date.now());
+  // 게임 전체 시작 시간 추가
+  const [gameStartTime, setGameStartTime] = useState<number>(Date.now());
   // 추가 상태
   const [wrongProblems, setWrongProblems] = useState<{problem: ProblemData, quiz: VocabQuiz, userAnswer: string}[]>([]);
   const [gameResults, setGameResults] = useState<{total: number, correct: number, wrong: number, score: number, accuracy: number}>({total: 0, correct: 0, wrong: 0, score: 0, accuracy: 0});
@@ -289,6 +312,7 @@ const ContextVocabQuizGame: React.FC<{onBack?: () => void}> = ({ onBack }) => {
     setQuestionStartTime(Date.now());
     setWrongProblems([]);
     setIsReviewMode(reviewMode);
+    setGameStartTime(Date.now());
   };
 
   // 답안 선택
@@ -347,36 +371,38 @@ const ContextVocabQuizGame: React.FC<{onBack?: () => void}> = ({ onBack }) => {
       correct = total - wrongProblems.length;
       const wrong = wrongProblems.length;
       const accuracy = total > 0 ? Math.round((correct / total) * 100) : 0;
-      setGameResults({total, correct, wrong, score: score + scoreGain, accuracy});
+      const finalScore = score + scoreGain;
+      
+      // 결과 객체 생성
+      const results = {total, correct, wrong, score: finalScore, accuracy};
+      setGameResults(results);
       setGameStatus('results');
       
-      // 게임 결과 저장
-      setTimeout(() => {
-        saveGameResults();
-      }, 100);
+      // 직접 저장 함수 호출
+      saveGameResultsDirectly(results);
     }
   };
 
-  // 게임 결과 저장 함수
-  const saveGameResults = async () => {
-    if (!auth.currentUser || gameResults.total === 0) return;
+  // 직접 저장하는 함수 추가
+  const saveGameResultsDirectly = async (results: {total: number, correct: number, wrong: number, score: number, accuracy: number}) => {
+    if (!auth.currentUser || results.total === 0) return;
     
     try {
       const sessionData = {
         date: new Date().toISOString().split('T')[0], // "2025-01-20"
         gameType: '어휘_퀴즈',
-        totalScore: gameResults.score,
-        problemCount: gameResults.total,
-        studyTime: Math.floor((Date.now() - questionStartTime) / 1000),
-        averageScore: gameResults.score / gameResults.total,
+        totalScore: results.score,
+        problemCount: results.total,
+        studyTime: Math.floor((Date.now() - gameStartTime) / 1000),
+        averageScore: results.score / results.total,
         metadata: {
           difficulty: settings.difficulty,
           domain: settings.category,
           targetLanguage: '중국어',
           questionCount: settings.questionCount,
-          accuracy: gameResults.accuracy,
-          correctCount: gameResults.correct,
-          wrongCount: gameResults.wrong
+          accuracy: results.accuracy,
+          correctCount: results.correct,
+          wrongCount: results.wrong
         }
       };
       

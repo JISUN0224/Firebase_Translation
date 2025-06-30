@@ -11,8 +11,8 @@ import ContextVocabQuizGame from './components/Trans_Training/ContextVocabQuizGa
 import ReverseTranslation from './components/Trans_Training/reverseTranslation';
 import SubtitleIntro from './components/Trans_Training/SubtitleIntro';
 import SubtitleTranslation from './components/Trans_Training/SubtitleTranslation';
-import StudyStats from './components/Analysis/StudyStats';
-import AIAnalysis from './components/Analysis/AIAnalysis';
+import StudyStats from './components/Tran_Analysis/StudyStats';
+import AIAnalysis from './components/Tran_Analysis/AIAnalysis';
 
 const AppRouter = () => (
   <Routes>

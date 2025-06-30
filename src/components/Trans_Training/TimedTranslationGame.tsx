@@ -3,7 +3,7 @@ import { collection, getDocs, QuerySnapshot, type DocumentData } from 'firebase/
 import { db, auth } from '../../firebase';
 import ChatbotWidget from '../../ChatbotWidget';
 import { useNavigate } from 'react-router-dom';
-import { saveStudySession } from '../Analysis/studyDataUtils';
+import { saveStudySession } from '../Tran_Analysis/studyDataUtils';
 
 interface Problem {
   id: string;
