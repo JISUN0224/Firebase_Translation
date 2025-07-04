@@ -13,6 +13,8 @@ import SubtitleIntro from './components/Trans_Training/SubtitleIntro';
 import SubtitleTranslation from './components/Trans_Training/SubtitleTranslation';
 import StudyStats from './components/Tran_Analysis/StudyStats';
 import AIAnalysis from './components/Tran_Analysis/AIAnalysis';
+import AIFeedback from './components/Interpretation/AIFeedback';
+import StepByStepInterpretation from './components/Interpretation/StepByStepInterpretation';
 
 const AppRouter = () => (
   <Routes>
@@ -28,6 +30,8 @@ const AppRouter = () => (
     <Route path="/subtitle-translation" element={<SubtitleTranslation />} />
     <Route path="/analysis/stats" element={<StudyStats />} />
     <Route path="/analysis/ai" element={<AIAnalysis />} />
+    <Route path="/interpreting/feedback" element={<AIFeedback />} />
+    <Route path="/interpreting/step-by-step" element={<StepByStepInterpretation />} />
     {/* 기타 라우트 추가 */}
   </Routes>
 );

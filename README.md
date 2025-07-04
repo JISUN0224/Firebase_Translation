@@ -1,6 +1,30 @@
-# React + TypeScript + Vite
+# 번역 학습 플랫폼 (Translation Learning Platform)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+React + TypeScript + Vite 기반의 AI 통역 피드백 시스템입니다.
+
+## 🚀 기능
+
+- 🎙️ **실시간 음성 인식**: Web Speech API를 사용한 중국어 음성 인식
+- 🤖 **AI 품질 분석**: Google Gemini API를 사용한 통역 품질 평가
+- 📊 **세부 평가**: 정확성, 유창성, 문법, 완성도 4개 항목 평가
+- 🎯 **맞춤 피드백**: 잘한 점과 개선점 제시
+
+## 🔧 설정 방법
+
+### 1. Gemini API 키 설정
+
+1. [Google AI Studio](https://makersuite.google.com/app/apikey)에서 API 키 생성
+2. 프로젝트 루트에 `.env` 파일 생성:
+```bash
+VITE_GEMINI_API_KEY=your_gemini_api_key_here
+```
+
+### 2. 설치 및 실행
+
+```bash
+npm install
+npm run dev
+```
 
 Currently, two official plugins are available:
 
