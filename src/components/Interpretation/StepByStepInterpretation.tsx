@@ -4,7 +4,7 @@ import { getStorage, ref, getDownloadURL } from 'firebase/storage';
 import { db } from '../../firebase';
 import axios from 'axios';
 
-// 인터페이스 정의
+// 인터페이스 정의 - 통합된 JSON 구조에 맞게 업데이트
 interface Problem {
   id?: string;
   title: string;
@@ -16,42 +16,62 @@ interface Problem {
   estimated_total_time: number;
   created_date: string;
   metadata: {
-    source: string;
-    language_pair: string;
-    content_type: string;
-    tags: string[];
+    source?: string;
+    content_type?: string;
+    tags?: string[];
   };
   segments: Array<{
     id: number;
-    korean_text: string;
-    chinese_interpretation_reference: string;
+    // 한국어 → 중국어 세그먼트 필드들
+    original_text?: string;
+    target_interpretation?: string;
+    alternative_interpretations?: string[];
+    // 중국어 → 한국어 세그먼트 필드들
+    chinese_text?: string;
+    korean_interpretation_reference?: string;
+    alternative_korean_interpretations?: string[];
+    // 공통 필드들
     char_count: number;
     difficulty_level: string;
     audio_timing: {
       start_time_sec: number;
       end_time_sec: number;
     };
+    pinyin_for_segment?: string;
     key_vocabulary: Array<{
-      chinese: string;
-      korean: string;
-      pinyin: string;
-      example_chinese: string;
-      example_korean: string;
-      note: string;
+      chinese?: string;
+      korean?: string;
+      pinyin?: string;
+      example_chinese?: string;
+      example_korean?: string;
+      note?: string;
+      // 새로운 구조의 필드들
+      source_text?: string;
+      target_text?: string;
+      source_example?: string;
+      target_example?: string;
     }>;
     grammar_points: Array<{
-      chinese_explanation: string;
-      korean_pattern: string;
-      example_chinese: string;
-      example_korean: string;
+      chinese_explanation?: string;
+      korean_pattern?: string;
+      example_chinese?: string;
+      example_korean?: string;
+      // 새로운 구조의 필드들
+      chinese_pattern?: string;
+      korean_explanation?: string;
     }>;
     interpreting_hints: string[];
     common_interpretation_challenges: string[];
     suggested_note_taking_points: string[];
-    alternative_chinese_interpretations: string[];
     recommended_delivery_tone: string;
     cultural_context: string;
     difficulty_analysis: string;
+    // 새로운 필드들
+    source_info?: {
+      source_file: string;
+      original_id: number;
+      language_pair: string;
+    };
   }>;
 }
 
@@ -98,6 +118,10 @@ const StepByStepInterpretation: React.FC = () => {
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [analysisError, setAnalysisError] = useState<string | null>(null);
   
+  // TTS 관리
+  const [currentTTSText, setCurrentTTSText] = useState<string | null>(null);
+  const [isTTSPlaying, setIsTTSPlaying] = useState(false);
+  
   // UI 상태 관리
   const [showOriginalText, setShowOriginalText] = useState(false);
   const [showLearningMaterials, setShowLearningMaterials] = useState(false);
@@ -126,6 +150,15 @@ const StepByStepInterpretation: React.FC = () => {
     fetchProblems();
   }, []);
 
+  // 컴포넌트 언마운트 시 TTS 정리
+  useEffect(() => {
+    return () => {
+      if ('speechSynthesis' in window) {
+        speechSynthesis.cancel();
+      }
+    };
+  }, []);
+
   // 필터 변경 시 현재 선택된 문제가 조건에 맞지 않으면 해제
   useEffect(() => {
     if (selectedProblem) {
@@ -152,7 +185,6 @@ const StepByStepInterpretation: React.FC = () => {
 
       // 현재 선택된 문제가 필터 조건에 맞지 않으면 선택 해제
       if (!categoryMatch || !difficultyMatch) {
-        console.log(`필터 변경으로 인해 "${selectedProblem.title}" 문제 선택 해제`);
         setSelectedProblem(null);
         setCurrentStep(1);
         setAccumulatedText('');
@@ -165,39 +197,53 @@ const StepByStepInterpretation: React.FC = () => {
 
 
 
-  // Firebase에서 문제 데이터 가져오기 (AIFeedback.tsx와 동일)
+  // Firebase에서 통합 문제 데이터 가져오기
   const fetchProblems = async () => {
     try {
       setLoading(true);
       setError(null);
       
-      const querySnapshot = await getDocs(collection(db, 'interpreting_data'));
-      const problemsData: Problem[] = [];
+      console.log('Firebase 통합 데이터 로딩 중...');
       
-      console.log('=== 원본 Firebase 데이터 분석 ===');
-      console.log('총 문서 수:', querySnapshot.size);
+      // interpreting_practice_files 컬렉션에서 개별 문서들을 가져오기
+      const querySnapshot = await getDocs(collection(db, 'interpreting_practice_files'));
+      const problemsData: Problem[] = [];
       
       querySnapshot.forEach((doc) => {
         const data = doc.data();
-        console.log(`문서 ID: ${doc.id}`);
-        console.log('문서 최상위 키들:', Object.keys(data));
+        console.log(`문서 발견: ${doc.id}`, data);
         
-        problemsData.push({ 
-          id: doc.id, 
-          ...data 
-        } as Problem);
+        // 각 문서가 완전한 문제이므로 그대로 사용
+        if (data.segments && Array.isArray(data.segments)) {
+          // 기존 필드들을 그대로 사용하고 없는 경우 기본값 설정
+          const problem: Problem = {
+            id: doc.id,
+            title: data.title || '통역 연습',
+            category: data.category || '통역 연습', 
+            author: data.author || '미상',
+            difficulty: (data.difficulty || 'intermediate') as 'beginner' | 'intermediate' | 'advanced',
+            description: data.description || '통역 연습 문제',
+            total_segments: data.total_segments || data.segments.length,
+            estimated_total_time: data.estimated_total_time || data.audio_info?.total_duration_sec || 0,
+            created_date: data.created_date || new Date().toISOString(),
+            metadata: {
+              source: data.source || doc.id,
+              content_type: data.content_type || 'interpreting_practice',
+              tags: data.tags || ['interpreting']
+            },
+            segments: data.segments
+          };
+          
+          problemsData.push(problem);
+        }
       });
       
-      console.log('변환된 problemsData:', problemsData);
-      console.log('================================');
-      
+      console.log(`총 ${problemsData.length}개 문제 로딩 완료`);
       setProblems(problemsData);
       
       // 실제 데이터에서 카테고리 추출
       const categories = Array.from(new Set(problemsData.map(p => p.category)));
       setAvailableCategories(['전체', ...categories]);
-      
-      console.log('추출된 카테고리:', categories);
       
     } catch (error) {
       console.error('Firestore 데이터 로딩 실패:', error);
@@ -238,13 +284,18 @@ const StepByStepInterpretation: React.FC = () => {
           title.includes('yanjiang') || title.includes('알리바바')) {
         audioFileName = 'yanjiang_Chinese.mp3';
       }
+      // 봉준호 인터뷰 관련
+      else if (title.includes('봉준호') || title.includes('미키') || title.includes('mickey') ||
+               author.includes('봉준호') || title.includes('인터뷰') || title.includes('interview')) {
+        audioFileName = 'Mickey17_Interview.mp3';
+      }
       // 한국 외교부 관련 (기본값이므로 명시적으로 설정)
       else if (title.includes('외교부') || title.includes('유엔') || 
                title.includes('기조연설') || title.includes('한국')) {
         audioFileName = 'KoreanSpeech.mp3';
       }
       
-      console.log(`문제 "${targetProblem.title}" → 음성파일: ${audioFileName}`);
+
     }
 
     try {
@@ -257,7 +308,6 @@ const StepByStepInterpretation: React.FC = () => {
       const audioUrl = await getDownloadURL(audioRef);
       
       setCurrentAudioUrl(audioUrl);
-      console.log(`음성 파일 로딩 성공 (${audioFileName}):`, audioUrl);
       
     } catch (error: any) {
       console.error('음성 파일 로딩 실패:', error);
@@ -290,7 +340,10 @@ const StepByStepInterpretation: React.FC = () => {
     loadAudioFile(problem);
     
     // 음성 인식 언어 설정 (통역 결과 언어로 설정)
-    const languagePair = problem.metadata?.language_pair;
+    // 새로운 구조에서는 첫 번째 세그먼트의 source_info에서 언어 쌍 정보를 가져옴
+    const firstSegment = problem.segments[0];
+    const languagePair = firstSegment?.source_info?.language_pair;
+    
     if (languagePair) {
       let targetLanguage: 'ko' | 'zh' = 'ko'; // 기본값
       
@@ -310,13 +363,10 @@ const StepByStepInterpretation: React.FC = () => {
         }
       }
       
-      console.log(`[${problem.title}] 통역 언어 설정:`, targetLanguage, `(language_pair: ${languagePair})`);
       setSourceLanguage(targetLanguage);
     }
     
-    console.log('선택된 문제:', problem.title);
-    console.log('문제 ID:', problem.id);
-    console.log('총 세그먼트 수:', problem.total_segments);
+    console.log(`문제 선택: ${problem.title} (${problem.segments?.length || 0}개 세그먼트)`);
   };
 
   // 유틸리티 함수들 (AIFeedback.tsx와 동일)
@@ -329,49 +379,68 @@ const StepByStepInterpretation: React.FC = () => {
     }
   };
 
-  const getDifficultyBadge = (difficulty: string) => {
-    switch(difficulty) {
-      case 'beginner': return 'bg-green-100 text-green-800';
-      case 'intermediate': return 'bg-yellow-100 text-yellow-800';
-      case 'advanced': return 'bg-red-100 text-red-800';
-      default: return 'bg-gray-100 text-gray-800';
-    }
-  };
+      const getDifficultyBadge = (difficulty: string) => {
+     switch(difficulty.toLowerCase()) {
+       case 'beginner':
+       case '초급':
+         return 'bg-green-500 text-white';
+       case 'intermediate':
+       case '중급':
+         return 'bg-orange-500 text-white';
+       case 'advanced':
+       case '고급':
+         return 'bg-red-500 text-white';
+       default:
+         return 'bg-gray-500 text-white';
+     }
+    };
 
   // 단계 이동 함수
   const goToStep = (step: number) => {
     setCurrentStep(step);
   };
 
-  // 세그먼트 오디오 재생 (AIFeedback.tsx와 동일)
+  // 세그먼트 오디오 재생 (전체 모드 지원)
   const playSegmentAudio = (segmentIndex?: number) => {
     if (!currentAudioUrl || !selectedProblem) return;
     
     const index = segmentIndex !== undefined ? segmentIndex : selectedSegmentIndex;
-    const segment = selectedProblem.segments[index];
-    if (!segment) return;
-    
     const audioElement = practiceAudioRef.current;
+    
     if (audioElement) {
       audioElement.src = currentAudioUrl;
-      audioElement.currentTime = segment.audio_timing.start_time_sec;
-      audioElement.play();
       
-      // 세그먼트 종료 시간에 자동 정지
-      const handleTimeUpdate = () => {
-        if (audioElement.currentTime >= segment.audio_timing.end_time_sec) {
-          audioElement.pause();
-          audioElement.removeEventListener('timeupdate', handleTimeUpdate);
-          setIsPlaying(false);
-          setIsAudioPlaying(false);
-        }
-      };
-      
-      audioElement.addEventListener('timeupdate', handleTimeUpdate);
-      setIsPlaying(true);
-      setIsAudioPlaying(true);
-      
-      console.log(`세그먼트 ${index + 1} 재생: ${segment.audio_timing.start_time_sec}초 - ${segment.audio_timing.end_time_sec}초`);
+      // 전체 세그먼트 모드인 경우 (-1)
+      if (index === -1) {
+        // 전체 파일 재생 (처음부터 끝까지)
+        audioElement.currentTime = 0;
+        audioElement.play();
+        
+        // 전체 재생 모드에서는 자동 정지하지 않음
+        setIsPlaying(true);
+        setIsAudioPlaying(true);
+      } else {
+        // 개별 세그먼트 재생
+        const segment = selectedProblem.segments[index];
+        if (!segment) return;
+        
+        audioElement.currentTime = segment.audio_timing.start_time_sec;
+        audioElement.play();
+        
+        // 세그먼트 종료 시간에 자동 정지
+        const handleTimeUpdate = () => {
+          if (audioElement.currentTime >= segment.audio_timing.end_time_sec) {
+            audioElement.pause();
+            audioElement.removeEventListener('timeupdate', handleTimeUpdate);
+            setIsPlaying(false);
+            setIsAudioPlaying(false);
+          }
+        };
+        
+        audioElement.addEventListener('timeupdate', handleTimeUpdate);
+        setIsPlaying(true);
+        setIsAudioPlaying(true);
+      }
     }
   };
 
@@ -531,23 +600,51 @@ const StepByStepInterpretation: React.FC = () => {
         throw new Error('Gemini API 키가 설정되지 않았습니다.');
       }
 
-      const currentSegment = selectedProblem.segments[selectedSegmentIndex];
+      // 언어쌍 정보를 제대로 파악
       let originalText: string;
+      let actualSourceLang: string;
+      let actualTargetLang: string;
+      let langPair: string;
       
-      if (selectedProblem.id === 'JEIBOYr3vC5dHfRDG9u1') {
-        originalText = (currentSegment as any)?.chinese_text || '';
-      } else {
-        originalText = currentSegment?.korean_text || '';
-      }
+      // 언어 쌍 자동 감지를 위한 헬퍼 함수
+      const detectLanguagePair = (segment: any) => {
+        if (segment.chinese_text && !segment.original_text) {
+          return { source: 'zh', target: 'ko', sourceText: segment.chinese_text };
+        } else if (segment.original_text && !segment.chinese_text) {
+          return { source: 'ko', target: 'zh', sourceText: segment.original_text };
+        }
+        // 기본값 (한국어 → 중국어)
+        return { source: 'ko', target: 'zh', sourceText: segment.original_text || '' };
+      };
 
-      const langPair = sourceLanguage === 'ko' ? '한국어 → 중국어' : '중국어 → 한국어';
-      const sourceLang = sourceLanguage === 'ko' ? '한국어' : '중국어';
-      const targetLang = sourceLanguage === 'ko' ? '중국어' : '한국어';
+      if (selectedSegmentIndex === -1) {
+        // 전체 세그먼트 모드: 모든 세그먼트의 원문 통합
+        const firstSegment = selectedProblem.segments[0];
+        const langInfo = detectLanguagePair(firstSegment);
+        
+        originalText = selectedProblem.segments.map((segment, index) => {
+          const segmentInfo = detectLanguagePair(segment);
+          return `[세그먼트 ${index + 1}] ${segmentInfo.sourceText}`;
+        }).join('\n\n');
+        
+        actualSourceLang = langInfo.source === 'zh' ? '중국어' : '한국어';
+        actualTargetLang = langInfo.target === 'zh' ? '중국어' : '한국어';
+        langPair = `${actualSourceLang} → ${actualTargetLang}`;
+      } else {
+        // 개별 세그먼트 모드
+        const currentSegment = selectedProblem.segments[selectedSegmentIndex];
+        const langInfo = detectLanguagePair(currentSegment);
+        
+        originalText = langInfo.sourceText;
+        actualSourceLang = langInfo.source === 'zh' ? '중국어' : '한국어';
+        actualTargetLang = langInfo.target === 'zh' ? '중국어' : '한국어';
+        langPair = `${actualSourceLang} → ${actualTargetLang}`;
+      }
 
       const prompt = `당신은 전문 통역 평가자입니다. ${langPair} 통역을 다음 4개 항목으로 0-100점 평가해주세요.
 
-**원문(${sourceLang}):** ${originalText}
-**통역문(${targetLang}):** ${accumulatedText.trim()}
+**원문(${actualSourceLang}):** ${originalText}
+**통역문(${actualTargetLang}):** ${accumulatedText.trim()}
 
 다음 JSON 형식으로만 응답해주세요:
 {
@@ -602,8 +699,60 @@ const StepByStepInterpretation: React.FC = () => {
     return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
   };
 
-  // 현재 세그먼트 정보
-  const currentSegment = selectedProblem?.segments[selectedSegmentIndex];
+  // TTS 음성 재생 함수
+  const playText = (text: string, language: 'ko' | 'zh') => {
+    // 현재 재생 중인 것이 있으면 중지
+    if (isTTSPlaying) {
+      stopTTS();
+      return;
+    }
+
+    // Web Speech API 지원 확인
+    if (!('speechSynthesis' in window)) {
+      alert('이 브라우저는 음성 합성을 지원하지 않습니다.');
+      return;
+    }
+
+    const utterance = new SpeechSynthesisUtterance(text);
+    
+    // 언어 설정
+    utterance.lang = language === 'ko' ? 'ko-KR' : 'zh-CN';
+    utterance.rate = 0.9; // 약간 느리게
+    utterance.pitch = 1.0;
+    utterance.volume = 1.0;
+
+    // 이벤트 리스너
+    utterance.onstart = () => {
+      setIsTTSPlaying(true);
+      setCurrentTTSText(text);
+    };
+
+    utterance.onend = () => {
+      setIsTTSPlaying(false);
+      setCurrentTTSText(null);
+    };
+
+    utterance.onerror = () => {
+      setIsTTSPlaying(false);
+      setCurrentTTSText(null);
+      alert('음성 재생 중 오류가 발생했습니다.');
+    };
+
+    // 음성 재생
+    speechSynthesis.speak(utterance);
+  };
+
+  // TTS 정지 함수
+  const stopTTS = () => {
+    if ('speechSynthesis' in window) {
+      speechSynthesis.cancel();
+      setIsTTSPlaying(false);
+      setCurrentTTSText(null);
+    }
+  };
+
+  // 현재 세그먼트 정보 (전체 모드일 때는 null)
+  const currentSegment = selectedProblem?.segments[selectedSegmentIndex >= 0 ? selectedSegmentIndex : 0];
 
   // 통합된 헤더 컴포넌트 (필터 옵션 + 단계 진행 표시)
   const Header = () => (
@@ -656,7 +805,7 @@ const StepByStepInterpretation: React.FC = () => {
             </div>
             <div className="ml-4 flex-1">
               <div className="font-semibold text-gray-800">원문 듣기</div>
-              <div className="text-sm text-gray-500">{sourceLanguage === 'ko' ? '한국어' : '중국어'} 원문을 들어보세요</div>
+              <div className="text-sm text-gray-500">{sourceLanguage === 'ko' ? '중국어' : '한국어'} 원문을 들어보세요</div>
             </div>
           </div>
 
@@ -681,7 +830,7 @@ const StepByStepInterpretation: React.FC = () => {
             </div>
             <div className="ml-4 flex-1">
               <div className="font-semibold text-gray-800">통역 녹음</div>
-              <div className="text-sm text-gray-500">{sourceLanguage === 'ko' ? '중국어' : '한국어'}로 통역해보세요</div>
+              <div className="text-sm text-gray-500">{sourceLanguage === 'ko' ? '한국어' : '중국어'}로 통역해보세요</div>
             </div>
           </div>
 
@@ -744,6 +893,12 @@ const StepByStepInterpretation: React.FC = () => {
       }
       
       return categoryMatch && difficultyMatch;
+    }).sort((a, b) => {
+      // 난이도별 정렬: 초급 → 중급 → 고급
+      const difficultyOrder = { 'beginner': 0, 'intermediate': 1, 'advanced': 2 };
+      const aOrder = difficultyOrder[a.difficulty] ?? 3;
+      const bOrder = difficultyOrder[b.difficulty] ?? 3;
+      return aOrder - bOrder;
     });
 
     return (
@@ -794,7 +949,7 @@ const StepByStepInterpretation: React.FC = () => {
                           <span className="text-sm text-gray-600">{problem.category}</span>
                         </div>
                         <h4 className="font-medium text-gray-800">{problem.title}</h4>
-                        <p className="text-sm text-gray-600">👤 {problem.author}</p>
+                        <p className="text-sm text-gray-600 text-left">👤 {problem.author}</p>
                       </div>
                       <div className="text-right text-sm text-gray-500">
                         <div>📊 {problem.total_segments}개</div>
@@ -842,10 +997,10 @@ const StepByStepInterpretation: React.FC = () => {
                   <span className={`px-3 py-1 rounded-full text-sm font-medium ${getDifficultyBadge(selectedProblem.difficulty)}`}>
                     {getDifficultyText(selectedProblem.difficulty)}
                   </span>
-                  <span className="text-sm text-gray-500">{selectedProblem.metadata?.language_pair || '한국어 → 중국어'}</span>
+                  <span className="text-sm text-gray-500">{selectedProblem.segments[0]?.source_info?.language_pair || '한국어 → 중국어'}</span>
                 </div>
                 <h2 className="text-xl font-bold text-gray-800">{selectedProblem.title}</h2>
-                <p className="text-gray-600">{selectedProblem.author} • {selectedProblem.description}</p>
+                <p className="text-gray-600 text-left">{selectedProblem.author} • {selectedProblem.description}</p>
               </div>
               <div className="w-20 h-20 relative">
                 <svg className="w-20 h-20 transform -rotate-90" viewBox="0 0 100 100">
@@ -860,38 +1015,70 @@ const StepByStepInterpretation: React.FC = () => {
                 </svg>
                 <div className="absolute inset-0 flex items-center justify-center">
                   <span className="text-lg font-bold text-gray-800">
-                    {selectedSegmentIndex + 1}/{selectedProblem.total_segments}
+                    {selectedSegmentIndex === -1 ? '전체' : `${selectedSegmentIndex + 1}/${selectedProblem.total_segments}`}
                   </span>
                 </div>
               </div>
             </div>
 
             {/* 세그먼트 선택 */}
-            {selectedProblem.segments.length > 1 && (
+            {selectedProblem.segments && selectedProblem.segments.length > 1 && (
               <div className="mt-4">
-                <h4 className="text-sm font-medium text-gray-700 mb-2">세그먼트 선택:</h4>
-                <div className="flex flex-wrap gap-2">
-                  {selectedProblem.segments.map((segment, index) => (
+                <h4 className="text-sm font-medium text-gray-700 mb-2">
+                  세그먼트 선택: (총 {selectedProblem.segments.length}개)
+                </h4>
+                
+                {/* 가로 스크롤 가능한 세그먼트 버튼들 */}
+                <div className="overflow-x-auto py-2">
+                  <div className="flex gap-2 min-w-max">
+                    {selectedProblem.segments.map((segment, index) => (
+                      <button
+                        key={index}
+                        onClick={() => {
+                          setSelectedSegmentIndex(index);
+                          setCurrentStep(1);
+                          setAccumulatedText('');
+                          setCurrentText('');
+                          setAnalysisResult(null);
+                          setRecordingTime(0);
+                        }}
+                        className={`px-3 py-1 rounded-lg text-sm font-medium transition-all min-w-[40px] flex-shrink-0 ${
+                          selectedSegmentIndex === index
+                            ? 'bg-blue-500 text-white'
+                            : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                        }`}
+                      >
+                        {index + 1}
+                      </button>
+                    ))}
+                    
+                    {/* 전체 세그먼트 버튼 */}
                     <button
-                      key={index}
                       onClick={() => {
-                        setSelectedSegmentIndex(index);
+                        setSelectedSegmentIndex(-1); // -1은 전체 세그먼트를 의미
                         setCurrentStep(1);
                         setAccumulatedText('');
                         setCurrentText('');
                         setAnalysisResult(null);
                         setRecordingTime(0);
                       }}
-                      className={`px-3 py-1 rounded-lg text-sm font-medium transition-all ${
-                        selectedSegmentIndex === index
-                          ? 'bg-blue-500 text-white'
-                          : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                      className={`px-4 py-1 rounded-lg text-sm font-medium transition-all min-w-[50px] flex-shrink-0 ${
+                        selectedSegmentIndex === -1
+                          ? 'bg-purple-500 text-white'
+                          : 'bg-purple-100 text-purple-700 hover:bg-purple-200'
                       }`}
                     >
-                      {index + 1}
+                      전체
                     </button>
-                  ))}
+                  </div>
                 </div>
+                
+                {/* 스크롤 안내 메시지 */}
+                {selectedProblem.segments.length > 8 && (
+                  <div className="mt-1 text-xs text-gray-500 text-center">
+                    ← → 스크롤하여 모든 세그먼트 보기 (마지막에 '전체' 버튼 있음)
+                  </div>
+                )}
               </div>
             )}
           </div>
@@ -921,11 +1108,16 @@ const StepByStepInterpretation: React.FC = () => {
               <h3 className="text-3xl font-bold text-gray-800 mb-4">
                 🔊 {selectedProblem?.title || '문제를 선택해주세요'}
               </h3>
-              {currentSegment && (
+              {selectedSegmentIndex === -1 ? (
                 <p className="text-lg text-gray-600">
-                  세그먼트 {selectedSegmentIndex + 1} / {selectedProblem?.total_segments} 
-                  ({currentSegment.audio_timing.start_time_sec}초 - {currentSegment.audio_timing.end_time_sec}초)
+                  전체 세그먼트 (모든 구간을 연속으로 재생)
                 </p>
+              ) : (
+                currentSegment && (
+                  <p className="text-lg text-gray-600">
+                    세그먼트 {selectedSegmentIndex + 1} / {selectedProblem?.total_segments}
+                  </p>
+                )
               )}
             </div>
 
@@ -968,12 +1160,38 @@ const StepByStepInterpretation: React.FC = () => {
                 {showOriginalText ? '🙈 원문 숨기기' : '👁️ 원문 보기'}
               </button>
               
-              {showOriginalText && currentSegment && (
+              {showOriginalText && (
                 <div className="mt-4 p-6 bg-yellow-50 border-2 border-yellow-200 rounded-xl">
                   <p className="text-lg text-gray-800 leading-relaxed">
-                    {selectedProblem?.id === 'JEIBOYr3vC5dHfRDG9u1' 
-                      ? (currentSegment as any)?.chinese_text || '원문 데이터가 없습니다.'
-                      : currentSegment?.korean_text || '원문 데이터가 없습니다.'}
+                    {selectedSegmentIndex === -1 ? (
+                      // 전체 세그먼트 모드: 모든 세그먼트의 원문 통합
+                      selectedProblem?.segments.map((segment, index) => {
+                        // 언어 쌍에 따라 적절한 필드 선택
+                        const getOriginalText = (segment: any) => {
+                          if (segment.chinese_text) {
+                            return segment.chinese_text; // 중국어 → 한국어
+                          } else if (segment.original_text) {
+                            return segment.original_text; // 한국어 → 중국어
+                          }
+                          return `세그먼트 ${index + 1} 데이터 없음`;
+                        };
+                        
+                        const text = getOriginalText(segment);
+                        return (
+                          <div key={index} className="mb-4">
+                            <div className="text-sm font-medium text-gray-600 mb-2">
+                              세그먼트 {index + 1}:
+                            </div>
+                            <div className="text-gray-800">{text}</div>
+                          </div>
+                        );
+                      })
+                    ) : (
+                      // 개별 세그먼트 모드: 해당 세그먼트의 원문만
+                      currentSegment && (
+                        currentSegment.chinese_text || currentSegment.original_text || '원문 데이터가 없습니다.'
+                      )
+                    )}
                   </p>
                 </div>
               )}
@@ -988,36 +1206,82 @@ const StepByStepInterpretation: React.FC = () => {
                 💡 학습 자료 보기 (핵심 어휘, 문법, 힌트)
               </button>
               
-              {showLearningMaterials && currentSegment && (
+              {showLearningMaterials && (
                 <div className="mt-4 p-6 bg-green-50 border-2 border-green-200 rounded-xl">
-                  {/* 핵심 어휘 */}
-                  {currentSegment.key_vocabulary.length > 0 && (
-                    <div className="mb-4">
-                      <h4 className="font-bold text-green-800 mb-2">핵심 어휘:</h4>
-                      {currentSegment.key_vocabulary.slice(0, 3).map((vocab, index) => (
-                        <div key={index} className="mb-2">
-                          • {vocab.chinese} ({vocab.pinyin}) - {vocab.korean}
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                  
-                  {/* 통역 힌트 */}
-                  {currentSegment.interpreting_hints.length > 0 && (
-                    <div className="mb-4">
-                      <h4 className="font-bold text-green-800 mb-2">통역 힌트:</h4>
-                      {currentSegment.interpreting_hints.slice(0, 2).map((hint, index) => (
-                        <div key={index} className="mb-1">• {hint}</div>
-                      ))}
-                    </div>
-                  )}
-                  
-                  {/* 문화적 맥락 */}
-                  {currentSegment.cultural_context && (
-                    <div>
-                      <h4 className="font-bold text-green-800 mb-2">문화적 맥락:</h4>
-                      <div>{currentSegment.cultural_context}</div>
-                    </div>
+                  {selectedSegmentIndex === -1 ? (
+                    // 전체 세그먼트 모드: 모든 세그먼트의 학습 자료 통합
+                    selectedProblem?.segments.map((segment, segmentIndex) => (
+                      <div key={segmentIndex} className="mb-6 pb-4 border-b border-green-200 last:border-b-0">
+                        <h4 className="font-bold text-green-800 mb-3">
+                          세그먼트 {segmentIndex + 1} 학습 자료:
+                        </h4>
+                        
+                        {/* 핵심 어휘 */}
+                        {segment.key_vocabulary.length > 0 && (
+                          <div className="mb-4">
+                            <h5 className="font-semibold text-green-700 mb-2">핵심 어휘:</h5>
+                            {segment.key_vocabulary.slice(0, 3).map((vocab, index) => (
+                              <div key={index} className="mb-2">
+                                • {vocab.source_text || vocab.chinese} ({vocab.pinyin}) - {vocab.target_text || vocab.korean}
+                              </div>
+                            ))}
+                          </div>
+                        )}
+                        
+                        {/* 통역 힌트 */}
+                        {segment.interpreting_hints.length > 0 && (
+                          <div className="mb-4">
+                            <h5 className="font-semibold text-green-700 mb-2">통역 힌트:</h5>
+                            {segment.interpreting_hints.slice(0, 2).map((hint, index) => (
+                              <div key={index} className="mb-1">• {hint}</div>
+                            ))}
+                          </div>
+                        )}
+                        
+                        {/* 문화적 맥락 */}
+                        {segment.cultural_context && (
+                          <div>
+                            <h5 className="font-semibold text-green-700 mb-2">문화적 맥락:</h5>
+                            <div>{segment.cultural_context}</div>
+                          </div>
+                        )}
+                      </div>
+                    ))
+                  ) : (
+                    // 개별 세그먼트 모드: 해당 세그먼트의 학습 자료만
+                    currentSegment && (
+                      <>
+                        {/* 핵심 어휘 */}
+                        {currentSegment.key_vocabulary.length > 0 && (
+                          <div className="mb-4">
+                            <h4 className="font-bold text-green-800 mb-2">핵심 어휘:</h4>
+                            {currentSegment.key_vocabulary.slice(0, 3).map((vocab, index) => (
+                              <div key={index} className="mb-2">
+                                • {vocab.source_text || vocab.chinese} ({vocab.pinyin}) - {vocab.target_text || vocab.korean}
+                              </div>
+                            ))}
+                          </div>
+                        )}
+                        
+                        {/* 통역 힌트 */}
+                        {currentSegment.interpreting_hints.length > 0 && (
+                          <div className="mb-4">
+                            <h4 className="font-bold text-green-800 mb-2">통역 힌트:</h4>
+                            {currentSegment.interpreting_hints.slice(0, 2).map((hint, index) => (
+                              <div key={index} className="mb-1">• {hint}</div>
+                            ))}
+                          </div>
+                        )}
+                        
+                        {/* 문화적 맥락 */}
+                        {currentSegment.cultural_context && (
+                          <div>
+                            <h4 className="font-bold text-green-800 mb-2">문화적 맥락:</h4>
+                            <div>{currentSegment.cultural_context}</div>
+                          </div>
+                        )}
+                      </>
+                    )
                   )}
                 </div>
               )}
@@ -1038,11 +1302,11 @@ const StepByStepInterpretation: React.FC = () => {
         {/* Step 2: 통역 녹음 */}
         {selectedProblem && currentStep === 2 && (
           <div className="bg-white rounded-3xl shadow-2xl p-10">
-            <div className="text-center mb-8">
-              <h3 className="text-3xl font-bold text-gray-800 mb-4">
-                🎙️ {sourceLanguage === 'ko' ? '중국어' : '한국어'}로 통역해보세요
-              </h3>
-            </div>
+                      <div className="text-center mb-8">
+            <h3 className="text-3xl font-bold text-gray-800 mb-4">
+              🎙️ {sourceLanguage === 'ko' ? '한국어' : '중국어'}로 통역해보세요
+            </h3>
+          </div>
 
             {/* 대형 녹음 버튼 */}
             <div className="text-center mb-8">
@@ -1063,7 +1327,7 @@ const StepByStepInterpretation: React.FC = () => {
               </div>
               
               <div className="text-lg text-gray-600 mt-2">
-                {isRecording ? `녹음 중... ${sourceLanguage === 'ko' ? '중국어' : '한국어'}로 말해주세요` : '녹음 버튼을 눌러 시작하세요'}
+                {isRecording ? `녹음 중... ${sourceLanguage === 'ko' ? '한국어' : '중국어'}로 말해주세요` : '녹음 버튼을 눌러 시작하세요'}
               </div>
             </div>
 
@@ -1081,6 +1345,22 @@ const StepByStepInterpretation: React.FC = () => {
                 </div>
               )}
             </div>
+
+            {/* 텍스트 초기화 버튼 */}
+            {(accumulatedText || currentText) && (
+              <div className="text-center mb-6">
+                <button
+                  onClick={() => {
+                    setAccumulatedText('');
+                    setCurrentText('');
+                    setRecordingTime(0);
+                  }}
+                  className="px-6 py-3 bg-red-500 hover:bg-red-600 text-white font-medium rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl"
+                >
+                  🗑️ 텍스트 초기화
+                </button>
+              </div>
+            )}
 
             {/* 네비게이션 버튼 */}
             <div className="flex gap-4">
@@ -1218,25 +1498,516 @@ const StepByStepInterpretation: React.FC = () => {
                   </p>
                 </div>
 
+                {/* 1. 모범 답안 비교 (언어쌍에 따라 선택) */}
+                {(() => {
+                  const targetLanguage = sourceLanguage === 'ko' ? '한국어' : '중국어';
+                  
+                  if (selectedSegmentIndex === -1) {
+                    // 전체 세그먼트 모드: 모든 세그먼트의 모범 답안 표시
+                    const hasAnyAlternatives = selectedProblem?.segments.some(segment => {
+                      // 언어 쌍에 따라 적절한 필드 확인
+                      return (segment.alternative_korean_interpretations && segment.alternative_korean_interpretations.length > 0) ||
+                             (segment.alternative_interpretations && segment.alternative_interpretations.length > 0);
+                    });
+                    
+                    return hasAnyAlternatives && (
+                      <div className="bg-purple-50 border border-purple-200 rounded-xl p-6 mb-6">
+                        <h4 className="font-bold text-purple-800 mb-4 flex items-center gap-2">
+                          <span>⭐</span> 전체 모범 {targetLanguage} 통역 답안
+                        </h4>
+                        <div className="space-y-6">
+                          {selectedProblem?.segments.map((segment, segmentIndex) => {
+                            // 언어 쌍에 따라 적절한 대안 번역 가져오기
+                            const alternatives = segment.alternative_korean_interpretations || segment.alternative_interpretations || [];
+                              
+                            return alternatives.length > 0 && (
+                              <div key={segmentIndex} className="border-b border-purple-200 pb-4 last:border-b-0">
+                                <h5 className="font-semibold text-purple-700 mb-3">
+                                  세그먼트 {segmentIndex + 1} 모범 답안:
+                                </h5>
+                                <div className="space-y-2">
+                                  {alternatives.slice(0, 2).map((alternative: string, index: number) => (
+                                    <div key={index} className="bg-white border border-purple-200 rounded-lg p-3">
+                                      <div className="flex items-start gap-3">
+                                        <div className="w-5 h-5 bg-purple-500 text-white rounded-full flex items-center justify-center text-xs font-bold">
+                                          {index + 1}
+                                        </div>
+                                        <div className="flex-1">
+                                          <p className="text-gray-800 text-sm leading-relaxed">{alternative}</p>
+                                        </div>
+                                        <button
+                                          onClick={() => playText(alternative, sourceLanguage === 'ko' ? 'ko' : 'zh')}
+                                          disabled={!alternative.trim()}
+                                          className={`ml-2 p-1 rounded-full transition-all duration-200 ${
+                                            isTTSPlaying && currentTTSText === alternative
+                                              ? 'bg-red-500 hover:bg-red-600 text-white'
+                                              : 'bg-purple-100 hover:bg-purple-200 text-purple-600'
+                                          } disabled:opacity-50 disabled:cursor-not-allowed`}
+                                        >
+                                          {isTTSPlaying && currentTTSText === alternative ? (
+                                            <span className="text-xs">⏹️</span>
+                                          ) : (
+                                            <span className="text-xs">🔊</span>
+                                          )}
+                                        </button>
+                                      </div>
+                                    </div>
+                                  ))}
+                                </div>
+                              </div>
+                            );
+                          })}
+                        </div>
+                        <div className="mt-4 p-3 bg-purple-100 rounded-lg">
+                          <p className="text-sm text-purple-700">
+                            💡 <strong>활용 팁:</strong> 위의 모범 {targetLanguage} 답안들과 여러분의 통역을 비교해보세요. 
+                            세그먼트별로 표현 방식과 핵심 어휘를 참고하여 다음 연습에 적용해보세요.
+                          </p>
+                        </div>
+                      </div>
+                    );
+                  } else {
+                    // 개별 세그먼트 모드: 해당 세그먼트의 모범 답안만
+                    const getAlternativeInterpretations = () => {
+                      if (!currentSegment) return null;
+                      
+                      // 언어 쌍에 따라 적절한 대안 번역 반환
+                      return currentSegment.alternative_korean_interpretations || currentSegment.alternative_interpretations || [];
+                    };
+                    
+                    const alternatives = getAlternativeInterpretations();
+                    
+                    return alternatives && alternatives.length > 0 && (
+                      <div className="bg-purple-50 border border-purple-200 rounded-xl p-6 mb-6">
+                        <h4 className="font-bold text-purple-800 mb-4 flex items-center gap-2">
+                          <span>⭐</span> 모범 {targetLanguage} 통역 답안
+                        </h4>
+                        <div className="space-y-3">
+                          {alternatives.slice(0, 3).map((alternative: string, index: number) => (
+                            <div key={index} className="bg-white border border-purple-200 rounded-lg p-4">
+                              <div className="flex items-start gap-3">
+                                <div className="w-6 h-6 bg-purple-500 text-white rounded-full flex items-center justify-center text-sm font-bold">
+                                  {index + 1}
+                                </div>
+                                <div className="flex-1">
+                                  <p className="text-gray-800 leading-relaxed">{alternative}</p>
+                                </div>
+                                <button
+                                  onClick={() => playText(alternative, sourceLanguage === 'ko' ? 'ko' : 'zh')}
+                                  disabled={!alternative.trim()}
+                                  className={`ml-2 p-2 rounded-full transition-all duration-200 ${
+                                    isTTSPlaying && currentTTSText === alternative
+                                      ? 'bg-red-500 hover:bg-red-600 text-white'
+                                      : 'bg-purple-100 hover:bg-purple-200 text-purple-600'
+                                  } disabled:opacity-50 disabled:cursor-not-allowed`}
+                                  title={isTTSPlaying && currentTTSText === alternative ? '음성 정지' : '음성 재생'}
+                                >
+                                  {isTTSPlaying && currentTTSText === alternative ? (
+                                    <span className="text-sm">⏹️</span>
+                                  ) : (
+                                    <span className="text-sm">🔊</span>
+                                  )}
+                                </button>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                        <div className="mt-4 p-3 bg-purple-100 rounded-lg">
+                          <p className="text-sm text-purple-700">
+                            💡 <strong>활용 팁:</strong> 위의 모범 {targetLanguage} 답안들과 여러분의 통역을 비교해보세요. 
+                            표현 방식, 어순, 핵심 어휘 선택 등을 참고하여 다음 연습에 적용해보세요.<br/>
+                            🔊 <strong>음성 듣기:</strong> 스피커 버튼을 클릭하면 정확한 발음과 억양을 들을 수 있습니다.
+                          </p>
+                        </div>
+                      </div>
+                    );
+                  }
+                })()}
+
+                {/* 2. 통역 시 주의사항 (common_interpretation_challenges) */}
+                {(() => {
+                  if (selectedSegmentIndex === -1) {
+                    // 전체 세그먼트 모드
+                    const hasAnyChallenges = selectedProblem?.segments.some(segment => 
+                      segment?.common_interpretation_challenges?.length > 0
+                    );
+                    
+                    return hasAnyChallenges && (
+                      <div className="bg-orange-50 border border-orange-200 rounded-xl p-6 mb-6">
+                        <h4 className="font-bold text-orange-800 mb-4 flex items-center gap-2">
+                          <span>⚠️</span> 전체 구간에서 놓치기 쉬운 포인트
+                        </h4>
+                        <div className="space-y-6">
+                          {selectedProblem?.segments.map((segment, segmentIndex) => {
+                            const challenges = segment?.common_interpretation_challenges || [];
+                            
+                            return challenges.length > 0 && (
+                              <div key={segmentIndex} className="border-b border-orange-200 pb-4 last:border-b-0">
+                                <h5 className="font-semibold text-orange-700 mb-3">
+                                  세그먼트 {segmentIndex + 1} 주의사항:
+                                </h5>
+                                <div className="space-y-2">
+                                  {challenges.slice(0, 3).map((challenge, index) => (
+                                    <div key={index} className="flex items-start gap-3 bg-white border border-orange-200 rounded-lg p-3">
+                                      <div className="w-5 h-5 bg-orange-500 text-white rounded-full flex items-center justify-center text-xs font-bold mt-0.5">
+                                        !
+                                      </div>
+                                      <div className="flex-1">
+                                        <p className="text-gray-800 text-sm leading-relaxed">{challenge}</p>
+                                      </div>
+                                    </div>
+                                  ))}
+                                </div>
+                              </div>
+                            );
+                          })}
+                        </div>
+                        <div className="mt-4 p-3 bg-orange-100 rounded-lg">
+                          <p className="text-sm text-orange-700">
+                            🎯 <strong>체크 포인트:</strong> 위의 주의사항들을 참고하여 자신의 통역에서 
+                            각 세그먼트별 포인트들이 제대로 처리되었는지 확인해보세요.
+                          </p>
+                        </div>
+                      </div>
+                    );
+                  } else {
+                    // 개별 세그먼트 모드
+                    return currentSegment?.common_interpretation_challenges && currentSegment.common_interpretation_challenges.length > 0 && (
+                      <div className="bg-orange-50 border border-orange-200 rounded-xl p-6 mb-6">
+                        <h4 className="font-bold text-orange-800 mb-4 flex items-center gap-2">
+                          <span>⚠️</span> 이 구간에서 놓치기 쉬운 포인트
+                        </h4>
+                        <div className="space-y-3">
+                          {currentSegment.common_interpretation_challenges.slice(0, 4).map((challenge, index) => (
+                            <div key={index} className="flex items-start gap-3 bg-white border border-orange-200 rounded-lg p-4">
+                              <div className="w-6 h-6 bg-orange-500 text-white rounded-full flex items-center justify-center text-sm font-bold mt-0.5">
+                                !
+                              </div>
+                              <div className="flex-1">
+                                <p className="text-gray-800 leading-relaxed">{challenge}</p>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                        <div className="mt-4 p-3 bg-orange-100 rounded-lg">
+                          <p className="text-sm text-orange-700">
+                            🎯 <strong>체크 포인트:</strong> 위의 주의사항들을 참고하여 자신의 통역에서 
+                            해당 부분들이 제대로 처리되었는지 확인해보세요.
+                          </p>
+                        </div>
+                      </div>
+                    );
+                  }
+                })()}
+
+                {/* 3. 문법 포인트 (grammar_points) */}
+                {(() => {
+                  if (selectedSegmentIndex === -1) {
+                    // 전체 세그먼트 모드
+                    const hasAnyGrammar = selectedProblem?.segments.some(segment => 
+                      segment?.grammar_points?.length > 0
+                    );
+                    
+                    return hasAnyGrammar && (
+                      <div className="bg-green-50 border border-green-200 rounded-xl p-6 mb-6">
+                        <h4 className="font-bold text-green-800 mb-4 flex items-center gap-2">
+                          <span>📚</span> 전체 핵심 문법 포인트
+                        </h4>
+                        <div className="space-y-6">
+                          {selectedProblem?.segments.map((segment, segmentIndex) => {
+                            const grammarPoints = segment?.grammar_points || [];
+                            
+                            return grammarPoints.length > 0 && (
+                              <div key={segmentIndex} className="border-b border-green-200 pb-4 last:border-b-0">
+                                <h5 className="font-semibold text-green-700 mb-3">
+                                  세그먼트 {segmentIndex + 1} 문법 포인트:
+                                </h5>
+                                <div className="space-y-3">
+                                  {grammarPoints.slice(0, 2).map((grammar, index) => (
+                                    <div key={index} className="bg-white border border-green-200 rounded-lg p-3">
+                                      <div className="flex items-start gap-3">
+                                        <div className="w-5 h-5 bg-green-500 text-white rounded-full flex items-center justify-center text-xs font-bold">
+                                          📝
+                                        </div>
+                                        <div className="flex-1 space-y-2">
+                                          {grammar.korean_pattern && (
+                                            <div>
+                                              <span className="text-xs font-medium text-green-700">한국어 패턴:</span>
+                                              <p className="text-gray-800 text-sm font-medium">{grammar.korean_pattern}</p>
+                                            </div>
+                                          )}
+                                          {grammar.chinese_explanation && (
+                                            <div>
+                                              <span className="text-xs font-medium text-green-700">중국어 설명:</span>
+                                              <p className="text-gray-800 text-sm">{grammar.chinese_explanation}</p>
+                                            </div>
+                                          )}
+                                          <div className="grid md:grid-cols-2 gap-2 mt-2">
+                                            {grammar.example_korean && (
+                                              <div className="bg-green-100 p-2 rounded">
+                                                <span className="text-xs font-medium text-green-600">한국어 예문</span>
+                                                <p className="text-gray-800 text-xs mt-1">{grammar.example_korean}</p>
+                                              </div>
+                                            )}
+                                            {grammar.example_chinese && (
+                                              <div className="bg-green-100 p-2 rounded">
+                                                <span className="text-xs font-medium text-green-600">중국어 예문</span>
+                                                <p className="text-gray-800 text-xs mt-1">{grammar.example_chinese}</p>
+                                              </div>
+                                            )}
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  ))}
+                                </div>
+                              </div>
+                            );
+                          })}
+                        </div>
+                        <div className="mt-4 p-3 bg-green-100 rounded-lg">
+                          <p className="text-sm text-green-700">
+                            📖 <strong>학습 가이드:</strong> 위의 문법 패턴들을 숙지하고, 
+                            유사한 구조가 나올 때 정확하게 적용할 수 있도록 연습해보세요.
+                          </p>
+                        </div>
+                      </div>
+                    );
+                  } else {
+                    // 개별 세그먼트 모드
+                    return currentSegment?.grammar_points && currentSegment.grammar_points.length > 0 && (
+                      <div className="bg-green-50 border border-green-200 rounded-xl p-6 mb-6">
+                        <h4 className="font-bold text-green-800 mb-4 flex items-center gap-2">
+                          <span>📚</span> 핵심 문법 포인트
+                        </h4>
+                        <div className="space-y-4">
+                          {currentSegment.grammar_points.slice(0, 3).map((grammar, index) => (
+                            <div key={index} className="bg-white border border-green-200 rounded-lg p-4">
+                              <div className="flex items-start gap-3">
+                                <div className="w-6 h-6 bg-green-500 text-white rounded-full flex items-center justify-center text-sm font-bold">
+                                  📝
+                                </div>
+                                <div className="flex-1 space-y-2">
+                                  {grammar.korean_pattern && (
+                                    <div>
+                                      <span className="text-sm font-medium text-green-700">한국어 패턴:</span>
+                                      <p className="text-gray-800 font-medium">{grammar.korean_pattern}</p>
+                                    </div>
+                                  )}
+                                  {grammar.chinese_explanation && (
+                                    <div>
+                                      <span className="text-sm font-medium text-green-700">중국어 설명:</span>
+                                      <p className="text-gray-800">{grammar.chinese_explanation}</p>
+                                    </div>
+                                  )}
+                                  <div className="grid md:grid-cols-2 gap-3 mt-3">
+                                    {grammar.example_korean && (
+                                      <div className="bg-green-100 p-3 rounded-lg">
+                                        <span className="text-xs font-medium text-green-600">한국어 예문</span>
+                                        <p className="text-gray-800 text-sm mt-1">{grammar.example_korean}</p>
+                                      </div>
+                                    )}
+                                    {grammar.example_chinese && (
+                                      <div className="bg-green-100 p-3 rounded-lg">
+                                        <span className="text-xs font-medium text-green-600">중국어 예문</span>
+                                        <p className="text-gray-800 text-sm mt-1">{grammar.example_chinese}</p>
+                                      </div>
+                                    )}
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                        <div className="mt-4 p-3 bg-green-100 rounded-lg">
+                          <p className="text-sm text-green-700">
+                            📖 <strong>학습 가이드:</strong> 위의 문법 패턴들을 숙지하고, 
+                            유사한 구조가 나올 때 정확하게 적용할 수 있도록 연습해보세요.
+                          </p>
+                        </div>
+                      </div>
+                    );
+                  }
+                })()}
+
+                {/* 4. 노트테이킹 포인트 (suggested_note_taking_points) */}
+                {(() => {
+                  if (selectedSegmentIndex === -1) {
+                    // 전체 세그먼트 모드
+                    const hasAnyNotes = selectedProblem?.segments.some(segment => 
+                      segment?.suggested_note_taking_points?.length > 0
+                    );
+                    
+                    return hasAnyNotes && (
+                      <div className="bg-indigo-50 border border-indigo-200 rounded-xl p-6 mb-6">
+                        <h4 className="font-bold text-indigo-800 mb-4 flex items-center gap-2">
+                          <span>✏️</span> 전체 핵심 노트테이킹 포인트
+                        </h4>
+                        <div className="space-y-6">
+                          {selectedProblem?.segments.map((segment, segmentIndex) => {
+                            const notePoints = segment?.suggested_note_taking_points || [];
+                            
+                            return notePoints.length > 0 && (
+                              <div key={segmentIndex} className="border-b border-indigo-200 pb-4 last:border-b-0">
+                                <h5 className="font-semibold text-indigo-700 mb-3">
+                                  세그먼트 {segmentIndex + 1} 노트테이킹:
+                                </h5>
+                                <div className="space-y-2">
+                                  {notePoints.slice(0, 3).map((point, index) => (
+                                    <div key={index} className="flex items-start gap-3 bg-white border border-indigo-200 rounded-lg p-3">
+                                      <div className="w-5 h-5 bg-indigo-500 text-white rounded-full flex items-center justify-center text-xs font-bold">
+                                        ✓
+                                      </div>
+                                      <div className="flex-1">
+                                        <p className="text-gray-800 text-sm leading-relaxed">{point}</p>
+                                      </div>
+                                    </div>
+                                  ))}
+                                </div>
+                              </div>
+                            );
+                          })}
+                        </div>
+                        <div className="mt-4 p-3 bg-indigo-100 rounded-lg">
+                          <p className="text-sm text-indigo-700">
+                            📝 <strong>노트테이킹 팁:</strong> 실제 통역 시에는 위의 포인트들을 미리 예상하고 
+                            핵심 정보를 빠르게 기록할 수 있도록 연습하세요.
+                          </p>
+                        </div>
+                      </div>
+                    );
+                  } else {
+                    // 개별 세그먼트 모드
+                    return currentSegment?.suggested_note_taking_points && currentSegment.suggested_note_taking_points.length > 0 && (
+                      <div className="bg-indigo-50 border border-indigo-200 rounded-xl p-6 mb-6">
+                        <h4 className="font-bold text-indigo-800 mb-4 flex items-center gap-2">
+                          <span>✏️</span> 핵심 노트테이킹 포인트
+                        </h4>
+                        <div className="space-y-3">
+                          {currentSegment.suggested_note_taking_points.slice(0, 5).map((point, index) => (
+                            <div key={index} className="flex items-start gap-3 bg-white border border-indigo-200 rounded-lg p-4">
+                              <div className="w-6 h-6 bg-indigo-500 text-white rounded-full flex items-center justify-center text-sm font-bold">
+                                ✓
+                              </div>
+                              <div className="flex-1">
+                                <p className="text-gray-800 leading-relaxed">{point}</p>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                        <div className="mt-4 p-3 bg-indigo-100 rounded-lg">
+                          <p className="text-sm text-indigo-700">
+                            📝 <strong>노트테이킹 팁:</strong> 실제 통역 시에는 위의 포인트들을 미리 예상하고 
+                            핵심 정보를 빠르게 기록할 수 있도록 연습하세요.
+                          </p>
+                        </div>
+                      </div>
+                    );
+                  }
+                })()}
+
+                {/* 5. 어조 및 전달 방식 (recommended_delivery_tone) */}
+                {(() => {
+                  if (selectedSegmentIndex === -1) {
+                    // 전체 세그먼트 모드
+                    const hasAnyTone = selectedProblem?.segments.some(segment => 
+                      segment?.recommended_delivery_tone
+                    );
+                    
+                    return hasAnyTone && (
+                      <div className="bg-pink-50 border border-pink-200 rounded-xl p-6 mb-6">
+                        <h4 className="font-bold text-pink-800 mb-4 flex items-center gap-2">
+                          <span>🎭</span> 전체 권장 어조 및 전달 방식
+                        </h4>
+                        <div className="space-y-6">
+                          {selectedProblem?.segments.map((segment, segmentIndex) => {
+                            const tone = segment?.recommended_delivery_tone;
+                            
+                            return tone && (
+                              <div key={segmentIndex} className="border-b border-pink-200 pb-4 last:border-b-0">
+                                <h5 className="font-semibold text-pink-700 mb-3">
+                                  세그먼트 {segmentIndex + 1} 어조:
+                                </h5>
+                                <div className="bg-white border border-pink-200 rounded-lg p-3">
+                                  <div className="flex items-start gap-3">
+                                    <div className="w-5 h-5 bg-pink-500 text-white rounded-full flex items-center justify-center text-xs font-bold">
+                                      🗣️
+                                    </div>
+                                    <div className="flex-1">
+                                      <p className="text-gray-800 text-sm leading-relaxed">{tone}</p>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            );
+                          })}
+                        </div>
+                        <div className="mt-4 p-3 bg-pink-100 rounded-lg">
+                          <p className="text-sm text-pink-700">
+                            🎙️ <strong>전달 가이드:</strong> 통역할 때는 단순히 내용만이 아니라 화자의 의도와 
+                            상황에 맞는 어조로 전달하는 것이 중요합니다.
+                          </p>
+                        </div>
+                      </div>
+                    );
+                  } else {
+                    // 개별 세그먼트 모드
+                    return currentSegment?.recommended_delivery_tone && (
+                      <div className="bg-pink-50 border border-pink-200 rounded-xl p-6 mb-6">
+                        <h4 className="font-bold text-pink-800 mb-4 flex items-center gap-2">
+                          <span>🎭</span> 권장 어조 및 전달 방식
+                        </h4>
+                        <div className="bg-white border border-pink-200 rounded-lg p-4">
+                          <div className="flex items-start gap-3">
+                            <div className="w-6 h-6 bg-pink-500 text-white rounded-full flex items-center justify-center text-sm font-bold">
+                              🗣️
+                            </div>
+                            <div className="flex-1">
+                              <p className="text-gray-800 leading-relaxed">{currentSegment.recommended_delivery_tone}</p>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="mt-4 p-3 bg-pink-100 rounded-lg">
+                          <p className="text-sm text-pink-700">
+                            🎙️ <strong>전달 가이드:</strong> 통역할 때는 단순히 내용만이 아니라 화자의 의도와 
+                            상황에 맞는 어조로 전달하는 것이 중요합니다.
+                          </p>
+                        </div>
+                      </div>
+                    );
+                  }
+                })()}
+
                 {/* 다음 세그먼트 버튼 */}
                 <div className="text-center">
                   <button
                     onClick={() => {
-                      // 다음 세그먼트로 이동 또는 완료
-                      if (selectedSegmentIndex < (selectedProblem?.segments.length || 1) - 1) {
-                        setSelectedSegmentIndex(prev => prev + 1);
+                      if (selectedSegmentIndex === -1) {
+                        // 전체 세그먼트에서 첫 번째 세그먼트로 이동
+                        setSelectedSegmentIndex(0);
                         setCurrentStep(1);
                         setAccumulatedText('');
                         setCurrentText('');
                         setAnalysisResult(null);
                         setRecordingTime(0);
                       } else {
-                        alert('모든 세그먼트를 완료했습니다! 🎉');
+                        // 다음 세그먼트로 이동 또는 완료
+                        if (selectedSegmentIndex < (selectedProblem?.segments.length || 1) - 1) {
+                          setSelectedSegmentIndex(prev => prev + 1);
+                          setCurrentStep(1);
+                          setAccumulatedText('');
+                          setCurrentText('');
+                          setAnalysisResult(null);
+                          setRecordingTime(0);
+                        } else {
+                          alert('모든 세그먼트를 완료했습니다! 🎉');
+                        }
                       }
                     }}
                     className="px-8 py-4 bg-gradient-to-r from-green-500 to-green-700 text-white font-semibold text-lg rounded-xl hover:from-green-600 hover:to-green-800 transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1"
                   >
-                    ✨ {selectedSegmentIndex < (selectedProblem?.segments.length || 1) - 1 ? '다음 세그먼트' : '연습 완료'}
+                    ✨ {selectedSegmentIndex === -1 ? '첫 번째 세그먼트로' : 
+                        selectedSegmentIndex < (selectedProblem?.segments.length || 1) - 1 ? '다음 세그먼트' : '연습 완료'}
                   </button>
                 </div>
               </div>
@@ -1245,7 +2016,14 @@ const StepByStepInterpretation: React.FC = () => {
             {/* 네비게이션 버튼 */}
             <div className="flex gap-4 mt-8">
               <button
-                onClick={() => goToStep(2)}
+                onClick={() => {
+                  // 다시 녹음할 때 기존 텍스트 초기화
+                  setAccumulatedText('');
+                  setCurrentText('');
+                  setRecordingTime(0);
+                  setAnalysisResult(null);
+                  goToStep(2);
+                }}
                 className="flex-1 py-4 px-6 bg-gray-200 text-gray-700 font-semibold rounded-xl hover:bg-gray-300 transition-all duration-300"
               >
                 ← 이전: 다시 녹음

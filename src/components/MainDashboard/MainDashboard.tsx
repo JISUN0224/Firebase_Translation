@@ -62,7 +62,7 @@ const interpretingCards = [
     title: 'AI 비교 분석',
     description: 'AI와 함께 통역 실력을 키워보세요',
     links: [
-      { label: 'AI통역 피드백', to: '/interpreting/feedback' },
+      { label: '🎯 단계별 통역 연습', to: '/interpreting/feedback' },
     ] as MenuLink[],
     border: 'border-purple-400',
     hover: 'hover:border-purple-500',
@@ -72,7 +72,7 @@ const interpretingCards = [
     title: '실전 연습',
     description: '다양한 방식으로 통역 실력을 향상시켜보세요',
     links: [
-      { label: '🎯 단계별 통역 연습', to: '/interpreting/step-by-step' },
+      { label: '🧠 메모리 트레이닝', to: '/interpreting/memory' },
     ] as MenuLink[],
     border: 'border-orange-400',
     hover: 'hover:border-orange-500',

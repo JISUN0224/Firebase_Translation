@@ -1,0 +1,2500 @@
+{
+  "title": "통합 통역 연습 자료집",
+  "category": "통역 연습",
+  "author": "통합 자료집",
+  "difficulty": "intermediate",
+  "description": "한국 외교 연설, 중국 비즈니스 리더십, 한국 영화 인터뷰를 포함한 종합 통역 연습 자료",
+  "total_segments": 38,
+  "estimated_total_time": 700.446,
+  "created_date": "2025-01-15T12:00:00.000000",
+  "metadata": {
+    "source": "Combined Sources",
+    "content_type": "interpreting_practice",
+    "tags": [
+      "diplomacy",
+      "business",
+      "entertainment",
+      "korean_chinese",
+      "interpreting_practice"
+    ]
+  },
+  "segments": [
+    {
+      "id": 1,
+      "original_text": "의장님, 사무총장님, 그리고 각국 대표 여러분, 저는 오늘 제79차 유엔총회 고위급회기에서 연설하게 된 것을 영광으로 생각합니다.",
+      "char_count": 72,
+      "difficulty_level": "intermediate",
+      "target_interpretation": "尊敬的主席先生，尊敬的秘书长先生，各位代表，今天我非常荣幸能够在联合国大会第79届高级别会议上致辞。",
+      "pinyin_for_segment": "zūn jìng de zhǔ xí xiān shēng ，zūn jìng de mì shū zhǎng xiān shēng ，gè wèi dài biǎo ，jīn tiān wǒ fēi cháng róng xìng néng gòu zài lián hé guó dà huì dì qī shí jiǔ jiè gāo jí bié huì yì shàng zhì cí 。",
+      "key_vocabulary": [
+        {
+          "source_text": "유엔총회",
+          "target_text": "联合国大会",
+          "pinyin": "lián hé guó dà huì",
+          "source_example": "올해 유엔총회에서는 기후 변화 문제를 논의했습니다.",
+          "target_example": "今年的联合国大会讨论了气候变化问题。",
+          "note": "약칭: 联大(lián dà)"
+        },
+        {
+          "source_text": "고위급회기",
+          "target_text": "高级别会议",
+          "pinyin": "gāo jí bié huì yì",
+          "source_example": "고위급회의는 주로 중요한 의제를 논의합니다.",
+          "target_example": "高级别会议通常讨论重要议题。",
+          "note": "주로 정상급 지도자들이 참석하는 회의를 의미합니다."
+        }
+      ],
+      "grammar_points": [
+        {
+          "chinese_explanation": "表示荣幸做某事，常用\"荣幸+动词短语\"的结构。",
+          "korean_pattern": "~하게 된 것을 영광으로 생각합니다",
+          "example_chinese": "我很荣幸能参加这次会议。",
+          "example_korean": "저는 이번 회의에 참석하게 된 것을 영광으로 생각합니다."
+        }
+      ],
+      "interpreting_hints": [
+        "각 직책에 맞는 정확한 호칭을 사용해야 합니다. (의장님: 主席, 사무총장님: 秘书长)",
+        "고위급 회의라는 점을 고려하여, 격식 있는 어투를 유지해야 합니다."
+      ],
+      "common_interpretation_challenges": [
+        "각 직책/신분에 대한 정확한 호칭 사용 (의장, 사무총장, 대표)",
+        "고위급회기라는 격식 있는 행사임을 감안하여 공식적인 어휘와 표현을 사용해야 함."
+      ],
+      "suggested_note_taking_points": [
+        "의장 (主席)",
+        "사무총장 (秘书长)",
+        "79차 유엔총회 (79届 联大)",
+        "영광 (荣幸)"
+      ],
+      "alternative_interpretations": [
+        "尊敬的主席，秘书长，各位代表，今天我非常荣幸在联合国大会第79届高级别会议上发言。"
+      ],
+      "recommended_delivery_tone": "공식적이고 진중하게, 존경심을 담아 전달해야 합니다.",
+      "cultural_context": "유엔총회는 국제적인 외교 행사이며, 연설은 공식적인 자리이므로 존중과 격식을 갖춘 표현을 사용하는 것이 중요합니다.",
+      "difficulty_analysis": "전반적으로 중간 난이도입니다. 어휘 자체는 어렵지 않지만, 공식적인 행사에서 사용되는 격식 있는 표현을 정확하게 구사하는 것이 중요합니다.",
+      "audio_timing": {
+        "start_time_sec": 0,
+        "end_time_sec": 10.379
+      },
+      "source_info": {
+        "source_file": "KoreaSpeech_Korean_15개.json",
+        "original_id": 1,
+        "language_pair": "ko-KR -> zh-CN"
+      }
+    },
+    {
+      "id": 2,
+      "original_text": "이번 총회는 '누구도 소외되지 않는다: 현재·미래 세대를 위한 평화, 지속 가능한 발전, 인간의 존엄 증진을 위해 함께 행동하기'라는 중요한 주제 아래 개최되었습니다.",
+      "char_count": 93,
+      "difficulty_level": "intermediate",
+      "target_interpretation": "本次大会以\"不让任何人掉队：为当代和未来世代的和平、可持续发展以及提升人类尊严而共同努力\"为重要主题而召开。",
+      "pinyin_for_segment": "běn cì dàhuì yǐ \"bù ràng rènhé rén diào duì: wèi dāngdài hé wèilái shìdài de hépíng, kě chíxù fāzhǎn yǐjí tíshēng rénlèi zūnyán ér gòngtóng nǔlì\" wèi zhòngyào zhǔtí ér zhàokāi.",
+      "key_vocabulary": [
+        {
+          "source_text": "누구도 소외되지 않는다",
+          "target_text": "不让任何人掉队",
+          "pinyin": "bù ràng rènhé rén diào duì",
+          "source_example": "우리의 목표는 누구도 소외되지 않게 하는 것입니다.",
+          "target_example": "我们的目标是不让任何人掉队。",
+          "note": "직역보다는 의미를 살린 표현"
+        },
+        {
+          "source_text": "지속 가능한 발전",
+          "target_text": "可持续发展",
+          "pinyin": "kě chíxù fāzhǎn",
+          "source_example": "지속 가능한 발전은 미래에 매우 중요합니다.",
+          "target_example": "可持续发展对未来至关重要。",
+          "note": "자주 사용되는 전문 용어"
+        }
+      ],
+      "grammar_points": [
+        {
+          "chinese_explanation": "用于表示目的，为了...",
+          "korean_pattern": "~을/를 위해",
+          "example_chinese": "为了更好的未来，我们一起努力。",
+          "example_korean": "더 나은 미래를 위해, 우리 함께 노력합시다."
+        }
+      ],
+      "interpreting_hints": [
+        "'누구도 소외되지 않는다'를 '不让任何人掉队'와 같이 구어체적인 표현으로 바꿔 자연스럽게 전달합니다.",
+        "긴 주제를 한 번에 전달하기 어려우므로, 의미 단위별로 끊어서 통역하고, 각 단락 사이의 논리적 연결을 명확히 합니다."
+      ],
+      "common_interpretation_challenges": [
+        "'누구도 소외되지 않는다'를 중국어로 자연스럽게 표현하는 방법",
+        "긴 주제를 끊어서 효과적으로 전달하는 전략"
+      ],
+      "suggested_note_taking_points": [
+        "누구도 소외 X",
+        "현재/미래 세대",
+        "평화, 지속가능발전, 인간존엄"
+      ],
+      "alternative_interpretations": [
+        "本次大会的主题也可以这样翻译：本次会议强调，为了所有世代的和平、可持续发展和人类尊严，我们需要共同努力，不让任何人掉队。"
+      ],
+      "recommended_delivery_tone": "공식적이고 진중하게, 주제의 중요성을 강조하는 어조",
+      "cultural_context": "국제 총회와 같은 공식 석상에서는 주제의 중요성을 강조하고 긍정적이고 협력적인 어조를 사용하는 것이 일반적입니다.",
+      "difficulty_analysis": "이 문장은 비교적 긴 주제를 포함하고 있어 intermediate 난이도로 분류됩니다.",
+      "audio_timing": {
+        "start_time_sec": 10.449,
+        "end_time_sec": 22.723
+      },
+      "source_info": {
+        "source_file": "KoreaSpeech_Korean_15개.json",
+        "original_id": 2,
+        "language_pair": "ko-KR -> zh-CN"
+      }
+    },
+    {
+      "id": 3,
+      "original_text": "이 주제는 우리 시대가 직면한 복합적인 위기와 도전에 대한 국제사회의 공동 대응 의지를 반영하고 있습니다.",
+      "char_count": 59,
+      "difficulty_level": "intermediate",
+      "target_interpretation": "这个主题反映了国际社会对于我们这个时代所面对的复杂危机和挑战的共同应对的决心。",
+      "pinyin_for_segment": "zhè gè zhǔ tí fǎn yìng le guó jì shè huì duì yú wǒ men zhè gè shí dài suǒ miàn duì de fù zá wēi jī hé tiǎo zhàn de gòng tóng yìng duì de jué xīn.",
+      "key_vocabulary": [
+        {
+          "source_text": "복합적인 위기",
+          "target_text": "复杂危机",
+          "pinyin": "fù zá wēi jī",
+          "source_example": "세계는 복합적인 위기에 직면해 있습니다.",
+          "note": "'복합적인'은 여러 요소가 얽혀있음을 강조"
+        },
+        {
+          "source_text": "국제사회",
+          "target_text": "国际社会",
+          "pinyin": "guó jì shè huì",
+          "source_example": "국제사회의 협력이 필요합니다.",
+          "note": "여러 국가들의 모임"
+        }
+      ],
+      "grammar_points": [
+        {
+          "chinese_explanation": "表示\"对\"什么事情/情况采取措施或行动",
+          "korean_pattern": "~에 대한",
+          "example_korean": "이 문제에 대한 해결책을 찾아야 합니다."
+        }
+      ],
+      "interpreting_hints": [
+        "'복합적인 위기와 도전'은 다양한 측면에서의 어려움을 포괄하는 표현임을 고려하여, 단순히 나열하는 것보다 함축적인 표현을 사용하는 것이 좋습니다."
+      ],
+      "common_interpretation_challenges": [
+        "'복합적인 위기와 도전'을 포괄적으로 표현하는 어휘 선택의 어려움",
+        "'공동 대응 의지'를 간결하고 명확하게 전달하는 방법"
+      ],
+      "suggested_note_taking_points": [
+        "복합 위기",
+        "국제 사회",
+        "공동 대응"
+      ],
+      "alternative_interpretations": [
+        "这个主题也体现了国际社会应对我们这个时代所面临的复杂危机和挑战的共同决心。"
+      ],
+      "recommended_delivery_tone": "공식적이고 진중하게, 국제 사회의 협력을 강조하는 어조",
+      "cultural_context": "국제 총회와 같은 공식적인 자리에서는 정확하고 격식 있는 표현이 중요합니다.",
+      "difficulty_analysis": "이 문장은 중간 난이도로, 복합적인 어휘와 추상적인 개념을 다루고 있습니다.",
+      "audio_timing": {
+        "start_time_sec": 22.793,
+        "end_time_sec": 29.621
+      },
+      "source_info": {
+        "source_file": "KoreaSpeech_Korean_15개.json",
+        "original_id": 3,
+        "language_pair": "ko-KR -> zh-CN"
+      }
+    },
+    {
+      "id": 4,
+      "original_text": "오늘날 우리는 지정학적 긴장, 기후변화의 위협, 경제적 불평등 심화, 그리고 팬데믹과 같은 초국가적 도전에 직면해 있습니다.",
+      "char_count": 69,
+      "difficulty_level": "intermediate",
+      "target_interpretation": "当前，我们正面临着地缘政治的紧张局势，气候变化的威胁，日益加剧的经济不平等，以及像新冠疫情这样的跨国挑战。",
+      "pinyin_for_segment": "dāngqián, wǒmen zhèng miànlínzhe dìyuán zhèngzhì de jǐnzhāng júshì, qìhòu biànhuà de wēixié, rìyì jiājù de jīngjì bù píngděng, yǐjí xiàng xīnguān yìqíng zhèyàng de kuàguó tiǎozhàn.",
+      "key_vocabulary": [
+        {
+          "source_text": "지정학적 긴장",
+          "target_text": "地缘政治紧张",
+          "pinyin": "dìyuán zhèngzhì jǐnzhāng",
+          "source_example": "국제 사회는 지정학적 긴장에 직면해 있습니다.",
+          "target_example": "国际社会面临着地缘政治紧张。",
+          "note": "지정학적이라는 단어의 정확한 의미를 이해하고 번역해야 합니다."
+        },
+        {
+          "source_text": "기후 변화",
+          "target_text": "气候变化",
+          "pinyin": "qìhòu biànhuà",
+          "source_example": "기후 변화는 세계적인 문제입니다.",
+          "target_example": "气候变化是一个全球性问题。",
+          "note": "기후변화는 고유명사처럼 사용되므로 정확하게 전달해야 합니다."
+        }
+      ],
+      "grammar_points": [
+        {
+          "chinese_explanation": "类似于\"面对着\"，\"面临着\"。表示正在经历或面对某种情况。",
+          "korean_pattern": "~에 직면하다",
+          "example_chinese": "我们面临着新的挑战。",
+          "example_korean": "우리는 새로운 도전에 직면해 있습니다."
+        }
+      ],
+      "interpreting_hints": [
+        "각 도전을 나열할 때, 쉼표를 사용하여 구분하고, 마지막 도전 앞에 '그리고'를 추가하여 문장의 흐름을 자연스럽게 만드세요."
+      ],
+      "common_interpretation_challenges": [
+        "초국가적 도전과 같은 추상적인 개념을 명확하고 간결하게 전달하는 데 어려움이 있을 수 있습니다."
+      ],
+      "suggested_note_taking_points": [
+        "지정학적 긴장",
+        "기후 변화",
+        "경제 불평등 심화",
+        "초국가적 도전"
+      ],
+      "alternative_interpretations": [
+        "今天，我们面临着地缘政治紧张、气候变化的威胁、经济不平等加剧以及像疫情这样的跨国挑战。"
+      ],
+      "recommended_delivery_tone": "공식적이고 진중하게, 그러나 명확하고 간결하게 전달합니다.",
+      "cultural_context": "국제 외교 무대에서 자주 사용되는 표현들이므로, 격식 있는 어휘 선택이 중요합니다.",
+      "difficulty_analysis": "중간 난이도의 문장으로, 주요 어휘와 문장 구조를 파악하고 자연스럽게 표현하는 것이 중요합니다.",
+      "audio_timing": {
+        "start_time_sec": 29.691,
+        "end_time_sec": 39.136
+      },
+      "source_info": {
+        "source_file": "KoreaSpeech_Korean_15개.json",
+        "original_id": 4,
+        "language_pair": "ko-KR -> zh-CN"
+      }
+    },
+    {
+      "id": 5,
+      "original_text": "이러한 도전들은 국경을 초월하며, 그 어떤 나라도 혼자서는 해결할 수 없습니다. 다자주의와 국제 협력의 중요성이 그 어느 때보다 강조되는 이유입니다.",
+      "char_count": 83,
+      "difficulty_level": "intermediate",
+      "target_interpretation": "这些挑战是跨境的，任何国家都无法独自应对。 这就是为什么多边主义和国际合作比以往任何时候都更加重要。",
+      "pinyin_for_segment": "zhè xiē tiǎo zhàn shì kuà jìng de, rèn hé guó jiā dōu wú fǎ dú zì yìng duì. zhè jiù shì wèi shén me duō biān zhǔ yì hé guó jì hé zuò bǐ yǐ wǎng rèn hé shí hou dōu gèng jiā zhòng yào.",
+      "key_vocabulary": [
+        {
+          "source_text": "국경을 초월하여",
+          "target_text": "跨境",
+          "pinyin": "kuà jìng",
+          "source_example": "국경을 초월한 전자상거래 발전이 빠르다.",
+          "target_example": "跨境电商发展迅速。",
+          "note": "초국가적인 문제를 설명할 때 유용"
+        },
+        {
+          "source_text": "다자주의",
+          "target_text": "多边主义",
+          "pinyin": "duō biān zhǔ yì",
+          "source_example": "우리는 다자주의를 지지한다.",
+          "target_example": "我们支持多边主义。",
+          "note": "국제 관계에서 중요한 개념"
+        }
+      ],
+      "grammar_points": [
+        {
+          "chinese_explanation": "表示原因或理由，相当于韩语的'~때문에'。",
+          "korean_pattern": "~이유입니다",
+          "example_chinese": "因为全球气候变化，所以我们需要采取行动。",
+          "example_korean": "지구 온난화 때문에 우리는 행동을 취해야 합니다."
+        }
+      ],
+      "interpreting_hints": [
+        "'그 어느 때보다'는 강조 표현이므로, '尤为重要'와 같은 어휘를 사용하여 강도를 높여 전달합니다."
+      ],
+      "common_interpretation_challenges": [
+        "'국경을 초월하며'를 '跨境'으로 번역할 때, 그 의미가 포괄적으로 전달되는지 확인해야 합니다."
+      ],
+      "suggested_note_taking_points": [
+        "挑战",
+        "跨境",
+        "多边主义",
+        "国际合作"
+      ],
+      "alternative_interpretations": [
+        "所以，应对这些挑战，没有哪个国家可以单打独斗。正因如此，多边主义和国际合作才显得尤为重要。"
+      ],
+      "recommended_delivery_tone": "공식적이고 진중하게, 연설하듯이 전달합니다.",
+      "cultural_context": "국제 외교 연설 또는 국제 포럼에서 자주 사용되는 표현입니다.",
+      "difficulty_analysis": "중간 난이도의 문장입니다. 핵심 어휘와 문장 구조가 비교적 간단하지만, 문맥에 맞는 자연스러운 표현을 사용하는 것이 중요합니다.",
+      "audio_timing": {
+        "start_time_sec": 39.206,
+        "end_time_sec": 49.546
+      },
+      "source_info": {
+        "source_file": "KoreaSpeech_Korean_15개.json",
+        "original_id": 5,
+        "language_pair": "ko-KR -> zh-CN"
+      }
+    },
+    {
+      "id": 6,
+      "chinese_text": "到今天为止，我几乎是一个电脑盲。我只会收发电子邮件和上网。很多技术专家经常把技术看得非常重。",
+      "char_count": 46,
+      "estimated_duration_sec": 10.2,
+      "difficulty_level": "beginner",
+      "korean_interpretation_reference": "오늘까지 왔지만, 저는 거의 컴퓨터 문맹에 가깝습니다. 저는 이메일을 주고받거나 인터넷을 사용하는 정도밖에 못 합니다. 많은 기술 전문가들은 기술을 굉장히 중요하게 생각하는데요.",
+      "chinese_audio_url": "https://your-storage-bucket.com/audio/speech_segment_001.mp3",
+      "pinyin_for_segment": "dào jīntiān wéizhǐ, wǒ jīhū shì yígè diànnǎo máng. wǒ zhǐ huì shōufā diànzi yóujiàn hé shàngwǎng. hěnduō jìshù zhuānjiā jīngcháng bǎ jìshù kàndé fēicháng zhòng.",
+      "key_vocabulary": [
+        {
+          "chinese": "电脑盲",
+          "korean": "컴퓨터 문맹",
+          "pinyin": "diànnǎo máng",
+          "example_chinese": "他是一个电脑盲。",
+          "example_korean": "그는 컴퓨터 문맹이다.",
+          "note": "‘电脑盲’이라는 표현은 컴퓨터를 잘 모르는 사람을 가리킵니다. 통역 시 이를 컴퓨터 문맹으로 통역하는 것이 자연스럽습니다."
+        },
+        {
+          "chinese": "重",
+          "korean": "중요하다",
+          "pinyin": "zhòng",
+          "example_chinese": "他把这件事看得很重。",
+          "example_korean": "그는 이 일을 매우 중요하게 생각했다.",
+          "note": "‘重’이라는 단어는 중요하다는 의미입니다. 이 단어는 통역 시 ‘중요하게 생각하다’로 번역하는 것이 적절합니다."
+        }
+      ],
+      "grammar_points": [
+        {
+          "chinese_pattern": "把字句",
+          "korean_explanation": "'받'을 사용한 문장 구조",
+          "example_chinese": "他把这个问题看得很重。",
+          "example_korean": "그는 이 문제를 매우 중요하게 생각했다."
+        }
+      ],
+      "interpreting_hints": [
+        "이 문장은 자신의 컴퓨터 지식 부족을 인정하고, 기술 전문가들의 기술에 대한 태도를 언급하고 있다.",
+        "문화적 맥락에서는 중국에서 기술의 중요성이 강조되는 경향이 있다는 것을 이해하는 것이 중요하다.",
+        "자연스러운 전달을 위해 '电脑盲'은 '컴퓨터 문맹'으로, '把技术看得非常重'은 '기술을 굉장히 중요하게 생각한다'로 번역하는 것이 좋다."
+      ],
+      "common_interpretation_challenges": [
+        "'电脑盲'이라는 표현을 자연스럽게 번역하는 것이 어려울 수 있다.",
+        "'把'를 사용하는 문장 구조를 정확하게 이해하고 번역하는 것이 중요하다."
+      ],
+      "suggested_note_taking_points": [
+        "컴퓨터 문맹",
+        "이메일과 인터넷",
+        "기술 중요성"
+      ],
+      "alternative_korean_interpretations": [
+        "지금까지와서 보면, 저는 거의 컴퓨터를 모르는 사람입니다. 이메일을 보내거나 받는 것과 인터넷을 사용하는 것 외에는 할 줄 모릅니다. 기술 전문가들은 대부분 기술을 아주 중요하게 여깁니다.",
+        "오늘 날에 와서 보면, 저는 사실상 컴퓨터에 대해 모르는 사람입니다. 이메일을 주고 받거나 인터넷을 이용하는 정도밖에 못합니다. 많은 기술 전문가들은 기술을 매우 중요하게 생각하는 것 같습니다."
+      ],
+      "recommended_delivery_tone": "솔직하고 친근한 어조",
+      "cultural_context": "현대 중국에서는 기술의 중요성을 강조하며, '电脑盲'이라는 표현은 이런 배경 아래에서 나타난 것이다.",
+      "difficulty_analysis": "이 구간은 '电脑盲'이라는 특정 표현과 '把'를 사용한 문장 구조를 이해하고 번역하는 데 중점을 두어야 한다.",
+      "audio_timing": {
+        "start_time_sec": 0,
+        "end_time_sec": 11.877
+      },
+      "source_info": {
+        "source_file": "ma_yun_speech_15개.json",
+        "original_id": 1,
+        "language_pair": "zh-CN -> ko-KR"
+      }
+    },
+    {
+      "id": 7,
+      "chinese_text": "我一直觉得，不懂技术没关系。真正的技术从来都是为不懂技术的人服务的。我们这些不懂技术的人创造了全球最大的电子商务公司。",
+      "char_count": 59,
+      "estimated_duration_sec": 13.1,
+      "difficulty_level": "intermediate",
+      "korean_interpretation_reference": "저는 항상 기술을 모른다는 것이 문제가 아니라고 생각했습니다. 진정한 기술은 기술에 대해 모르는 사람들을 위해 존재하는 것이고, 기술에 대해 몰랐던 우리들이 세계에서 가장 큰 전자상거래 회사를 창조했죠.",
+      "chinese_audio_url": "https://your-storage-bucket.com/audio/speech_segment_002.mp3",
+      "pinyin_for_segment": "wǒ yīzhí juédé, bù dǒng jìshù méi guānxì. zhēnzhèng de jìshù cónglái dōu shì wèi bù dǒng jìshù de rén fúwù de. wǒmen zhèxiē bù dǒng jìshù de rén chuàngzào le quánqiú zuìdà de diànzǐ shāngwù gōngsī.",
+      "key_vocabulary": [
+        {
+          "chinese": "技术",
+          "korean": "기술",
+          "pinyin": "jìshù",
+          "example_chinese": "我不懂这个技术。",
+          "example_korean": "나는 이 기술을 모른다.",
+          "note": "기술을 지칭하는 중국어 단어로, 특히 IT 기술 등을 의미할 때 사용"
+        },
+        {
+          "chinese": "电子商务",
+          "korean": "전자상거래",
+          "pinyin": "diànzǐ shāngwù",
+          "example_chinese": "电子商务是现代社会的一个重要组成部分。",
+          "example_korean": "전자상거래는 현대 사회의 중요한 구성 요소입니다.",
+          "note": "인터넷을 통해 상품이나 서비스를 사고 팔거나 교환하는 활동을 의미"
+        }
+      ],
+      "grammar_points": [
+        {
+          "chinese_pattern": "从来都是",
+          "korean_explanation": "'항상 ~이다'라는 의미로 사용됩니다.",
+          "example_chinese": "他从来都是这样对待我。",
+          "example_korean": "그는 항상 나에게 이런 태도를 보였습니다."
+        }
+      ],
+      "interpreting_hints": [
+        "이 문장에서 '기술이 기술을 모르는 사람들을 위해 존재한다'는 점이 핵심 포인트입니다.",
+        "마지막 문장에서 '기술을 모르는 사람들이 세계 최대의 전자상거래 회사를 창조했다'는 점을 강조해야 합니다.",
+        "자연스러운 전달을 위해 '기술을 모른다'는 표현을 '기술에 대해 모르다'로 번역하는 것이 좋습니다."
+      ],
+      "common_interpretation_challenges": [
+        "기술이 기술을 모르는 사람들을 위해 존재한다는 개념을 이해하고 정확하게 전달하는 것이 어려울 수 있습니다.",
+        "마지막 부분에서 '전자상거래 회사를 창조하다'를 올바르게 해석하는 것이 중요합니다."
+      ],
+      "suggested_note_taking_points": [
+        "기술",
+        "기술을 모르는 사람들",
+        "세계 최대의 전자상거래 회사 창조"
+      ],
+      "alternative_korean_interpretations": [
+        "저는 항상 기술에 대해 모를 수도 있다고 생각해왔습니다. 진정한 기술이란, 기술에 대해 모르는 사람들을 위한 것이며, 우리 같은 기술을 모르는 사람들이 세계 최대의 전자상거래 회사를 만들어냈습니다.",
+        "기술을 모른다는 것은 문제가 아니라고 저는 늘 생각해왔습니다. 진정한 기술은 기술에 대해 모르는 사람들을 위해 존재하며, 우리 같은 사람들이 세계에서 가장 큰 전자상거래 회사를 만들어냈죠."
+      ],
+      "recommended_delivery_tone": "신념에 찬 설득력 있는 어조로 전달",
+      "cultural_context": "중국의 IT 기업인 알리바바가 세계 최대의 전자상거래 회사로 성장한 배경을 이해하는 것이 중요합니다.",
+      "difficulty_analysis": "이 구간에서는 기술에 대한 지식의 중요성에 대해 다른 시각을 제시하고 있어, 이해하고 정확하게 통역하는 데 어려움이 있을 수 있습니다. 이를 극복하기 위해 주요 개념과 표현을 이해하고, 그것들을 자연스럽게 전달하는 방법을 연습해야 합니다.",
+      "audio_timing": {
+        "start_time_sec": 11.9,
+        "end_time_sec": 25.344
+      },
+      "source_info": {
+        "source_file": "ma_yun_speech_15개.json",
+        "original_id": 2,
+        "language_pair": "zh-CN -> ko-KR"
+      }
+    },
+    {
+      "id": 8,
+      "chinese_text": "所以我认为外行是可以领导内行的，关键是要尊重内行。我没法跟技术人员吵架，他们讲的东西我都听不懂。我说的话他们也觉得奇怪，说：“你怎么会这么说呢？ ”",
+      "char_count": 74,
+      "estimated_duration_sec": 16.4,
+      "difficulty_level": "intermediate",
+      "korean_interpretation_reference": "그래서 저는 비전문가도 전문가를 이끌 수 있다고 생각해요. 중요한 건 전문가에 대한 존중이죠. 저는 전문가들과 다툴 수 없어요. 그들이 말하는 건 전혀 이해가 안 가거든요. 그런데 제가 한 말에 대해서도 그들은 이상해하고 말하죠. '왜 그런 말을 하셨나요?'라고요.",
+      "chinese_audio_url": "https://your-storage-bucket.com/audio/speech_segment_003.mp3",
+      "pinyin_for_segment": "suǒyǐ wǒ rènwéi wàiháng shì kěyǐ lǐngdǎo nèiháng de, guānjiàn shì yào zūnzhòng nèiháng. wǒ méifǎ gēn jìshù rényuán chǎojià, tāmen jiǎng de dōngxi wǒ dōu tīng bù dǒng. wǒ shuō de huà tāmen yě juédé qíguài, shuō: 'nǐ zěnme huì zhème shuō ne?'",
+      "key_vocabulary": [
+        {
+          "chinese": "领导",
+          "korean": "이끌다",
+          "pinyin": "lǐngdǎo",
+          "example_chinese": "他被选为队长，领导我们的团队。",
+          "example_korean": "그는 팀장으로 선출되어 우리 팀을 이끌었다.",
+          "note": "이끌다의 의미로 사용될 때는 주로 인간을 대상으로 사용"
+        },
+        {
+          "chinese": "尊重",
+          "korean": "존중하다",
+          "pinyin": "zūnzhòng",
+          "example_chinese": "我们要尊重每个人的权利。",
+          "example_korean": "우리는 모든 사람의 권리를 존중해야 합니다.",
+          "note": "대상에 따라 존중하다, 존경하다 등으로 해석 가능"
+        }
+      ],
+      "grammar_points": [
+        {
+          "chinese_pattern": "是...的 (강조 구조)",
+          "korean_explanation": "주어나 목적어에 대한 특징이나 상태를 강조",
+          "example_chinese": "我是学生。",
+          "example_korean": "나는 학생이다."
+        }
+      ],
+      "interpreting_hints": [
+        "문장의 강조 구조를 이해하고 적절히 통역에 반영",
+        "문화적 맥락을 이해하고 적절히 표현"
+      ],
+      "common_interpretation_challenges": [
+        "중국어의 강조 구조를 한국어 통역에 적절히 반영하는 것",
+        "비전문가와 전문가간의 의사소통 어려움을 자연스럽게 전달하는 것"
+      ],
+      "suggested_note_taking_points": [
+        "비전문가",
+        "전문가",
+        "이해 못함"
+      ],
+      "alternative_korean_interpretations": [
+        "그래서 전문가를 이끌 수 있는 사람은 반드시 전문가일 필요는 없다고 생각해요. 중요한 건 전문가에 대한 존중이 있어야 한다는 거죠. 저는 기술 전문가들과 다투지 않아요. 그들이 무슨 말을 하든 제가 이해할 수 없으니까요. 그러나 제 말도 그들에게는 이상하게 들린다고 하더군요. '어떻게 그런 말을 하실 수 있나요?'라고 말이죠.",
+        "그러니까 전문가를 이끌 수 있는 사람은 전문가일 필요는 없다고 생각합니다. 가장 중요한 것은 전문가를 존중하는 것이죠. 저는 기술 전문가들과 다투지 않아요. 그들이 어떤 말을 하든 저에게는 이해할 수 없으니까요. 그러나 제 얘기도 그들에게는 이해가 안 가는 것 같아요. '왜 그런 말을 하셨나요?'라고 말하더라고요."
+      ],
+      "recommended_delivery_tone": "친근하면서도 진지한 톤",
+      "cultural_context": "중국에서는 비전문가가 전문가를 이끌 수 있다는 생각이 널리 퍼져있으며, 이는 중국의 전통적인 사회구조와 관련이 있다. 전문가를 존중하는 것이 중요하다는 점도 중국사회의 가치관을 반영하는 것으로 보인다.",
+      "difficulty_analysis": "이 세그먼트는 중국어의 특정 문법구조와 문화적 맥락을 이해하고 이를 자연스럽게 통역하는 능력을 요구한다.",
+      "audio_timing": {
+        "start_time_sec": 25.4,
+        "end_time_sec": 42.215
+      },
+      "source_info": {
+        "source_file": "ma_yun_speech_15개.json",
+        "original_id": 3,
+        "language_pair": "zh-CN -> ko-KR"
+      }
+    },
+    {
+      "id": 9,
+      "chinese_text": "我告诉他们，中国80%的人，不懂电脑的人，都和我想的一样。别人经常说我们是高科技公司。其实在客户面前，越说是高科技公司，客户越怕你。",
+      "char_count": 66,
+      "estimated_duration_sec": 14.7,
+      "difficulty_level": "beginner",
+      "korean_interpretation_reference": "전기를 모르는 중국인이 80%라고 저는 그들에게 말했어요. 그리고 그들은 저와 같은 생각을 가지고 있어요. 사람들은 우리를 고기술 회사라고 자주 얘기하지만, 사실은 고객 앞에서 '고기술 회사'라고 말할수록 그들은 더욱 두려워해요.",
+      "chinese_audio_url": "https://your-storage-bucket.com/audio/speech_segment_004.mp3",
+      "pinyin_for_segment": "wǒ gàosu tāmen, zhōngguó 80% de rén, bù dǒng diànnǎo de rén, dōu hé wǒ xiǎng de yīyàng. biérén jīngcháng shuō wǒmen shì gāo kējì gōngsī. qíshí zài kèhù miànqián, yuè shuō shì gāo kējì gōngsī, kèhù yuè pà nǐ.",
+      "key_vocabulary": [
+        {
+          "chinese": "告诉",
+          "korean": "말하다",
+          "pinyin": "gàosu",
+          "example_chinese": "我告诉他我已经完成了作业。",
+          "example_korean": "나는 그에게 숙제를 이미 끝냈다고 말했다.",
+          "note": "통역시 '알리다'로도 해석 가능"
+        },
+        {
+          "chinese": "高科技",
+          "korean": "고기술",
+          "pinyin": "gāo kējì",
+          "example_chinese": "这家公司是高科技公司。",
+          "example_korean": "이 회사는 고기술 회사입니다.",
+          "note": "통역시 '첨단 기술'로도 해석 가능"
+        }
+      ],
+      "grammar_points": [
+        {
+          "chinese_pattern": "越...越...",
+          "korean_explanation": "'~할수록 ~해진다'의 의미",
+          "example_chinese": "学习越多，知识就越多。",
+          "example_korean": "공부를 많이 할수록 지식이 많아진다."
+        }
+      ],
+      "interpreting_hints": [
+        "고객의 두려움과 관련된 맥락을 이해하는 것이 중요",
+        "중국인의 '고기술'에 대한 부정적인 인식을 전달하는 것에 주목",
+        "자연스러운 전달을 위해 '고기술 회사'를 '첨단 기술 회사'로 해석할 수 있음"
+      ],
+      "common_interpretation_challenges": [
+        "중국인의 '고기술'에 대한 부정적인 인식을 올바르게 해석하는 것",
+        "고객의 두려움을 표현하는 뉘앙스를 적절히 전달하는 것"
+      ],
+      "suggested_note_taking_points": [
+        "'고기술'에 대한 중국인의 인식",
+        "'고객의 두려움'이라는 주제",
+        "'고기술 회사'라는 표현에 대한 부정적 반응"
+      ],
+      "alternative_korean_interpretations": [
+        "저는 그들에게 전기를 모르는 중국인이 80%라고 말했고, 그들은 저와 같은 생각을 가지고 있습니다. 사람들은 자주 우리 회사를 고기술 회사라고 말하지만, 사실은 고객 앞에서 '고기술 회사'라고 말할수록 고객들은 더 두려워합니다.",
+        "전기를 모르는 중국인이 80%라는 사실을 저는 그들에게 전했어요. 그리고 그들은 저와 같은 생각을 가지고 있죠. 사람들은 자주 우리를 고기술 회사라고 칭하지만, 사실은 고객들 앞에서 '고기술 회사'라고 얘기할수록 그들은 우리를 더 두려워하게 돼요."
+      ],
+      "recommended_delivery_tone": "진솔하고 직설적인 어조",
+      "cultural_context": "중국에서는 '고기술'이라는 이미지가 항상 긍정적으로 받아들여지지 않음",
+      "difficulty_analysis": "이 구간에서는 중국인의 '고기술'에 대한 인식과 관련된 뉘앙스를 이해하고 전달하는 능력이 중요하며, 문법적으로는 '越...越...' 구조를 이해하는 것이 핵심 학습 포인트",
+      "audio_timing": {
+        "start_time_sec": 42.3,
+        "end_time_sec": 59.863
+      },
+      "source_info": {
+        "source_file": "ma_yun_speech_15개.json",
+        "original_id": 4,
+        "language_pair": "zh-CN -> ko-KR"
+      }
+    },
+    {
+      "id": 10,
+      "chinese_text": "所以，要把客户的麻烦留给自己。把麻烦留给自己，你的麻烦就会越来越少。",
+      "char_count": 34,
+      "estimated_duration_sec": 7.6,
+      "difficulty_level": "beginner",
+      "korean_interpretation_reference": "그러니까, 고객의 문제를 스스로의 문제로 받아들이세요. 그렇게 하면 당신의 문제는 점점 줄어들게 될 거예요.",
+      "chinese_audio_url": "https://your-storage-bucket.com/audio/speech_segment_005.mp3",
+      "pinyin_for_segment": "suǒyǐ, yào bǎ kèhù de máfan liú gěi zìjǐ. bǎ máfan liú gěi zìjǐ, nǐ de máfan jiù huì yuè lái yuè shǎo.",
+      "key_vocabulary": [
+        {
+          "chinese": "麻烦",
+          "korean": "문제",
+          "pinyin": "máfan",
+          "example_chinese": "这个问题很麻烦。",
+          "example_korean": "이 문제는 꽤 복잡해요.",
+          "note": "순차통역에서는 '복잡함'보다는 '문제'라는 단어를 사용하는 것이 자연스럽습니다."
+        }
+      ],
+      "grammar_points": [
+        {
+          "chinese_pattern": "把字句",
+          "korean_explanation": "'~을/를'로 표현되는 목적어를 문장 앞에 둔다.",
+          "example_chinese": "把书放在桌子上。",
+          "example_korean": "책을 탁자 위에 놓아요."
+        }
+      ],
+      "interpreting_hints": [
+        "'마판'은 '복잡함, 번거로움'을 의미하는 중국어 단어이지만 통역에서는 '문제'라는 단어를 사용하는 것이 좀 더 자연스럽습니다.",
+        "중국어에서는 '마판'이 빈번히 사용되지만 한국어에서는 '문제'를 반복적으로 사용하는 것이 부자연스러울 수 있으니 적절한 대체어를 사용하는 것이 좋습니다.",
+        "'그래야 당신의 문제가 점점 줄어들게 될 것입니다'라는 표현은 의미 전달을 위해 추가적으로 사용된 것입니다."
+      ],
+      "common_interpretation_challenges": [
+        "'마판'이라는 단어를 그대로 '번거로움'이라고 번역하면 한국어에서는 자연스럽지 않을 수 있습니다.",
+        "중국어 문장에서는 반복되는 표현이 자연스럽지만 한국어에서는 그렇지 않을 수 있으므로 적절한 단어 선택이 중요합니다."
+      ],
+      "suggested_note_taking_points": [
+        "고객의 문제",
+        "스스로의 문제로",
+        "문제는 줄어들게"
+      ],
+      "alternative_korean_interpretations": [
+        "그러므로, 고객의 근심을 당신이 대신 가져가세요. 그렇게 하면 당신이 겪는 어려움은 점점 적어질 것입니다.",
+        "그래서, 고객의 걱정을 당신이 대신 지게 되면, 당신의 문제는 점차 줄어들 것입니다."
+      ],
+      "recommended_delivery_tone": "직접적이고 설득력 있는 어조",
+      "cultural_context": "중국의 서비스 산업에서는 고객의 문제를 자신의 문제로 받아들이는 것이 중요한 가치로 여겨집니다.",
+      "difficulty_analysis": "이 구간은 중국어의 '바' 구조와 '마판'이라는 단어의 의미를 이해하고 적절하게 통역하는 것이 중요한 학습 포인트입니다.",
+      "audio_timing": {
+        "start_time_sec": 59.9,
+        "end_time_sec": 67.875
+      },
+      "source_info": {
+        "source_file": "ma_yun_speech_15개.json",
+        "original_id": 5,
+        "language_pair": "zh-CN -> ko-KR"
+      }
+    },
+    {
+      "id": 11,
+      "chinese_text": "我是从1995年开始创业的。在中国，我差不多是第一个做互联网的人，比张树新早了半年多。当时我们在杭州做中国黄页，做了三年，非常艰难。",
+      "char_count": 66,
+      "estimated_duration_sec": 14.7,
+      "difficulty_level": "intermediate",
+      "korean_interpretation_reference": "저는 1995년부터 창업을 시작했습니다. 중국에서는 저가 거의 첫 인터넷 사업가였고, 장슈신보다 반년 이상 일찍 시작했습니다. 당시 우리는 항저우에서 중국 옐로우 페이지를 만들었고, 3년 동안 매우 힘들게 일했습니다.",
+      "chinese_audio_url": "https://your-storage-bucket.com/audio/speech_segment_006.mp3",
+      "pinyin_for_segment": "Wǒ shì cóng 1995 nián kāishǐ chuàngyè de. Zài zhōngguó, wǒ chàbùduō shì dì yī gè zuò hùliánwǎng de rén, bǐ zhāng shùxīn zǎole bànnián duō. Dāngshí wǒmen zài hángzhōu zuò zhōngguó huáng yè, zuòle sān nián, fēicháng jiānnán.",
+      "key_vocabulary": [
+        {
+          "chinese": "创业",
+          "korean": "창업",
+          "pinyin": "chuàngyè"
+        },
+        {
+          "chinese": "互联网",
+          "korean": "인터넷",
+          "pinyin": "hùliánwǎng"
+        },
+        {
+          "chinese": "黄页",
+          "korean": "옐로우 페이지",
+          "pinyin": "huáng yè"
+        },
+        {
+          "chinese": "艰难",
+          "korean": "힘들다",
+          "pinyin": "jiānnán"
+        }
+      ],
+      "interpreting_hints": [
+        "장슈신은 중국의 유명한 인터넷 사업가입니다.",
+        "중국 옐로우 페이지는 중국의 온라인 비즈니스 디렉토리입니다."
+      ],
+      "cultural_context": "1995년에 인터넷 사업을 시작한 것은 중국에서 매우 이른 시기로, 당시에는 인터넷이 대중화되지 않아 사업을 운영하기 매우 어려웠습니다.",
+      "difficulty_analysis": "이 문장은 중국의 초기 인터넷 사업에 대한 이해와 관련 인물에 대한 지식이 필요합니다.",
+      "audio_timing": {
+        "start_time_sec": 67.9,
+        "end_time_sec": 84.705
+      },
+      "alternative_korean_interpretations": [
+        "저는 1995년에 창업을 시작했고, 중국에서 인터넷 사업을 처음 시작한 사람 중 한 명이었습니다. 장슈신보다 약 반년 이상 먼저였죠. 그 때 우리는 항저우에서 중국 황페이지를 만들었는데, 그것은 3년 동안 매우 힘든 일이었습니다.",
+        "저는 1995년부터 창업을 시작했고, 중국에서 인터넷 사업을 시작한 사람들 중에서는 제가 거의 첫 번째였습니다. 장슈신보다 반년 가량 앞섰고, 그 때 우리는 항저우에서 중국 황페이지를 만들었습니다. 그 일은 3년 동안 굉장히 힘들었습니다."
+      ],
+      "common_interpretation_challenges": [
+        "마윈의 감정과 경험을 정확하게 표현하는 것이 어려울 수 있습니다.",
+        "장슈신과의 비교를 통해 마윈의 선도적인 역할을 강조하는 것이 중요합니다."
+      ],
+      "grammar_points": [
+        {
+          "chinese_pattern": "V了O",
+          "korean_explanation": "동사 뒤에 '了'를 붙여 완료의미를 나타내는 문법",
+          "example_chinese": "我吃了饭。",
+          "example_korean": "저는 밥을 먹었습니다."
+        }
+      ],
+      "recommended_delivery_tone": "진지하고 열정적",
+      "suggested_note_taking_points": [
+        "1995년 창업",
+        "중국 첫 인터넷 사업",
+        "장슈신보다 반년 먼저",
+        "항저우 중국 황페이지",
+        "3년 동안 힘듦"
+      ],
+      "source_info": {
+        "source_file": "ma_yun_speech_15개.json",
+        "original_id": 6,
+        "language_pair": "zh-CN -> ko-KR"
+      }
+    },
+    {
+      "id": 12,
+      "chinese_text": "那时候我们做生意的模式很简单，就是帮企业做网页。但中国的企业没有办法上网，怎么办？我们就想办法，先从朋友的企业做起，朋友信任你，知道你不会骗他。",
+      "char_count": 72,
+      "estimated_duration_sec": 16,
+      "difficulty_level": "intermediate",
+      "korean_interpretation_reference": "그때 우리가 사업을 진행하는 방식은 매우 단순했어요. 기업들이 웹페이지를 만드는 것을 도와주는 것이었죠. 그런데 중국의 기업들이 인터넷에 접속할 수 없다면 어떻게 해야 할까요? 우리는 방법을 찾아냈어요. 친구의 기업부터 시작해서, 친구들은 당신을 믿고 당신이 그들을 속이지 않을 것이라는 것을 알고 있었기 때문이죠.",
+      "chinese_audio_url": "https://your-storage-bucket.com/audio/speech_segment_007.mp3",
+      "pinyin_for_segment": "Na shíhou wǒmen zuò shēngyì de móshì hěn jiǎndān, jiùshì bāng qǐyè zuò wǎngyè. Dàn zhōngguó de qǐyè méiyǒu bànfǎ shàngwǎng, zěnme bàn? Wǒmen jiù xiǎng bànfǎ, xiān cóng péngyǒu de qǐyè zuò qǐ, péngyǒu xìnrèn nǐ, zhīdào nǐ bù huì piàn tā.",
+      "key_vocabulary": [
+        {
+          "chinese": "那时候",
+          "korean": "그때",
+          "pinyin": "na shíhou"
+        },
+        {
+          "chinese": "做生意",
+          "korean": "사업을 하다",
+          "pinyin": "zuò shēngyì"
+        },
+        {
+          "chinese": "模式",
+          "korean": "방식",
+          "pinyin": "móshì"
+        },
+        {
+          "chinese": "企业",
+          "korean": "기업",
+          "pinyin": "qǐyè"
+        },
+        {
+          "chinese": "网页",
+          "korean": "웹페이지",
+          "pinyin": "wǎngyè"
+        },
+        {
+          "chinese": "朋友",
+          "korean": "친구",
+          "pinyin": "péngyǒu"
+        },
+        {
+          "chinese": "信任",
+          "korean": "믿다",
+          "pinyin": "xìnrèn"
+        },
+        {
+          "chinese": "骗",
+          "korean": "속이다",
+          "pinyin": "piàn"
+        }
+      ],
+      "interpreting_hints": [
+        "문맥을 이해하고, 중국어 문장의 구조를 한국어에 맞게 재구성하세요.",
+        "중국어의 특정 표현을 한국어에 맞게 적절하게 번역하세요."
+      ],
+      "cultural_context": "이 문장은 중국의 인터넷 환경과 사업 환경에 대한 이해가 필요합니다. 중국에서는 인터넷 접근이 제한되어 있기 때문에, 기업들이 웹페이지를 만드는 것이 어려운 상황을 설명하고 있습니다.",
+      "difficulty_analysis": "이 문장은 중국어의 일반적인 표현과 문법을 사용하고 있으며, 특별한 어려움은 없습니다. 그러나 문화적인 배경을 이해하는 것이 중요합니다.",
+      "audio_timing": {
+        "start_time_sec": 84.8,
+        "end_time_sec": 103.401
+      },
+      "alternative_korean_interpretations": [
+        "그때 우리가 사업을 진행하는 방식은 매우 단순했습니다. 기업들에게 웹페이지를 제작해주는 것이었습니다. 그런데 중국의 기업들이 인터넷에 접속할 수 없다면 어떻게 해야 할까요? 우리는 해결책을 찾았습니다. 친구의 기업부터 시작하였습니다. 친구는 당신을 신뢰하고 당신이 그를 속이지 않을 것이라는 것을 알고 있습니다.",
+        "그때 우리의 사업 모델은 매우 간단했습니다. 기업들에게 웹페이지를 만들어주는 것이었습니다. 그런데 중국 기업들이 인터넷에 접속할 수 없다면 어떻게 해야 할까요? 우리는 방법을 찾았습니다. 먼저 친구의 기업부터 시작했습니다. 친구는 당신을 신뢰하고 당신이 그를 속이지 않을 것이라는 것을 알고 있습니다."
+      ],
+      "common_interpretation_challenges": [
+        "이 세그먼트에서 통역사들이 겪기 쉬운 어려움은 '模式'와 '办法'라는 단어의 정확한 해석",
+        "실수하기 쉬운 포인트는 '我们就想办法'라는 표현을 '우리는 그래서 생각했다'로 잘못 해석하는 것"
+      ],
+      "grammar_points": [
+        {
+          "chinese_pattern": "就是...的模式",
+          "korean_explanation": "'...이 바로 ...의 방식'을 의미하는 표현",
+          "example_chinese": "我们的模式就是帮助别人。",
+          "example_korean": "우리의 방식은 다른 사람을 돕는 것입니다."
+        }
+      ],
+      "recommended_delivery_tone": "친근하고 솔직한 어조",
+      "suggested_note_taking_points": [
+        "사업 모델",
+        "웹페이지 제작",
+        "인터넷 접속 문제",
+        "친구의 기업부터 시작"
+      ],
+      "source_info": {
+        "source_file": "ma_yun_speech_15개.json",
+        "original_id": 7,
+        "language_pair": "zh-CN -> ko-KR"
+      }
+    },
+    {
+      "id": 13,
+      "chinese_text": "第一家被我们搬上互联网的企业是一家宾馆——望湖宾馆。宾馆经理给了我一份中英文的宾馆介绍。我把介绍打印好，传到美国西雅图做网页，然后把做好的网页挂到互联网上。我对经理说，你看看国外有没有人看到这个网页。如果有人看到，你再付我钱，结果他说有人看到也不会付我钱。",
+      "char_count": 128,
+      "estimated_duration_sec": 28.4,
+      "difficulty_level": "intermediate",
+      "korean_interpretation_reference": "우리가 인터넷에 처음으로 올린 기업은 한 호텔, 바로 '웡후 호텔'이었습니다. 호텔 매니저는 저에게 중영문 호텔 소개서를 주었습니다. 저는 그 소개서를 인쇄하여 미국 시애틀로 보내 웹페이지를 만들었고, 그런 다음 완성된 웹페이지를 인터넷에 올렸습니다. 저는 매니저에게 이 웹페이지를 해외에서 누군가 본다면 그때 저에게 돈을 지불하라고 말했습니다. 그러나 그는 누군가가 이를 본다 해도 돈을 지불하지 않을 것이라고 말했습니다.",
+      "chinese_audio_url": "https://your-storage-bucket.com/audio/speech_segment_008.mp3",
+      "pinyin_for_segment": "Dì yī jiā bèi wǒmen bān shàng hùliánwǎng de qǐyè shì yījiā bīnguǎn——wàng hú bīnguǎn. Bīnguǎn jīnglǐ gěi le wǒ yī fèn zhōng yīngwén de bīnguǎn jièshào. Wǒ bǎ jièshào dǎyìn hǎo, chuán dào měiguó xī yǎtú zuò wǎngyè, ránhòu bǎ zuò hǎo de wǎngyè guà dào hùliánwǎng shàng. Wǒ duì jīnglǐ shuō, nǐ kàn kàn guówài yǒu méiyǒu rén kàn dào zhège wǎngyè. Rúguǒ yǒu rén kàn dào, nǐ zài fù wǒ qián, jiéguǒ tā shuō yǒu rén kàn dào yě bù huì fù wǒ qián.",
+      "key_vocabulary": [
+        {
+          "chinese": "第一家",
+          "korean": "첫 번째",
+          "pinyin": "dì yī jiā"
+        },
+        {
+          "chinese": "互联网",
+          "korean": "인터넷",
+          "pinyin": "hùliánwǎng"
+        },
+        {
+          "chinese": "宾馆",
+          "korean": "호텔",
+          "pinyin": "bīnguǎn"
+        },
+        {
+          "chinese": "经理",
+          "korean": "매니저",
+          "pinyin": "jīnglǐ"
+        },
+        {
+          "chinese": "网页",
+          "korean": "웹페이지",
+          "pinyin": "wǎngyè"
+        }
+      ],
+      "interpreting_hints": [
+        "문장의 맥락을 이해하고, 중국어 표현을 한국어에 맞게 재해석하세요.",
+        "문장의 주제와 관련된 어휘를 이해하고 사용하세요."
+      ],
+      "cultural_context": "중국에서는 일반적으로 서비스를 제공한 후에 비용을 청구하는 것이 일반적입니다.",
+      "difficulty_analysis": "이 문장은 일반적인 비즈니스 상황을 설명하고 있으며, 특정한 전문 용어나 문화적 배경 지식을 필요로 하지 않습니다. 그러나 일부 표현은 한국어로 직역하면 자연스럽지 않을 수 있으므로, 이를 적절히 재해석하는 능력이 필요합니다.",
+      "audio_timing": {
+        "start_time_sec": 103.5,
+        "end_time_sec": 133.038
+      },
+      "alternative_korean_interpretations": [
+        "우리가 처음으로 인터넷에 올린 기업은 호텔이었어요, '왕호 호텔'이죠. 호텔 매니저가 저에게 중영문으로 된 호텔 소개서를 주었어요. 저는 그걸 프린트해서 시애틀에 있는 웹페이지 제작자에게 보냈고, 그 후 완성된 웹페이지를 인터넷에 올렸어요. 그리고 매니저에게 이 웹페이지를 해외 사람들이 볼 수 있는지 확인해보라고 말했어요. 만약 누군가 이 웹페이지를 본다면 그때 돈을 내라고 했지만, 그는 누가 본다 해도 돈을 주지 않겠다고 했어요.",
+        "처음으로 인터넷에 올린 기업은 호텔이었어요, 바로 '왕호 호텔'. 호텔 매니저가 저에게 중영문 호텔 소개서를 주었어요. 저는 그 소개서를 프린트해서 시애틀에 있는 웹페이지 제작자에게 보냈고, 그 다음 완성된 웹페이지를 인터넷에 올렸어요. 그리고 매니저에게 이 웹페이지를 해외 사람들이 볼 수 있는지 확인해보라고 말했어요. 만약 누군가 이 웹페이지를 본다면 그때 돈을 내라고 했지만, 그는 누가 본다 해도 돈을 주지 않겠다고 했어요."
+      ],
+      "common_interpretation_challenges": [
+        "중국어의 특정 표현을 한국어로 자연스럽게 번역하는 것이 어려울 수 있습니다.",
+        "마윈의 특유의 어조를 잘 살리는 것이 중요합니다."
+      ],
+      "grammar_points": [
+        {
+          "chinese_pattern": "把字句",
+          "korean_explanation": "‘받침’을 사용하여 행동의 결과나 상태를 강조하는 문장",
+          "example_chinese": "我把书放在桌子上。",
+          "example_korean": "나는 책을 탁자 위에 놓았다."
+        }
+      ],
+      "recommended_delivery_tone": "친근하고 솔직한 어조",
+      "suggested_note_taking_points": [
+        "인터넷",
+        "호텔",
+        "웹페이지"
+      ],
+      "source_info": {
+        "source_file": "ma_yun_speech_15개.json",
+        "original_id": 8,
+        "language_pair": "zh-CN -> ko-KR"
+      }
+    },
+    {
+      "id": 14,
+      "chinese_text": "当时很多人把我们看作骗子，他们都不懂互联网。最有意思的是，1995年，联合国第四次世界妇女大会在北京召开。美国的很多妇女代表在来中国之前，上网搜索在中国住的地方，结果搜到了那家宾馆。",
+      "char_count": 91,
+      "estimated_duration_sec": 20.2,
+      "difficulty_level": "intermediate",
+      "korean_interpretation_reference": "당시 많은 사람들이 우리를 사기꾼으로 보았고, 그들은 인터넷을 이해하지 못했습니다. 가장 흥미로운 것은, 1995년, 유엔 제4차 세계 여성 대회가 베이징에서 열렸습니다. 미국의 많은 여성 대표들이 중국에 오기 전에, 인터넷에서 중국에 머무를 장소를 검색하였고, 그 결과 그들은 그 호텔을 찾았습니다.",
+      "chinese_audio_url": "https://your-storage-bucket.com/audio/speech_segment_009.mp3",
+      "pinyin_for_segment": "Dāngshí hěnduō rén bǎ wǒmen kànwéi piànzi, tāmen dōu bù dǒng hùliánwǎng. Zuì yǒuyìsi de shì, 1995 nián, liánhéguó dì sì cì shìjiè fùnǚ dàhuì zài běijīng zhàokāi. Měiguó de hěnduō fùnǚ dàibiǎo zài lái zhōngguó zhīqián, shàngwǎng sōusuǒ zài zhōngguó zhù de dìfāng, jiéguǒ sōu dàole nà jiā bīnguǎn.",
+      "key_vocabulary": [
+        {
+          "chinese": "骗子",
+          "korean": "사기꾼",
+          "pinyin": "piànzi"
+        },
+        {
+          "chinese": "互联网",
+          "korean": "인터넷",
+          "pinyin": "hùliánwǎng"
+        },
+        {
+          "chinese": "联合国",
+          "korean": "유엔",
+          "pinyin": "liánhéguó"
+        },
+        {
+          "chinese": "妇女大会",
+          "korean": "여성 대회",
+          "pinyin": "fùnǚ dàhuì"
+        },
+        {
+          "chinese": "宾馆",
+          "korean": "게스트하우스",
+          "pinyin": "bīnguǎn"
+        }
+      ],
+      "interpreting_hints": [
+        "문맥을 이해하고, 중국어 표현을 한국어에 맞게 해석하세요.",
+        "특정 단어의 의미를 정확하게 파악하세요."
+      ],
+      "cultural_context": "1995년에 열린 유엔 제4차 세계 여성 대회는 여성의 권리와 성 평등에 대한 중요한 이슈를 논의한 행사였습니다.",
+      "difficulty_analysis": "이 텍스트는 특정한 역사적 사건에 대한 이해와, 인터넷과 관련된 단어의 이해가 필요합니다.",
+      "audio_timing": {
+        "start_time_sec": 133.3,
+        "end_time_sec": 155.75
+      },
+      "alternative_korean_interpretations": [
+        "그때 많은 사람들이 우리를 사기꾼으로 봤고, 인터넷에 대해선 모르는 사람들이 많았습니다. 특히 재미있는 사건은 1995년 유엔의 제4차 세계 여성 대회가 베이징에서 열렸을 때였는데요, 미국의 여성 대표들이 중국에 오기 전에 인터넷으로 숙소를 찾아보니, 그들이 찾은 곳은 바로 그 호텔이었습니다.",
+        "당시에는 많은 사람들이 우리를 사기꾼으로 보았고, 인터넷에 대한 이해도가 낮았습니다. 가장 흥미로운 사건은 1995년에 베이징에서 열린 유엔의 제4차 세계 여성 대회였는데요, 미국의 여성 대표들이 중국에 오기 전에 인터넷으로 숙소를 찾아보았는데, 그들이 찾은 곳은 바로 그 호텔이었습니다."
+      ],
+      "common_interpretation_challenges": [
+        "이 세그먼트에서 통역사들이 겪기 쉬운 어려움은 '바'문장의 순서를 잘못 통역하는 것",
+        "실수하기 쉬운 포인트는 '유엔'을 '연합국'으로 잘못 통역하는 것"
+      ],
+      "grammar_points": [
+        {
+          "chinese_pattern": "把字句",
+          "korean_explanation": "'~을'이라는 의미의 '바'를 사용한 문장",
+          "example_chinese": "我把钥匙忘在家里了。",
+          "example_korean": "나는 집에 열쇠를 두고 왔다."
+        }
+      ],
+      "recommended_delivery_tone": "친근하고 솔직한 어조로 전달",
+      "suggested_note_taking_points": [
+        "사기꾼",
+        "인터넷 이해도",
+        "유엔 여성 대회"
+      ],
+      "source_info": {
+        "source_file": "ma_yun_speech_15개.json",
+        "original_id": 9,
+        "language_pair": "zh-CN -> ko-KR"
+      }
+    },
+    {
+      "id": 15,
+      "chinese_text": "宾馆的人对这些妇女说，我们离北京有1000多公里，但她们还是要来住。通过这件事情，我们发现，如果把中国的企业都放到网上去，能量一定大得不得了。这个认识一直影响着我，直到今天。",
+      "char_count": 87,
+      "estimated_duration_sec": 19.3,
+      "difficulty_level": "beginner",
+      "korean_interpretation_reference": "호텔의 사람들이 이 여성들에게 우리가 베이징에서 1000km 이상 떨어져 있다고 말했지만, 그들은 여전히 여기에 머무르려고 했습니다. 이 사건을 통해 우리는 중국의 모든 기업을 인터넷에 올리면 그 에너지는 매우 크다는 것을 발견했습니다. 이 인식은 나를 계속해서 영향을 미치고 있습니다, 오늘날까지도.",
+      "chinese_audio_url": "https://your-storage-bucket.com/audio/speech_segment_010.mp3",
+      "pinyin_for_segment": "bīn guǎn de rén duì zhèxiē fù nǚ shuō, wǒmen lí běijīng yǒu 1000 duō gōnglǐ, dàn tāmen háishì yào lái zhù. tōngguò zhè jiàn shìqíng, wǒmen fāxiàn, rúguǒ bǎ zhōngguó de qǐyè dōu fàng dào wǎng shàng qù, néngliàng yīdìng dà dé bùdéle. zhège rènshí yīzhí yǐngxiǎngzhe wǒ, zhídào jīntiān.",
+      "key_vocabulary": [
+        {
+          "chinese": "宾馆",
+          "korean": "호텔",
+          "pinyin": "bīnguǎn"
+        },
+        {
+          "chinese": "妇女",
+          "korean": "여성",
+          "pinyin": "fùnǚ"
+        },
+        {
+          "chinese": "企业",
+          "korean": "기업",
+          "pinyin": "qǐyè"
+        },
+        {
+          "chinese": "能量",
+          "korean": "효과",
+          "pinyin": "néngliàng"
+        },
+        {
+          "chinese": "认识",
+          "korean": "인식",
+          "pinyin": "rènshì"
+        }
+      ],
+      "interpreting_hints": [
+        "문맥을 이해하고, 중국어 문장의 구조를 한국어에 맞게 재구성하세요.",
+        "키 단어를 기억하고 이해하세요."
+      ],
+      "cultural_context": "중국에서는 인터넷을 통한 비즈니스가 크게 성장하고 있으며, 이는 중국 사회와 경제에 큰 영향을 미치고 있습니다.",
+      "difficulty_analysis": "이 텍스트는 중국의 사회와 경제에 대한 이해를 필요로 합니다. 또한, 중국어의 문장 구조와 표현을 한국어로 올바르게 번역하는 능력이 필요합니다.",
+      "audio_timing": {
+        "start_time_sec": 156,
+        "end_time_sec": 178.018
+      },
+      "alternative_korean_interpretations": [
+        "우리 호텔 직원들은 이 여성들에게 베이징에서 천 킬로미터나 떨어져 있다고 말했지만, 그들은 여전히 우리 호텔에 머물고 싶어했습니다. 이 사건을 통해, 중국의 모든 기업을 인터넷에 올린다면 그 에너지는 상상을 초월할 것이라는 것을 깨달았습니다. 이 생각은 계속해서 나에게 영향을 미쳤고, 지금까지도 그렇습니다.",
+        "우리 호텔에서는 이 여성들에게 베이징에서 1000킬로미터나 떨어져 있다고 말했지만, 그들은 여기에 머무르려 했습니다. 이 사건을 통해 깨달았습니다. 중국의 모든 기업을 인터넷에 올린다면, 그 에너지는 엄청날 것이라는 것을요. 이 생각은 계속해서 나를 영향을 미쳤고, 지금까지도 그렇습니다."
+      ],
+      "common_interpretation_challenges": [
+        "이 세그먼트에서는 '把字句'라는 중국어 특유의 문법이 나오는데, 이를 자연스럽게 한국어로 통역하는 것이 어려울 수 있습니다.",
+        "마윈의 연설 특유의 어조와 말투를 잘 살려서 통역하는 것이 중요합니다."
+      ],
+      "grammar_points": [
+        {
+          "chinese_pattern": "把字句",
+          "korean_explanation": "바구문은 동사의 목적어를 동사 앞에 두고, 동사의 결과를 강조하는 문법",
+          "example_chinese": "把书放在桌子上。",
+          "example_korean": "책을 탁자 위에 놓아라."
+        }
+      ],
+      "recommended_delivery_tone": "신중하고 진지한 어조",
+      "suggested_note_taking_points": [
+        "1000킬로미터",
+        "인터넷에 기업 올리기",
+        "에너지"
+      ],
+      "source_info": {
+        "source_file": "ma_yun_speech_15개.json",
+        "original_id": 10,
+        "language_pair": "zh-CN -> ko-KR"
+      }
+    },
+    {
+      "id": 16,
+      "chinese_text": "1995年的时候，互联网的速度很慢，慢得一塌糊涂。1995年8月，中国电信连入互联网，我们是中国电信的第七个客户。",
+      "char_count": 57,
+      "estimated_duration_sec": 12.7,
+      "difficulty_level": "intermediate",
+      "korean_interpretation_reference": "1995년에는 인터넷 속도가 매우 느렸습니다, 느려서 말도 안되었습니다. 1995년 8월에 중국 통신이 인터넷에 연결되었고, 우리는 중국 통신의 일곱 번째 고객이었습니다.",
+      "chinese_audio_url": "https://your-storage-bucket.com/audio/speech_segment_011.mp3",
+      "pinyin_for_segment": "1995 nián de shíhou, hùliánwǎng de sùdù hěn màn, màn de yītāhútú. 1995 nián 8 yuè, zhōngguó diànxìn liánrù hùliánwǎng, wǒmen shì zhōngguó diànxìn de dì qī gè kèhù.",
+      "key_vocabulary": [
+        {
+          "chinese": "互联网",
+          "korean": "인터넷",
+          "pinyin": "hùliánwǎng"
+        },
+        {
+          "chinese": "速度",
+          "korean": "속도",
+          "pinyin": "sùdù"
+        },
+        {
+          "chinese": "电信",
+          "korean": "통신",
+          "pinyin": "diànxìn"
+        },
+        {
+          "chinese": "客户",
+          "korean": "고객",
+          "pinyin": "kèhù"
+        }
+      ],
+      "interpreting_hints": [
+        "시간 표현에 주의하라",
+        "중국 통신사에 대한 이해가 필요하다"
+      ],
+      "cultural_context": "1995년에 중국에서 인터넷이 처음 시작되었으며, 그 당시 속도는 매우 느렸다.",
+      "difficulty_analysis": "중국어의 시간 표현과 특정 단어의 이해가 필요하다.",
+      "audio_timing": {
+        "start_time_sec": 179.2,
+        "end_time_sec": 194.629
+      },
+      "alternative_korean_interpretations": [
+        "1995년에는 인터넷 속도가 굉장히 느려서 혼란스러웠습니다. 그해 8월에 중국 통신이 인터넷에 접속하였고, 우리는 그들의 일곱 번째 고객이었습니다.",
+        "1995년, 인터넷은 매우 느렸고, 그것은 정말로 혼란스러웠습니다. 1995년 8월, 중국 통신이 인터넷에 연결되었고, 우리는 그들의 일곱 번째 고객이었습니다."
+      ],
+      "common_interpretation_challenges": [
+        "이 세그먼트에서는 특정 시기의 특정 사건을 설명하고 있어, 시간 순서를 정확하게 해석하는 것이 중요합니다.",
+        "비격식 표현 '一塌糊涂'의 정확한 해석이 어려울 수 있습니다."
+      ],
+      "grammar_points": [
+        {
+          "chinese_pattern": "的时候",
+          "korean_explanation": "~할 때",
+          "example_chinese": "我吃饭的时候，他来了。",
+          "example_korean": "저가 밥을 먹을 때, 그가 왔습니다."
+        }
+      ],
+      "recommended_delivery_tone": "친근하고 솔직함",
+      "suggested_note_taking_points": [
+        "1995년",
+        "인터넷 속도 느림",
+        "중국 통신의 일곱 번째 고객"
+      ],
+      "source_info": {
+        "source_file": "ma_yun_speech_15개.json",
+        "original_id": 11,
+        "language_pair": "zh-CN -> ko-KR"
+      }
+    },
+    {
+      "id": 17,
+      "chinese_text": "为了证明互联网的存在，我找了很多媒体朋友到我家里，通过拨号上网。他们带着摄像机在我家里等了三个半小时，终于等出来半张图片。确实，我们走得很艰难。",
+      "char_count": 72,
+      "estimated_duration_sec": 16,
+      "difficulty_level": "intermediate",
+      "korean_interpretation_reference": "인터넷이 실제로 존재함을 증명하기 위해, 여러 미디어 분들을 집으로 초대해 전화로 인터넷에 접속하게 했습니다. 그들은 카메라를 들고 제 집에서 3시간 반 동안 기다렸고, 결국 반 장의 사진을 불러오는 데 성공했습니다. 사실, 우리의 진행이 매우 힘들었습니다.",
+      "chinese_audio_url": "https://your-storage-bucket.com/audio/speech_segment_012.mp3",
+      "pinyin_for_segment": "wèile zhèngmíng hùliánwǎng de cúnzài, wǒ zhǎo le hěnduō méitǐ péngyou dào wǒ jiā lǐ, tōngguò bōhào shàngwǎng. tāmen dàizhe shèxiàngjī zài wǒ jiā lǐ děng le sān gè bàn xiǎoshí, zhōngyú děng chūlái bàn zhāng túpiàn. quèshí, wǒmen zǒu de hěn jiānnán.",
+      "key_vocabulary": [
+        {
+          "chinese": "证明",
+          "korean": "증명하다",
+          "pinyin": "zhèngmíng",
+          "example_chinese": "他们需要证明自己的身份。",
+          "example_korean": "그들은 자신의 신분을 증명해야 합니다.",
+          "note": "증명하다는 개념이 중요함"
+        },
+        {
+          "chinese": "拨号上网",
+          "korean": "전화로 인터넷에 접속하다",
+          "pinyin": "bōhào shàngwǎng",
+          "example_chinese": "拨号上网速度慢。",
+          "example_korean": "전화로 인터넷에 접속하는 것은 느립니다.",
+          "note": "90년대에 주로 사용되던 인터넷 접속 방식"
+        }
+      ],
+      "grammar_points": [
+        {
+          "chinese_pattern": "为了...，...",
+          "korean_explanation": "~하기 위해, ...",
+          "example_chinese": "为了健康，我开始跑步。",
+          "example_korean": "건강을 위해, 나는 달리기를 시작했다."
+        }
+      ],
+      "interpreting_hints": [
+        "이 문장은 인터넷의 초기 시대를 묘사하는 것이므로 그 시대의 맥락을 이해하는 것이 중요합니다.",
+        "이야기의 목적과 결과를 명확하게 전달하세요.",
+        "시간이 얼마나 걸렸는지를 강조하면 듣는 사람이 얼마나 힘들었는지 더 잘 이해할 수 있습니다."
+      ],
+      "common_interpretation_challenges": [
+        "인터넷의 초기 시대에 대한 이해 부족",
+        "시간과 노력을 강조하는 것이 중요한데 이를 놓치는 경우"
+      ],
+      "suggested_note_taking_points": [
+        "증명",
+        "3시간 반",
+        "힘들다"
+      ],
+      "alternative_korean_interpretations": [
+        "인터넷의 존재를 증명하려고, 여러 미디어 인사들을 집에 초대해서 전화로 인터넷에 접속해 보였습니다. 그들은 카메라를 들고 제집에서 3시간 반 동안 기다렸고, 결국에는 반 장 사진 하나를 불러오는데 성공했습니다. 사실상, 우리의 행보는 매우 어려웠습니다.",
+        "인터넷이 실제로 있다는 것을 증명하기 위해, 여러 미디어 분들을 제 집에 초대해 전화로 인터넷에 접속시켰습니다. 그들은 카메라를 가지고 제 집에서 3시간 반 기다렸고, 결국에는 반 장의 사진을 불러오는 것에 성공했습니다. 사실, 우리의 진행 상황은 매우 힘들었습니다."
+      ],
+      "recommended_delivery_tone": "상세하고 설명적",
+      "cultural_context": "이 문장은 인터넷의 초기 시대를 묘사하며, 그 당시 인터넷 접속이 매우 느렸음을 보여줍니다.",
+      "difficulty_analysis": "이 문장의 난이도는 중간 정도로, 특히 '증명', '3시간 반', '힘들다'와 같은 키워드를 놓치지 않고 정확하게 전달하는 것이 중요합니다.",
+      "audio_timing": {
+        "start_time_sec": 194.9,
+        "end_time_sec": 213.2
+      },
+      "source_info": {
+        "source_file": "ma_yun_speech_15개.json",
+        "original_id": 12,
+        "language_pair": "zh-CN -> ko-KR"
+      }
+    },
+    {
+      "id": 18,
+      "chinese_text": "我们要证明自己不是骗子。互联网确实存在，确实有这样的网页。今天的互联网速度实在是太快了，当年的速度和现在的没法相提并论。",
+      "char_count": 60,
+      "estimated_duration_sec": 13.3,
+      "difficulty_level": "beginner",
+      "korean_interpretation_reference": "우리는 사기꾼이 아니라는 걸 증명해야 합니다. 인터넷이 실재하며, 그런 웹페이지가 정말로 있다는 것입니다. 오늘날의 인터넷 속도는 너무나 빠르고, 과거의 속도와 비교할 수조차 없습니다.",
+      "chinese_audio_url": "https://your-storage-bucket.com/audio/speech_segment_013.mp3",
+      "pinyin_for_segment": "wǒmen yào zhèngmíng zìjǐ bùshì piànzi. hùliánwǎng quèshí cúnzài, quèshí yǒu zhèyàng de wǎngyè. jīntiān de hùliánwǎng sùdù shízài shì tài kuài le, dāngnián de sùdù hé xiànzài de méifǎ xiāngtíbìnglùn.",
+      "key_vocabulary": [
+        {
+          "chinese": "证明",
+          "korean": "증명하다",
+          "pinyin": "zhèngmíng",
+          "example_chinese": "我们要证明自己不是骗子。",
+          "example_korean": "우리는 사기꾼이 아니라는 걸 증명해야 합니다.",
+          "note": "주체가 무엇을 증명하려는지 명확히 전달해야 합니다."
+        },
+        {
+          "chinese": "互联网",
+          "korean": "인터넷",
+          "pinyin": "hùliánwǎng",
+          "example_chinese": "今天的互联网速度实在是太快了。",
+          "example_korean": "오늘날의 인터넷 속도는 너무나 빠릅니다.",
+          "note": "평범한 표현으로 '인터넷'을 의미합니다."
+        }
+      ],
+      "grammar_points": [
+        {
+          "chinese_pattern": "确实...，确实...",
+          "korean_explanation": "'확실하게... 확실하게...'의 의미로, 두 가지 사실을 강조하며 이야기할 때 사용합니다.",
+          "example_chinese": "互联网确实存在，确实有这样的网页。",
+          "example_korean": "인터넷이 실재하며, 그런 웹페이지가 정말로 있다는 것입니다."
+        }
+      ],
+      "interpreting_hints": [
+        "문장의 주제를 먼저 파악하고, 그에 따라 주요 내용을 강조하는 방식으로 통역합니다.",
+        "문화적 맥락이나 뉘앙스를 설명할 때는 실질적인 예시를 들어 설명합니다.",
+        "자연스러운 전달을 위해 주어진 문장을 그대로 번역하기보다는, 한국어로 자연스럽게 표현하는 방식을 선택합니다."
+      ],
+      "common_interpretation_challenges": [
+        "인터넷 속도 비교에 대한 내용을 통역할 때, 과거와 현재의 차이를 명확하게 통역하는 것이 중요합니다.",
+        "중국어 문장에서 '确实'이 두 번 반복되는데, 이를 한국어로 자연스럽게 통역하는 것이 어려울 수 있습니다."
+      ],
+      "suggested_note_taking_points": [
+        "증명",
+        "인터넷",
+        "속도 비교"
+      ],
+      "alternative_korean_interpretations": [
+        "우리는 자신이 사기꾼이 아니라는 사실을 입증해야 합니다. 인터넷은 분명히 존재하며, 그러한 웹페이지가 존재합니다. 현재의 인터넷 속도는 과거와는 비교도 할 수 없을 만큼 빠릅니다.",
+        "우리는 사기꾼이 아니라는 것을 보여줘야 합니다. 인터넷이 확실히 있고, 그런 웹페이지가 실제로 존재합니다. 현재의 인터넷 속도는 너무 빠르기 때문에 과거와 비교할 수 없습니다."
+      ],
+      "recommended_delivery_tone": "객관적이고 설명적인 어조",
+      "cultural_context": "중국에서는 인터넷의 발전이 빠르게 이루어져 왔으며, 이에 따른 변화를 강조하는 맥락이 있습니다.",
+      "difficulty_analysis": "이 구간은 중국어 문장의 강조 구조와 인터넷에 대한 이해를 필요로 합니다. 통역 학습자는 중요 단어와 문법 구조를 파악하고, 이에 따른 한국어 표현을 연습해야 합니다.",
+      "audio_timing": {
+        "start_time_sec": 213.5,
+        "end_time_sec": 228.682
+      },
+      "source_info": {
+        "source_file": "ma_yun_speech_15개.json",
+        "original_id": 13,
+        "language_pair": "zh-CN -> ko-KR"
+      }
+    },
+    {
+      "id": 19,
+      "chinese_text": "当时，别人认为我们就是个体经济。那时候个体经济一般是没有资格竞争的。经过一年多的经营，我们发现很难打败国企。国企也打不败我们。",
+      "char_count": 63,
+      "estimated_duration_sec": 14,
+      "difficulty_level": "intermediate",
+      "korean_interpretation_reference": "당시, 다른 사람들은 우리를 개인경제로 보았습니다. 그때 개인경제는 일반적으로 경쟁 자격이 없었습니다. 1년 이상의 경영 후, 우리는 국영기업을 이기기 어렵다는 것을 발견했습니다. 국영기업도 우리를 이길 수 없었습니다.",
+      "chinese_audio_url": "https://your-storage-bucket.com/audio/speech_segment_014.mp3",
+      "pinyin_for_segment": "Dāngshí, biérén rènwéi wǒmen jiùshì gètǐ jīngjì. Nà shíhòu gètǐ jīngjì yībān shì méiyǒu zīgé jìngzhēng de. Jīngguò yī nián duō de jīngyíng, wǒmen fāxiàn hěn nán dǎbài guóqǐ. Guóqǐ yě dǎbù bài wǒmen.",
+      "key_vocabulary": [
+        {
+          "chinese": "个体经济",
+          "korean": "개인경제",
+          "pinyin": "gètǐ jīngjì"
+        },
+        {
+          "chinese": "资格",
+          "korean": "자격",
+          "pinyin": "zīgé"
+        },
+        {
+          "chinese": "竞争",
+          "korean": "경쟁",
+          "pinyin": "jìngzhēng"
+        },
+        {
+          "chinese": "经营",
+          "korean": "경영",
+          "pinyin": "jīngyíng"
+        },
+        {
+          "chinese": "国企",
+          "korean": "국영기업",
+          "pinyin": "guóqǐ"
+        }
+      ],
+      "interpreting_hints": [
+        "'个体经济'는 중국에서 자영업자나 소규모 사업을 의미합니다.",
+        "'国企'는 국영기업을 가리킵니다."
+      ],
+      "cultural_context": "중국에서는 개인경제와 국영기업 간의 경쟁이 엄격하게 제한되었으며, 이는 중국의 경제 체제와 밀접한 관련이 있습니다.",
+      "difficulty_analysis": "이 텍스트는 중국의 경제 체제와 관련된 용어를 포함하고 있어, 이에 대한 이해가 필요합니다. 또한, 문장 구조가 복잡하여 통역이 어려울 수 있습니다.",
+      "audio_timing": {
+        "start_time_sec": 228.9,
+        "end_time_sec": 245.531
+      },
+      "alternative_korean_interpretations": [
+        "당시 사람들은 우리가 개인 경제라고 생각했고, 그 당시에는 개인 경제는 일반적으로 경쟁할 자격이 없었습니다. 1년 이상 운영한 후에 우리는 국영 기업을 이길 수 없다는 것을 알게 되었습니다. 그러나 국영 기업도 우리를 이길 수 없었습니다.",
+        "당시에는 사람들이 우리를 개인 경제라고 보았습니다. 그때는 개인 경제가 경쟁할 자격이 없었습니다. 1년 넘게 운영하면서 국영 기업을 이길 수 없다는 것을 깨달았습니다. 하지만 국영 기업도 우리를 이길 수 없었습니다."
+      ],
+      "common_interpretation_challenges": [
+        "개인 경제와 국영 기업이라는 특정한 중국 경제 용어를 정확히 이해하고 통역하는 것이 어려울 수 있습니다.",
+        "중국 경제의 특정한 맥락을 이해하지 못하면, 이 문장의 의미를 완전히 파악하는 데 어려움이 있을 수 있습니다."
+      ],
+      "grammar_points": [
+        {
+          "chinese_pattern": "也...不...",
+          "korean_explanation": "'도...않다'의 의미로, 두 가지 이상의 사항이 동일한 부정적 결과를 가지고 있음을 나타냄",
+          "example_chinese": "我也不知道。",
+          "example_korean": "나도 모른다."
+        }
+      ],
+      "recommended_delivery_tone": "진지하고 공식적인 어조",
+      "suggested_note_taking_points": [
+        "개인 경제",
+        "국영 기업",
+        "경쟁 불가"
+      ],
+      "source_info": {
+        "source_file": "ma_yun_speech_15개.json",
+        "original_id": 14,
+        "language_pair": "zh-CN -> ko-KR"
+      }
+    },
+    {
+      "id": 20,
+      "chinese_text": "最后我们就做了合资企业。我们投资，占30%的股份，别人占70%的股份。当时别人的目的是兼并我们。于是出现了一些观点上的分歧。",
+      "char_count": 62,
+      "estimated_duration_sec": 13.8,
+      "difficulty_level": "beginner",
+      "korean_interpretation_reference": "결국 우리는 합작 기업을 설립했습니다. 우리는 30%의 주식을 보유하고, 다른 사람들은 70%를 차지했습니다. 당시 다른 사람들의 목표는 우리를 인수하는 것이었습니다. 그래서 여러 가지 견해 차이가 발생했습니다.",
+      "chinese_audio_url": "https://your-storage-bucket.com/audio/speech_segment_015.mp3",
+      "pinyin_for_segment": "zuìhòu wǒmen jiù zuò le hézī qǐyè. wǒmen tóuzī, zhàn 30% de gǔfèn, biérén zhàn 70% de gǔfèn. dāngshí biérén de mùdì shì jiānbìng wǒmen. yúshì chūxiàn le yīxiē guāndiǎn shàng de fēnqí.",
+      "key_vocabulary": [
+        {
+          "chinese": "合资企业",
+          "korean": "합작 기업",
+          "pinyin": "hézī qǐyè",
+          "example_chinese": "我们是一家合资企业。",
+          "example_korean": "우리는 합작 기업입니다.",
+          "note": "합작 기업은 두 개 이상의 기업이 투자하여 공동으로 운영하는 기업을 의미합니다."
+        },
+        {
+          "chinese": "兼并",
+          "korean": "인수",
+          "pinyin": "jiānbìng",
+          "example_chinese": "他们的公司被兼并了。",
+          "example_korean": "그들의 회사가 인수되었습니다.",
+          "note": "인수 또는 합병을 의미하는 단어입니다. 문맥에 따라 다르게 해석될 수 있습니다."
+        }
+      ],
+      "grammar_points": [
+        {
+          "chinese_pattern": "了",
+          "korean_explanation": "'-았/었-' 의 의미로, 동사 뒤에 붙어 과거 시제를 나타냅니다.",
+          "example_chinese": "我吃了饭。",
+          "example_korean": "나는 밥을 먹었습니다."
+        }
+      ],
+      "interpreting_hints": [
+        "주식의 비율을 명확하게 해석해야 합니다.",
+        "문화적 맥락이나 뉘앙스 설명",
+        "자연스러운 전달을 위한 팁"
+      ],
+      "common_interpretation_challenges": [
+        "'合资企业'를 합작 기업이라는 표현으로 올바르게 해석하는 것",
+        "'兼并'을 올바르게 인수 또는 합병으로 해석하는 것"
+      ],
+      "suggested_note_taking_points": [
+        "합작 기업",
+        "주식 비율",
+        "인수"
+      ],
+      "alternative_korean_interpretations": [
+        "마침내, 우리는 합작 회사를 설립하였습니다. 우리는 주식의 30%를 차지하였고, 나머지 70%는 다른 사람들이 가졌습니다. 당시 다른 사람들의 목적은 우리를 인수하는 것이었습니다. 그 결과 다양한 의견이 분분해졌습니다.",
+        "결국 우리는 합작 회사를 창설했습니다. 우리는 30%의 지분을 보유했고, 나머지 70%는 다른 사람들이 가지고 있었습니다. 당시 다른 사람들의 목표는 우리를 합병하는 것이었습니다. 그래서 여러 가지 의견 차이가 발생했습니다."
+      ],
+      "recommended_delivery_tone": "객관적이고 사실적으로",
+      "cultural_context": "중국에서는 기업 간의 합작이나 인수가 자주 발생하는 경제 환경입니다.",
+      "difficulty_analysis": "이 구간의 난이도는 비교적 낮으며, 주로 사업 용어와 기업의 지분 비율에 대한 이해를 필요로 합니다.",
+      "audio_timing": {
+        "start_time_sec": 245.6,
+        "end_time_sec": 261.864
+      },
+      "source_info": {
+        "source_file": "ma_yun_speech_15개.json",
+        "original_id": 15,
+        "language_pair": "zh-CN -> ko-KR"
+      }
+    },
+    {
+      "id": 21,
+      "original_text": "안녕하세요. 오늘은 봉준호 감독님 모시고 신작 '미키 17' 관련해서 궁금했던 점들 직접 여쭤보는 시간 갖겠습니다. 감독님, 안녕하세요.",
+      "char_count": 76,
+      "difficulty_level": "beginner",
+      "target_interpretation": "大家好。今天我们请到了奉俊昊导演，将就新作《米奇17》相关问题进行直接访谈。导演您好。",
+      "pinyin_for_segment": "dà jiā hǎo. jīn tiān wǒ men qǐng dào le fèng jùn hào dǎo yǎn, jiāng jiù xīn zuò 《mǐ qí 17》xiāng guān wèn tí jìn xíng zhí jiē fǎng tán. dǎo yǎn nín hǎo.",
+      "key_vocabulary": [
+        {
+          "source_text": "导演",
+          "target_text": "감독",
+          "pinyin": "dǎo yǎn",
+          "target_example": "봉준호 감독님의 새 영화가 기대됩니다.",
+          "note": "영화를 연출하는 사람"
+        },
+        {
+          "source_text": "新作",
+          "target_text": "신작",
+          "pinyin": "xīn zuò",
+          "target_example": "이번 신작은 언제 개봉하나요?",
+          "note": "새로 만든 작품"
+        }
+      ],
+      "grammar_points": [
+        {
+          "chinese_explanation": "表示关于某事物的相关内容",
+          "korean_pattern": "~관련해서",
+          "example_korean": "이 문제 관련해서 이야기해보겠습니다."
+        }
+      ],
+      "interpreting_hints": [
+        "인터뷰 시작 멘트로 격식있고 정중한 어조로 통역해야 합니다."
+      ],
+      "common_interpretation_challenges": [
+        "'미키 17' 영화 제목의 정확한 중국어 표기",
+        "존댓말의 적절한 중국어 표현"
+      ],
+      "suggested_note_taking_points": [
+        "봉준호 감독",
+        "미키 17",
+        "인터뷰 시작"
+      ],
+      "alternative_interpretations": [
+        "您好，今天我们邀请奉俊昊导演就其新片《米奇17》进行专访。导演您好。"
+      ],
+      "recommended_delivery_tone": "정중하고 공식적인 어조로, 인터뷰 진행자의 전문성을 보여주는 톤",
+      "cultural_context": "한국 미디어 인터뷰의 표준적인 시작 인사말로, 격식을 차린 표현이 중요합니다.",
+      "difficulty_analysis": "기본적인 인사와 소개 문장으로 초급 수준이지만, 영화 제목과 존댓말 표현에 주의가 필요합니다.",
+      "audio_timing": {
+        "start_time_sec": 0,
+        "end_time_sec": 10.714,
+        "duration_sec": 10.714
+      },
+      "source_info": {
+        "source_file": "Mickey17interview_15개.json",
+        "original_id": 1,
+        "language_pair": "ko-KR -> zh-CN"
+      }
+    },
+    {
+      "id": 22,
+      "original_text": "네, 안녕하세요. 봉준호입니다. 이렇게 직접 이야기 나눌 기회가 생겨서 저도 좋습니다.",
+      "char_count": 52,
+      "difficulty_level": "beginner",
+      "target_interpretation": "您好，我是奉俊昊。能有这样直接交流的机会我也很高兴。",
+      "pinyin_for_segment": "nín hǎo, wǒ shì fèng jùn hào. néng yǒu zhè yàng zhí jiē jiāo liú de jī huì wǒ yě hěn gāo xìng.",
+      "key_vocabulary": [
+        {
+          "source_text": "直接交流",
+          "target_text": "직접 이야기 나누다",
+          "pinyin": "zhí jiē jiāo liú",
+          "target_example": "직접 이야기 나누는 것이 좋습니다.",
+          "note": "면대면으로 대화하는 것"
+        },
+        {
+          "source_text": "机会",
+          "target_text": "기회",
+          "pinyin": "jī huì",
+          "target_example": "이런 기회가 많지 않습니다.",
+          "note": "어떤 일을 할 수 있는 때"
+        }
+      ],
+      "grammar_points": [
+        {
+          "chinese_explanation": "表示这样的方式或情况",
+          "korean_pattern": "이렇게",
+          "example_korean": "이렇게 만나게 되어서 기쁩니다."
+        }
+      ],
+      "interpreting_hints": [
+        "감독의 겸손하고 친근한 어조를 잘 전달해야 합니다."
+      ],
+      "common_interpretation_challenges": [
+        "겸손한 한국어 표현을 중국어로 자연스럽게 번역하기"
+      ],
+      "suggested_note_taking_points": [
+        "봉준호 소개",
+        "직접 대화 기회",
+        "기쁨 표현"
+      ],
+      "alternative_interpretations": [
+        "您好，我是奉俊昊。有这样面对面交流的机会，我也很开心。"
+      ],
+      "recommended_delivery_tone": "겸손하고 친근한 어조로, 감사의 마음을 담아서",
+      "cultural_context": "한국 연예계에서 인터뷰이가 보이는 겸손한 태도와 감사 표현입니다.",
+      "difficulty_analysis": "기본적인 인사와 감사 표현으로 초급 수준입니다.",
+      "audio_timing": {
+        "start_time_sec": 10.784,
+        "end_time_sec": 16.449,
+        "duration_sec": 5.665
+      },
+      "source_info": {
+        "source_file": "Mickey17interview_15개.json",
+        "original_id": 2,
+        "language_pair": "ko-KR -> zh-CN"
+      }
+    },
+    {
+      "id": 23,
+      "original_text": "먼저 '미키 17' 홍보 때문에 전 세계를 정말 바쁘게 다녀왔다고 들었어요. 런던부터 도쿄까지, 어, 엄청난 일정이었을 것 같은데요.",
+      "char_count": 76,
+      "difficulty_level": "intermediate",
+      "target_interpretation": "首先听说您为了《米奇17》的宣传在全世界奔波，非常忙碌。从伦敦到东京，应该是非常紧张的行程吧。",
+      "pinyin_for_segment": "shǒu xiān tīng shuō nín wèi le 《mǐ qí 17》de xuān chuán zài quán shì jiè bēn bō, fēi cháng máng lù. cóng lún dūn dào dōng jīng, yīng gāi shì fēi cháng jǐn zhāng de xíng chéng ba.",
+      "key_vocabulary": [
+        {
+          "source_text": "宣传",
+          "target_text": "홍보",
+          "pinyin": "xuān chuán",
+          "target_example": "영화 홍보를 위해 여러 도시를 방문했습니다.",
+          "note": "제품이나 작품을 알리는 활동"
+        },
+        {
+          "source_text": "奔波",
+          "target_text": "바쁘게 다니다",
+          "pinyin": "bēn bō",
+          "target_example": "일 때문에 전국을 바쁘게 다녔습니다.",
+          "note": "여기저기 바쁘게 돌아다니는 것"
+        },
+        {
+          "source_text": "行程",
+          "target_text": "일정",
+          "pinyin": "xíng chéng",
+          "target_example": "이번 출장 일정이 매우 빡빡합니다.",
+          "note": "여행이나 업무의 계획"
+        }
+      ],
+      "grammar_points": [
+        {
+          "chinese_explanation": "表示因为某种原因而做某事",
+          "korean_pattern": "~때문에",
+          "example_korean": "비 때문에 경기가 취소되었습니다."
+        }
+      ],
+      "interpreting_hints": [
+        "인터뷰어의 관심과 배려를 보여주는 질문 어조를 전달해야 합니다."
+      ],
+      "common_interpretation_challenges": [
+        "'바쁘게 다녀왔다'를 자연스러운 중국어로 표현하기",
+        "도시 이름의 정확한 발음"
+      ],
+      "suggested_note_taking_points": [
+        "미키 17 홍보",
+        "전세계 일정",
+        "런던-도쿄"
+      ],
+      "alternative_interpretations": [
+        "听说为了宣传《米奇17》，您在全球各地进行了非常繁忙的行程，从伦敦到东京，想必是相当紧凑的安排。"
+      ],
+      "recommended_delivery_tone": "친근하면서도 관심 어린 어조로, 상대방에 대한 배려를 보여주는 톤",
+      "cultural_context": "한국 연예계에서 해외 홍보 일정은 매우 중요하며, 이에 대한 언급은 성공을 인정하는 의미가 있습니다.",
+      "difficulty_analysis": "중간 난이도로, 일상 회화와 업무 관련 표현이 혼재되어 있으며, 지명과 관용 표현이 포함되어 있습니다.",
+      "audio_timing": {
+        "start_time_sec": 16.519000000000002,
+        "end_time_sec": 26.053,
+        "duration_sec": 9.534
+      },
+      "source_info": {
+        "source_file": "Mickey17interview_15개.json",
+        "original_id": 3,
+        "language_pair": "ko-KR -> zh-CN"
+      }
+    },
+    {
+      "id": 24,
+      "original_text": "아, 네. 그게 뭐랄까, 좀 정신이 없었죠. 하하하. 그 도시들을 쭉 돌다 보니까 어 스태프들이 농담으로 저보고 \"준호 17\", \"준호 18\" 이렇게 부르더라고요. 복제인간처럼 계속 나타난다고.",
+      "char_count": 112,
+      "difficulty_level": "intermediate",
+      "target_interpretation": "啊，是的。怎么说呢，确实有点忙得晕头转向。哈哈哈。在这些城市转了一圈后，工作人员开玩笑叫我\"俊昊17\"、\"俊昊18\"，说我像克隆人一样不断出现。",
+      "pinyin_for_segment": "ā, shì de. zěn me shuō ne, què shí yǒu diǎn máng de yūn tóu zhuàn xiàng. hā hā hā. zài zhè xiē chéng shì zhuàn le yī quān hòu, gōng zuò rén yuán kāi wán xiào jiào wǒ \"jùn hào 17\"、\"jùn hào 18\", shuō wǒ xiàng kè lóng rén yī yàng bù duàn chū xiàn.",
+      "key_vocabulary": [
+        {
+          "source_text": "晕头转向",
+          "target_text": "정신이 없다",
+          "pinyin": "yūn tóu zhuàn xiàng",
+          "target_example": "일이 너무 많아서 정신이 없었습니다.",
+          "note": "매우 바빠서 혼란스러운 상태"
+        },
+        {
+          "source_text": "克隆人",
+          "target_text": "복제인간",
+          "pinyin": "kè lóng rén",
+          "target_example": "영화에서 복제인간이 등장합니다.",
+          "note": "유전자 복제로 만든 인간"
+        }
+      ],
+      "grammar_points": [
+        {
+          "chinese_explanation": "表示在某个过程中发现或经历了什么",
+          "korean_pattern": "~다 보니까",
+          "example_korean": "계속 연습하다 보니까 실력이 늘었습니다."
+        }
+      ],
+      "interpreting_hints": [
+        "감독의 유머러스한 톤과 웃음소리를 자연스럽게 전달해야 합니다."
+      ],
+      "common_interpretation_challenges": [
+        "'정신이 없었다'는 구어체 표현의 자연스러운 번역",
+        "영화 제목과 연관된 유머의 전달"
+      ],
+      "suggested_note_taking_points": [
+        "바쁜 일정",
+        "스태프 농담",
+        "준호 17/18"
+      ],
+      "alternative_interpretations": [
+        "啊，对。就是说，真的是忙得不可开交。哈哈哈。跑了这么多城市，工作人员开玩笑说我是\"俊昊17\"、\"俊昊18\"，像复制人一样到处出现。"
+      ],
+      "recommended_delivery_tone": "편안하고 유머러스한 어조로, 웃음과 함께 자연스럽게",
+      "cultural_context": "영화 '미키 17'의 복제인간 설정과 연결된 농담으로, 영화 내용을 아는 관객들에게는 재미있는 유머입니다.",
+      "difficulty_analysis": "중간 난이도로, 구어체 표현과 영화 관련 유머, 감탄사 등이 포함되어 자연스러운 번역이 필요합니다.",
+      "audio_timing": {
+        "start_time_sec": 26.123,
+        "end_time_sec": 40.46,
+        "duration_sec": 14.337
+      },
+      "source_info": {
+        "source_file": "Mickey17interview_15개.json",
+        "original_id": 4,
+        "language_pair": "ko-KR -> zh-CN"
+      }
+    },
+    {
+      "id": 25,
+      "original_text": "\"준호 17\"이요? 재밌네요. 그 와중에도 국내 소식, 뭐 4월 총선 같은 것도 챙겨 보셨다고요?",
+      "char_count": 53,
+      "difficulty_level": "intermediate",
+      "target_interpretation": "\"俊昊17\"？真有趣。听说在那期间您也关注国内消息，比如4月的大选之类的？",
+      "pinyin_for_segment": "\"jùn hào 17\"? zhēn yǒu qù. tīng shuō zài nà qī jiān nín yě guān zhù guó nèi xiāo xi, bǐ rú 4 yuè de dà xuǎn zhī lèi de?",
+      "key_vocabulary": [
+        {
+          "source_text": "国内消息",
+          "target_text": "국내 소식",
+          "pinyin": "guó nèi xiāo xi",
+          "target_example": "해외에 있어도 국내 소식을 챙겨 봅니다.",
+          "note": "자국의 뉴스나 정보"
+        },
+        {
+          "source_text": "大选",
+          "target_text": "총선",
+          "pinyin": "dà xuǎn",
+          "target_example": "4월에 국회의원 총선거가 있었습니다.",
+          "note": "국회의원을 선출하는 선거"
+        }
+      ],
+      "grammar_points": [
+        {
+          "chinese_explanation": "表示在某种情况下仍然做某事",
+          "korean_pattern": "그 와중에도",
+          "example_korean": "바쁜 와중에도 가족과 시간을 보냈습니다."
+        }
+      ],
+      "interpreting_hints": [
+        "사회자의 호기심 어린 톤을 잘 전달해야 합니다."
+      ],
+      "common_interpretation_challenges": [
+        "'챙겨 보다'라는 표현의 적절한 번역",
+        "한국 정치 상황에 대한 배경 지식"
+      ],
+      "suggested_note_taking_points": [
+        "준호 17",
+        "국내 소식",
+        "4월 총선"
+      ],
+      "alternative_interpretations": [
+        "\"俊昊17\"？挺有意思的。听说即使在那么忙的情况下，您也会关注国内新闻，比如4月的国会选举？"
+      ],
+      "recommended_delivery_tone": "호기심 어린 톤으로, 약간의 놀라움과 관심을 표현하는 어조",
+      "cultural_context": "2024년 4월 한국 국회의원 선거를 언급하는 것으로, 시사적인 내용이 포함되어 있습니다.",
+      "difficulty_analysis": "중간 난이도로, 정치 관련 용어와 시간 표현, 구어체가 혼재되어 있습니다.",
+      "audio_timing": {
+        "start_time_sec": 40.53,
+        "end_time_sec": 47.445,
+        "duration_sec": 6.915
+      },
+      "source_info": {
+        "source_file": "Mickey17interview_15개.json",
+        "original_id": 5,
+        "language_pair": "ko-KR -> zh-CN"
+      }
+    },
+    {
+      "id": 26,
+      "original_text": "아, 네. 뭐 선거는 중요하니까요. 어디에 있든 결과는 궁금하더라고요. 뭐 정치적인 이야기는 음, 제가 깊게 할 건 아니고 그냥 상황을 지켜봤다는 정도죠.",
+      "char_count": 89,
+      "difficulty_level": "intermediate",
+      "target_interpretation": "啊，是的。选举很重要嘛。无论在哪里都会好奇结果。政治方面的话题嗯，我不会深入讨论，只是关注一下情况而已。",
+      "pinyin_for_segment": "ā, shì de. xuǎn jǔ hěn zhòng yào ma. wú lùn zài nǎ lǐ dōu huì hào qí jié guǒ. zhèng zhì fāng miàn de huà tí ēn, wǒ bù huì shēn rù tǎo lùn, zhǐ shì guān zhù yī xià qíng kuàng ér yǐ.",
+      "key_vocabulary": [
+        {
+          "source_text": "选举",
+          "target_text": "선거",
+          "pinyin": "xuǎn jǔ",
+          "target_example": "민주주의에서 선거는 매우 중요합니다.",
+          "note": "대표를 뽑는 투표"
+        },
+        {
+          "source_text": "关注",
+          "target_text": "지켜보다",
+          "pinyin": "guān zhù",
+          "target_example": "상황을 조용히 지켜보고 있습니다.",
+          "note": "주의 깊게 살펴보는 것"
+        }
+      ],
+      "grammar_points": [
+        {
+          "chinese_explanation": "表示无论在什么情况下都是如此",
+          "korean_pattern": "어디에 있든",
+          "example_korean": "어디에 있든 가족이 그립습니다."
+        }
+      ],
+      "interpreting_hints": [
+        "정치적 발언을 피하려는 신중한 태도를 잘 전달해야 합니다."
+      ],
+      "common_interpretation_challenges": [
+        "정치적 중립성을 유지하려는 뉘앙스 전달",
+        "'깊게 할 건 아니고'라는 구어체 표현"
+      ],
+      "suggested_note_taking_points": [
+        "선거 중요성",
+        "정치 중립",
+        "상황 관찰"
+      ],
+      "alternative_interpretations": [
+        "啊，对。毕竟选举是重要的事情。不管身在何处都会关心结果。至于政治话题嗯，我不会深入探讨，只是观察一下局势罢了。"
+      ],
+      "recommended_delivery_tone": "신중하고 조심스러운 어조로, 정치적 중립을 유지하려는 의도를 보여주는 톤",
+      "cultural_context": "한국 연예인들이 정치적 발언을 조심스러워하는 문화적 배경이 반영된 발언입니다.",
+      "difficulty_analysis": "중간 난이도로, 정치적 뉘앙스와 구어체 표현, 신중한 어조가 포함되어 있습니다.",
+      "audio_timing": {
+        "start_time_sec": 47.515,
+        "end_time_sec": 57.667,
+        "duration_sec": 10.152
+      },
+      "source_info": {
+        "source_file": "Mickey17interview_15개.json",
+        "original_id": 6,
+        "language_pair": "ko-KR -> zh-CN"
+      }
+    },
+    {
+      "id": 27,
+      "original_text": "네. 그리고 아카데미 영화 박물관에 감독님 섹션이 생긴다는 소식도 들었습니다. 정말 대단한데요.",
+      "char_count": 52,
+      "difficulty_level": "intermediate",
+      "target_interpretation": "好的。还有听说奥斯卡电影博物馆要设立导演您的专区。真的很了不起。",
+      "pinyin_for_segment": "hǎo de. hái yǒu tīng shuō ào sī kǎ diàn yǐng bó wù guǎn yào shè lì dǎo yǎn nín de zhuān qū. zhēn de hěn liǎo bù qǐ.",
+      "key_vocabulary": [
+        {
+          "source_text": "奥斯卡电影博物馆",
+          "target_text": "아카데미 영화 박물관",
+          "pinyin": "ào sī kǎ diàn yǐng bó wù guǎn",
+          "target_example": "아카데미 영화 박물관은 LA에 있습니다.",
+          "note": "미국 로스앤젤레스의 영화 전문 박물관"
+        },
+        {
+          "source_text": "专区",
+          "target_text": "섹션",
+          "pinyin": "zhuān qū",
+          "target_example": "박물관에 한국 영화 섹션이 있습니다.",
+          "note": "특별히 구분된 전시 공간"
+        }
+      ],
+      "grammar_points": [
+        {
+          "chinese_explanation": "表示某事物将要发生或建立",
+          "korean_pattern": "~이/가 생긴다",
+          "example_korean": "새로운 지하철역이 생깁니다."
+        }
+      ],
+      "interpreting_hints": [
+        "감탄과 축하의 어조를 적절히 전달해야 합니다."
+      ],
+      "common_interpretation_challenges": [
+        "기관명의 정확한 번역",
+        "감탄사의 자연스러운 표현"
+      ],
+      "suggested_note_taking_points": [
+        "아카데미 박물관",
+        "감독 섹션",
+        "대단한 성과"
+      ],
+      "alternative_interpretations": [
+        "是啊。还听说学院电影博物馆将设立导演您的展区，真是太厉害了。"
+      ],
+      "recommended_delivery_tone": "감탄과 축하의 어조로, 존경심을 담아서",
+      "cultural_context": "아카데미 영화 박물관은 영화계 최고 권위의 기관으로, 개인 섹션이 생기는 것은 매우 큰 영예입니다.",
+      "difficulty_analysis": "중간 난이도로, 전문 기관명과 감탄 표현이 포함되어 있습니다.",
+      "audio_timing": {
+        "start_time_sec": 57.737,
+        "end_time_sec": 65.361,
+        "duration_sec": 7.624
+      },
+      "source_info": {
+        "source_file": "Mickey17interview_15개.json",
+        "original_id": 7,
+        "language_pair": "ko-KR -> zh-CN"
+      }
+    },
+    {
+      "id": 28,
+      "original_text": "네, 그게 참 영광스러운 일이죠. 제 작업 과정들, 뭐 스케치나 콘티 같은 것들을 쭉 모아서 보여주는 건데요. 제가 원래 그런 걸 잘 버리지 못하는 성격이라 자료가 좀 많습니다.",
+      "char_count": 102,
+      "difficulty_level": "intermediate",
+      "target_interpretation": "是的，这确实是很荣幸的事情。展示我的工作过程，比如草图、分镜头脚本之类的东西。我本来就不太舍得扔东西的性格，所以资料比较多。",
+      "pinyin_for_segment": "shì de, zhè què shí shì hěn róng xìng de shì qíng. zhǎn shì wǒ de gōng zuò guò chéng, bǐ rú cǎo tú、fēn jìng tóu jiǎo běn zhī lèi de dōng xi. wǒ běn lái jiù bù tài shě de rēng dōng xi de xìng gé, suǒ yǐ zī liào bǐ jiào duō.",
+      "key_vocabulary": [
+        {
+          "source_text": "荣幸",
+          "target_text": "영광스럽다",
+          "pinyin": "róng xìng",
+          "target_example": "이런 기회를 얻게 되어 영광스럽습니다.",
+          "note": "큰 영예로 여기는 마음"
+        },
+        {
+          "source_text": "分镜头脚本",
+          "target_text": "콘티",
+          "pinyin": "fēn jìng tóu jiǎo běn",
+          "target_example": "영화 촬영 전에 콘티를 그립니다.",
+          "note": "영화의 장면을 미리 그린 그림"
+        }
+      ],
+      "grammar_points": [
+        {
+          "chinese_explanation": "表示某人的性格特点或习惯",
+          "korean_pattern": "~하는 성격이다",
+          "example_korean": "저는 정리를 잘하는 성격입니다."
+        }
+      ],
+      "interpreting_hints": [
+        "감독의 겸손함과 자신의 습관에 대한 솔직한 고백을 잘 전달해야 합니다."
+      ],
+      "common_interpretation_challenges": [
+        "영화 전문 용어의 정확한 번역",
+        "'버리지 못하는 성격'이라는 개인적 특성 표현"
+      ],
+      "suggested_note_taking_points": [
+        "영광스러운 일",
+        "작업 과정",
+        "스케치/콘티"
+      ],
+      "alternative_interpretations": [
+        "是啊，真是非常光荣的事。展出我的创作过程，像素描、故事板这些材料。我这人本来就舍不得丢东西，所以资料积累得挺多的。"
+      ],
+      "recommended_delivery_tone": "겸손하면서도 기쁜 어조로, 개인적인 성격을 털어놓는 친근한 톤",
+      "cultural_context": "한국인의 겸손한 성격과 창작자의 작업 습관이 잘 드러나는 발언입니다.",
+      "difficulty_analysis": "중간 난이도로, 영화 전문 용어와 개인적 성격 표현이 혼재되어 있습니다.",
+      "audio_timing": {
+        "start_time_sec": 65.431,
+        "end_time_sec": 77.156,
+        "duration_sec": 11.725
+      },
+      "source_info": {
+        "source_file": "Mickey17interview_15개.json",
+        "original_id": 8,
+        "language_pair": "ko-KR -> zh-CN"
+      }
+    },
+    {
+      "id": 29,
+      "original_text": "직접 보신 분들 얘기 들어보면 옥자 실물 모형이나 마더 김혜자 선생님 그 침통 같은 소품들도 전시되어 있다면서요?",
+      "char_count": 66,
+      "difficulty_level": "advanced",
+      "target_interpretation": "听参观过的人说，《玉子》的实物模型和《母亲》中金惠子老师的那个针线盒等道具也有展出？",
+      "pinyin_for_segment": "tīng cān guān guò de rén shuō, 《yù zi》de shí wù mó xíng hé 《mǔ qīn》zhōng jīn huì zi lǎo shī de nà gè zhēn xiàn hé děng dào jù yě yǒu zhǎn chū?",
+      "key_vocabulary": [
+        {
+          "source_text": "实物模型",
+          "target_text": "실물 모형",
+          "pinyin": "shí wù mó xíng",
+          "target_example": "박물관에 공룡 실물 모형이 있습니다.",
+          "note": "실제 크기로 만든 모형"
+        },
+        {
+          "source_text": "针线盒",
+          "target_text": "침통",
+          "pinyin": "zhēn xiàn hé",
+          "target_example": "할머니의 오래된 침통을 발견했습니다.",
+          "note": "바느질 도구를 넣는 상자"
+        }
+      ],
+      "grammar_points": [
+        {
+          "chinese_explanation": "表示听别人说过某事",
+          "korean_pattern": "~다면서요?",
+          "example_korean": "내일 비가 온다면서요?"
+        }
+      ],
+      "interpreting_hints": [
+        "영화 제목과 배우 이름, 소품명을 정확히 전달해야 합니다."
+      ],
+      "common_interpretation_challenges": [
+        "영화 제목 '옥자', '마더'의 중국어 표기",
+        "'침통'이라는 전통 소품의 적절한 번역"
+      ],
+      "suggested_note_taking_points": [
+        "옥자 모형",
+        "마더 침통",
+        "김혜자 선생님"
+      ],
+      "alternative_interpretations": [
+        "听去看过的人说，《玉子》的真实大小模型和《母亲》里金惠子前辈的针线匣等道具也在展出是吗？"
+      ],
+      "recommended_delivery_tone": "호기심 어린 확인의 어조로, 약간의 흥미를 보이는 톤",
+      "cultural_context": "봉준호 감독의 대표작들과 한국의 전통 소품에 대한 언급으로, 영화에 대한 깊은 이해가 필요합니다.",
+      "difficulty_analysis": "고급 난이도로, 영화 관련 전문 지식과 한국 전통 문화 요소가 포함되어 있습니다.",
+      "audio_timing": {
+        "start_time_sec": 77.226,
+        "end_time_sec": 86.631,
+        "duration_sec": 9.405
+      },
+      "source_info": {
+        "source_file": "Mickey17interview_15개.json",
+        "original_id": 9,
+        "language_pair": "ko-KR -> zh-CN"
+      }
+    },
+    {
+      "id": 30,
+      "original_text": "네, 맞아요. 그런 상징적인 것들을 좀 모아놨죠. 스토리보드만 쭉 모아 놓은 방도 있고요. 관객분들이 영화를 다른 각도에서 좀 보실 수 있지 않을까 싶어요. '미키 17' 관련 자료는 나중에 예, 개봉 후에 추가될 예정입니다.",
+      "char_count": 127,
+      "difficulty_level": "intermediate",
+      "target_interpretation": "是的，没错。收集了一些这样具有象征意义的物品。还有专门陈列故事板的展厅。我想观众们可以从不同角度来欣赏电影吧。《米奇17》相关资料预计在上映后会增加展出。",
+      "pinyin_for_segment": "shì de, méi cuò. shōu jí le yī xiē zhè yàng jù yǒu xiàng zhēng yì yì de wù pǐn. hái yǒu zhuān mén chén liè gù shi bǎn de zhǎn tīng. wǒ xiǎng guān zhòng men kě yǐ cóng bù tóng jiǎo dù lái xīn shǎng diàn yǐng ba. 《mǐ qí 17》xiāng guān zī liào yù jì zài shàng yìng hòu huì zēng jiā zhǎn chū.",
+      "key_vocabulary": [
+        {
+          "source_text": "象征性",
+          "target_text": "상징적인",
+          "pinyin": "xiàng zhēng xìng",
+          "target_example": "이 작품은 상징적인 의미가 큽니다.",
+          "note": "깊은 의미를 담고 있는"
+        },
+        {
+          "source_text": "故事板",
+          "target_text": "스토리보드",
+          "pinyin": "gù shi bǎn",
+          "target_example": "영화 제작 전에 스토리보드를 그립니다.",
+          "note": "영화의 장면을 순서대로 그린 그림"
+        },
+        {
+          "source_text": "上映",
+          "target_text": "개봉",
+          "pinyin": "shàng yìng",
+          "target_example": "이 영화는 다음 달에 개봉합니다.",
+          "note": "영화가 극장에서 상영되는 것"
+        }
+      ],
+      "grammar_points": [
+        {
+          "chinese_explanation": "表示从某个角度或方面来看",
+          "korean_pattern": "~에서 보다",
+          "example_korean": "다른 관점에서 보면 이해할 수 있습니다."
+        }
+      ],
+      "interpreting_hints": [
+        "전시에 대한 자부심과 관객에 대한 배려가 드러나도록 통역해야 합니다."
+      ],
+      "common_interpretation_challenges": [
+        "'다른 각도에서 보다'라는 표현의 자연스러운 번역",
+        "미래 계획에 대한 정확한 시제 사용"
+      ],
+      "suggested_note_taking_points": [
+        "상징적 소품",
+        "스토리보드 전시",
+        "미키 17 추가 예정"
+      ],
+      "alternative_interpretations": [
+        "对，就是这样。把一些标志性的东西收集起来了。还有专门展示分镜图的展厅。希望观众能从不同视角来观赏电影。《米奇17》的相关资料计划在电影上映后补充展出。"
+      ],
+      "recommended_delivery_tone": "만족스러우면서도 겸손한 어조로, 관객에 대한 배려를 보여주는 톤",
+      "cultural_context": "영화 전시회에서 관객과의 소통을 중시하는 한국 영화계의 문화가 반영되어 있습니다.",
+      "difficulty_analysis": "중간 난이도로, 전시 관련 용어와 미래 계획 표현이 포함되어 있습니다.",
+      "audio_timing": {
+        "start_time_sec": 86.701,
+        "end_time_sec": 99.306,
+        "duration_sec": 12.605
+      },
+      "source_info": {
+        "source_file": "Mickey17interview_15개.json",
+        "original_id": 10,
+        "language_pair": "ko-KR -> zh-CN"
+      }
+    },
+    {
+      "id": 31,
+      "original_text": "그런 기록들을 보다 보면 고 변희봉 선생님 생각이 또 나더라고요. 감독님 영화에서 정말 빼놓을 수 없는 분이셨잖아요.",
+      "char_count": 68,
+      "difficulty_level": "intermediate",
+      "target_interpretation": "看这些记录时，又想起了已故的边熙奉老师。他在导演的电影中真是不可缺少的人物啊。",
+      "pinyin_for_segment": "kàn zhè xiē jì lù shí, yòu xiǎng qǐ le yǐ gù de biān xī fèng lǎo shī. tā zài dǎo yǎn de diàn yǐng zhōng zhēn shì bù kě quē shǎo de rén wù a.",
+      "key_vocabulary": [
+        {
+          "source_text": "已故",
+          "target_text": "고",
+          "pinyin": "yǐ gù",
+          "target_example": "고 김대중 대통령을 기리는 행사가 있었습니다.",
+          "note": "돌아가신 분을 높여 부르는 말"
+        },
+        {
+          "source_text": "不可缺少",
+          "target_text": "빼놓을 수 없는",
+          "pinyin": "bù kě quē shǎo",
+          "target_example": "그는 우리 팀에서 빼놓을 수 없는 존재입니다.",
+          "note": "반드시 필요한, 없어서는 안 되는"
+        }
+      ],
+      "grammar_points": [
+        {
+          "chinese_explanation": "表示在做某事的过程中产生了某种感受或想法",
+          "korean_pattern": "~다 보면",
+          "example_korean": "공부하다 보면 재미있어집니다."
+        }
+      ],
+      "interpreting_hints": [
+        "돌아가신 분에 대한 그리움과 존경의 마음을 담아 통역해야 합니다."
+      ],
+      "common_interpretation_challenges": [
+        "고인에 대한 존경어 사용",
+        "감정적인 뉘앙스의 전달"
+      ],
+      "suggested_note_taking_points": [
+        "변희봉 선생님",
+        "고인에 대한 추억",
+        "중요한 존재"
+      ],
+      "alternative_interpretations": [
+        "看着这些资料，又让人想起了故去的边熙奉前辈。他在导演电影中真是无法替代的存在。"
+      ],
+      "recommended_delivery_tone": "그리움과 존경이 담긴 감정적인 어조로, 고인에 대한 애도의 마음을 표현",
+      "cultural_context": "한국에서 돌아가신 분을 언급할 때의 존경과 그리움의 문화적 맥락이 중요합니다.",
+      "difficulty_analysis": "중간 난이도로, 고인에 대한 존경어와 감정적 표현이 포함되어 있습니다.",
+      "audio_timing": {
+        "start_time_sec": 99.37599999999999,
+        "end_time_sec": 107.119,
+        "duration_sec": 7.743
+      },
+      "source_info": {
+        "source_file": "Mickey17interview_15개.json",
+        "original_id": 11,
+        "language_pair": "ko-KR -> zh-CN"
+      }
+    },
+    {
+      "id": 32,
+      "original_text": "아, 네. 그렇죠. 변 선생님은 정말 뭐랄까, 제 영화 속 아버지 혹은 할아버지 세대를 그냥 그 자체로 보여주시는 분이었어요. '플란다스의 개' 때부터 '옥자'까지 쭉 함께 했으니까요.",
+      "char_count": 125,
+      "difficulty_level": "intermediate",
+      "target_interpretation": "奉俊昊导演: 啊，是的。变老师真是，怎么说呢，就是把电影中我心目中的父亲或者爷爷那一辈人原原本本地展现出来了。从《弗兰德斯的狗》到《玉子》都一直合作。",
+      "pinyin_for_segment": "fèng jùn hào dǎo yǎn: a, shì de. biàn lǎo shī zhēn shì, zěn me shuō ne, jiù shì bǎ diàn yǐng zhōng wǒ xīn mù zhōng de fù qīn huò zhě yé ye nà yī bèi rén yuán yuán běn běn de zhǎn xiàn chū lái le. cóng 《fú lán dé sī de gǒu》 dào 《yù zǐ》 dōu yī zhí hé zuò.",
+      "key_vocabulary": [
+        {
+          "source_text": "弗兰德斯的狗",
+          "target_text": "플란다스의 개",
+          "pinyin": "fú lán dé sī de gǒu"
+        },
+        {
+          "source_text": "玉子",
+          "target_text": "옥자",
+          "pinyin": "yù zǐ"
+        },
+        {
+          "source_text": "父辈",
+          "target_text": "아버지 세대",
+          "pinyin": "fù bèi"
+        }
+      ],
+      "grammar_points": [
+        {
+          "chinese_explanation": "表示动作或状态的持续",
+          "korean_pattern": "~까지 쭉"
+        }
+      ],
+      "interpreting_hints": [
+        "인터뷰이의 감정적 표현을 자연스럽게 전달하는 것이 중요합니다.",
+        "영화 제목은 고유명사이므로 정확히 발음해야 합니다."
+      ],
+      "common_interpretation_challenges": [
+        "감독의 비유적 표현을 적절하게 번역하는 어려움",
+        "감정 이입이 필요한 부분의 톤 조절"
+      ],
+      "suggested_note_taking_points": [
+        "변 선생님",
+        "영화 속 아버지",
+        "플란다스~옥자",
+        "함께"
+      ],
+      "alternative_interpretations": [
+        " 奉俊昊导演: 嗯，是啊。边老师真是，可以说，把电影里我心目中父亲或祖父那一代人的形象，原汁原味地呈现了出来。从《法兰德斯之犬》到《玉子》都一直合作。"
+      ],
+      "recommended_delivery_tone": "회상하며 진솔하게 이야기하는 어조",
+      "cultural_context": "한국 감독과 배우 간의 깊은 유대감을 보여주는 대화입니다.",
+      "difficulty_analysis": "일반적인 회화체로 구성되어 있으나, 비유적인 표현과 특정 영화 제목이 포함되어 있습니다.",
+      "audio_timing": {
+        "start_time_sec": 107.189,
+        "end_time_sec": 120.8,
+        "duration_sec": 13.611
+      },
+      "source_info": {
+        "source_file": "Mickey17interview_15개.json",
+        "original_id": 12,
+        "language_pair": "ko-KR -> zh-CN"
+      }
+    },
+    {
+      "id": 33,
+      "original_text": "네, 맞아요. 제가 어떤 특정 세대를 그리고 싶을 때 변 선생님의 얼굴이나 그 분위기가 꼭 필요했던 것 같아요. 참 특별한 존재였죠. 크라이테리온 블루레이 인터뷰도 직접 하셨다고 들었어요. 투병 중이실 때.",
+      "char_count": 147,
+      "difficulty_level": "intermediate",
+      "target_interpretation": "主持人(女性): 是的，没错。我想描绘某个特定世代时，边老师的脸庞和他的那种氛围就显得非常必要。真是特别的存在。听说他生病的时候，也亲自做了Criterion蓝光采访。",
+      "pinyin_for_segment": "zhǔ chí rén (nǚ xìng): shì de, méi cuò. wǒ xiǎng miáo huì mǒu gè tè dìng shì dài shí, biān lǎo shī de liǎn páng hé tā de nà zhǒng fēn wéi jiù xiǎn dé fēi cháng bì yào. zhēn shì tè bié de cún zài. tīng shuō tā shēng bìng de shí hou, yě qīn zì zuò le Criterion lán guāng cǎi fǎng. tú bìng zhōng shí.",
+      "key_vocabulary": [
+        {
+          "source_text": "特定世代",
+          "target_text": "특정 세대",
+          "pinyin": "tè dìng shì dài"
+        },
+        {
+          "source_text": "特别的存在",
+          "target_text": "특별한 존재",
+          "pinyin": "tè bié de cún zài"
+        },
+        {
+          "source_text": "투병 중",
+          "target_text": "투병 중",
+          "pinyin": "tóu bìng zhōng"
+        }
+      ],
+      "grammar_points": [
+        {
+          "chinese_explanation": "表示听说的内容",
+          "korean_pattern": "~다고 들었어요"
+        }
+      ],
+      "interpreting_hints": [
+        "화자의 공감과 다음 질문으로 넘어가는 연결을 부드럽게 처리해야 합니다."
+      ],
+      "common_interpretation_challenges": [
+        "인물에 대한 존경심을 담은 어조 유지",
+        "질문의 핵심을 놓치지 않고 명확하게 전달"
+      ],
+      "suggested_note_taking_points": [
+        "변 선생님 얼굴",
+        "분위기 필요",
+        "특별 존재",
+        "크라이테리온 블루레이",
+        "투병 중 인터뷰"
+      ],
+      "alternative_interpretations": [
+        "主持人(女性): 嗯，是的。我想描绘某个特定时代的人时，边老师的面孔和那种气质是必不可少的。他真是个特别的存在。听说他生病期间，也亲自接受了Criterion蓝光采访。"
+      ],
+      "recommended_delivery_tone": "공감하며 차분하게 질문하는 어조",
+      "cultural_context": "질문자가 인터뷰 대상자의 의견에 공감하며 다음 주제로 자연스럽게 전환하는 방식입니다.",
+      "difficulty_analysis": "평이한 대화체로 구성되어 있으나, 특정 고유명사(Criterion)가 포함되어 있습니다.",
+      "audio_timing": {
+        "start_time_sec": 120.86999999999999,
+        "end_time_sec": 134.755,
+        "duration_sec": 13.885
+      },
+      "source_info": {
+        "source_file": "Mickey17interview_15개.json",
+        "original_id": 13,
+        "language_pair": "ko-KR -> zh-CN"
+      }
+    },
+    {
+      "id": 34,
+      "original_text": "네, 그때 항암치료 때문에 삭발하신 상태였는데 그 모습 그대로 인터뷰를 진행했죠. 어쩌면 그게 선생님 생존 마지막 영상 기록일 수도 있겠다는 생각이 들어서 더 정성껏 하려고 했던 기억이 납니다.",
+      "char_count": 149,
+      "difficulty_level": "intermediate",
+      "target_interpretation": "奉俊昊导演: 是的，那时他因为化疗头发都剃光了，但他就以那样的面貌进行了采访。当时我想，那或许会是老师生前最后的影像记录，所以就更用心地去做了，这段记忆至今仍很清晰。",
+      "pinyin_for_segment": "fèng jùn hào dǎo yǎn: shì de, nà shí tā yīn wéi huà liáo tóu fa dōu tì guāng le, dàn tā jiù yǐ nà yàng de miàn mào jìn xíng le cǎi fǎng. dāng shí wǒ xiǎng, nà huò xǔ huì shì lǎo shī shēng qián zuì hòu de yǐng xiàng jì lù, suǒ yǐ jiù gèng yòng xīn de qù zuò le, zhè duàn jì yì zhì jīn réng hěn qīng xī.",
+      "key_vocabulary": [
+        {
+          "source_text": "抗癌治疗",
+          "target_text": "항암치료",
+          "pinyin": "kàng ái zhì liáo"
+        },
+        {
+          "source_text": "剃发",
+          "target_text": "삭발",
+          "pinyin": "tì fà"
+        },
+        {
+          "source_text": "影像记录",
+          "target_text": "영상 기록",
+          "pinyin": "yǐng xiàng jì lù"
+        }
+      ],
+      "grammar_points": [
+        {
+          "chinese_explanation": "表示原因或理由",
+          "korean_pattern": "~때문에"
+        },
+        {
+          "chinese_explanation": "表示思考或猜测",
+          "korean_pattern": "~겠다는 생각이 들어서"
+        }
+      ],
+      "interpreting_hints": [
+        "감독의 감정선을 살려 존경과 안타까움을 전달합니다.",
+        "문장이 길어질 경우 의미 단위로 끊어 전달하는 것이 효과적입니다."
+      ],
+      "common_interpretation_challenges": [
+        "인물의 감정 상태를 적절하게 전달",
+        "문장 구조가 길어질 때의 정보 유지"
+      ],
+      "suggested_note_taking_points": [
+        "항암치료",
+        "삭발 상태",
+        "인터뷰 진행",
+        "마지막 영상 기록",
+        "정성껏"
+      ],
+      "alternative_interpretations": [
+        " 奉俊昊导演: 对，那时他因为化疗而剃了光头，但他就是以那样的形象接受了采访。当时我觉得，那也许是老师生前的最后影像记录了，所以就更用心去做了，记忆犹新。"
+      ],
+      "recommended_delivery_tone": "경건하고 진심을 담은 어조",
+      "cultural_context": "병중인 스승에 대한 제자의 존경과 애틋함을 보여주는 대화입니다.",
+      "difficulty_analysis": "비교적 긴 문장이 포함되어 있으며, 감정적인 요소가 두드러집니다.",
+      "audio_timing": {
+        "start_time_sec": 134.825,
+        "end_time_sec": 147.757,
+        "duration_sec": 12.932
+      },
+      "source_info": {
+        "source_file": "Mickey17interview_15개.json",
+        "original_id": 14,
+        "language_pair": "ko-KR -> zh-CN"
+      }
+    },
+    {
+      "id": 35,
+      "original_text": "오스카 트로피 들고 병문안 가셨던 이야기도 참 뭉클하더라고요.",
+      "char_count": 55,
+      "difficulty_level": "easy",
+      "target_interpretation": "主持人(女性): 听说您拿着奥斯卡奖杯去探望他的故事也真令人感动。",
+      "pinyin_for_segment": "zhǔ chí rén (nǚ xìng): tīng shuō nín ná zhe ào sī kǎ jiǎng bēi qù tàn wàng tā de gù shì yě zhēn lìng rén gǎn dòng.",
+      "key_vocabulary": [
+        {
+          "source_text": "奥斯卡奖杯",
+          "target_text": "오스카 트로피",
+          "pinyin": "ào sī kǎ jiǎng bēi"
+        },
+        {
+          "source_text": "探望",
+          "target_text": "병문안 가다",
+          "pinyin": "tàn wàng"
+        },
+        {
+          "source_text": "令人感动",
+          "target_text": "뭉클하다",
+          "pinyin": "lìng rén gǎn dòng"
+        }
+      ],
+      "grammar_points": [
+        {
+          "chinese_explanation": "表示听到某事",
+          "korean_pattern": "~다고 들었어요"
+        }
+      ],
+      "interpreting_hints": [
+        "짧고 간결하게 질문의 핵심을 전달합니다."
+      ],
+      "common_interpretation_challenges": [
+        "감정을 함축적으로 전달하는 표현 선택"
+      ],
+      "suggested_note_taking_points": [
+        "오스카 트로피",
+        "병문안",
+        "뭉클"
+      ],
+      "alternative_interpretations": [
+        " 主持人(女性): 您拿着奥斯卡奖杯去探病的故事也着实让人感动。"
+      ],
+      "recommended_delivery_tone": "감동을 표현하는 어조",
+      "cultural_context": "큰 성과를 개인적인 존경심을 표현하는 데 사용한 미담을 언급합니다.",
+      "difficulty_analysis": "간결하고 명확한 문장으로 이루어져 있습니다.",
+      "audio_timing": {
+        "start_time_sec": 147.827,
+        "end_time_sec": 152.482,
+        "duration_sec": 4.655
+      },
+      "source_info": {
+        "source_file": "Mickey17interview_15개.json",
+        "original_id": 15,
+        "language_pair": "ko-KR -> zh-CN"
+      }
+    },
+    {
+      "id": 36,
+      "original_text": " 네, 그 상 받고 나서 제일 먼저 선생님께 보여드리고 싶었어요. 그래서 트로피 들고 찾아 뵀죠. 같이 사진도 찍고 아이처럼 좋아하시던 모습이 아직도 선합니다.",
+      "char_count": 108,
+      "difficulty_level": "intermediate",
+      "target_interpretation": "奉俊昊导演: 是的，拿到那个奖之后，我最想先给老师看。所以就拿着奖杯去拜访了他。一起拍了照，他像孩子一样开心的样子至今仍历历在目。",
+      "pinyin_for_segment": "fèng jùn hào dǎo yǎn: shì de, ná dào nà gè jiǎng zhī hòu, wǒ zuì xiǎng xiān gěi lǎo shī kàn. suǒ yǐ jiù ná zhe jiǎng bēi qù bài fǎng le tā. yī qǐ pāi le zhào, tā xiàng hái zi yī yàng kāi xīn de yàng zi zhì jīn réng lì lì zài mù.",
+      "key_vocabulary": [
+        {
+          "source_text": "奖杯",
+          "target_text": "트로피",
+          "pinyin": "jiǎng bēi"
+        },
+        {
+          "source_text": "拜访",
+          "target_text": "찾아 뵙다",
+          "pinyin": "bài fǎng"
+        },
+        {
+          "source_text": "历历在目",
+          "target_text": "아직도 선합니다",
+          "pinyin": "lì lì zài mù"
+        }
+      ],
+      "grammar_points": [
+        {
+          "chinese_explanation": "表示动作的先后顺序",
+          "korean_pattern": "~고 나서"
+        },
+        {
+          "chinese_explanation": "表示状态的持续",
+          "korean_pattern": "아직도 ~"
+        }
+      ],
+      "interpreting_hints": [
+        "감독의 뿌듯함과 감동을 전달하는 어조를 유지합니다."
+      ],
+      "common_interpretation_challenges": [
+        "감정적인 서술을 자연스럽게 전달",
+        "문장의 흐름을 끊김 없이 이어가기"
+      ],
+      "suggested_note_taking_points": [
+        "상 받고",
+        "제일 먼저 선생님",
+        "트로피 들고",
+        "사진 찍고",
+        "아이처럼 좋아",
+        "아직도 선해"
+      ],
+      "alternative_interpretations": [
+        " 奉俊昊导演: 是的，拿到那个奖后，我最想第一个给老师看。所以我就拿着奖杯去拜访了他。我们还一起拍了照片，他像孩子一样高兴的样子至今仍清晰可见。"
+      ],
+      "recommended_delivery_tone": "감동과 추억을 이야기하는 어조",
+      "cultural_context": "스승과 제자 간의 깊은 유대감과 존경심을 보여주는 일화입니다.",
+      "difficulty_analysis": "비교적 평이한 문장으로 구성되어 있으나, 따뜻한 감정이 내포되어 있습니다.",
+      "audio_timing": {
+        "start_time_sec": 152.552,
+        "end_time_sec": 164.517,
+        "duration_sec": 11.965
+      },
+      "source_info": {
+        "source_file": "Mickey17interview_15개.json",
+        "original_id": 16,
+        "language_pair": "ko-KR -> zh-CN"
+      }
+    },
+    {
+      "id": 37,
+      "original_text": "네, 정말 두 분의 유대감이 느껴지는 이야기네요. 자, 이제 '미키 17' 이야기로 좀 더 들어가 볼까요? 이번 영화는 전작들과 다르게 혈연관계가 거의 안 나온다는 점이 좀 눈에 띄어요. 그게 좀 의도적인 선택이었는데요. 원작 소설을 읽었을 때 주인공 미키랑 나시의 그 사랑 이야기가 굉장히 강렬하게 다가왔어요. 특히 그 가스실 장면 같은 부분들이요.",
+      "char_count": 218,
+      "difficulty_level": "intermediate",
+      "target_interpretation": "主持人(女性): 是的，这真是能感受到两位深厚情谊的故事。那么，我们现在深入聊聊《米奇17》吧？这部电影和之前的作品不同，几乎没有血缘关系出现，这一点很引人注目。这有点像是有意的选择呢。我读原著小说的时候，主人公米奇和纳西的爱情故事给我留下了非常深刻的印象。特别是像毒气室场景那样的部分。",
+      "pinyin_for_segment": "zhǔ chí rén (nǚ xìng): shì de, zhè zhēn shì néng gǎn shòu dào liǎng wèi shēn hòu qíng yì de gù shì. nà me, wǒ men xiàn zài shēn rù liáo liáo 《mǐ qí 17》 ba? zhè bù diàn yǐng hé zhī qián de zuò pǐn bù tóng, jī hū méi yǒu xuè yuán guān xì chū xiàn, zhè yī diǎn hěn yǐn rén zhù mù. zhè yǒu diǎn xiàng shì yǒu yì de xuǎn zé ne. wǒ dú yuán zhù xiǎo shuō de shí hou, zhǔ rén gōng mǐ qí hé nà xī de ài qíng gù shì gěi wǒ liú xià le fēi cháng shēn kè de yìn xiàng. tè bié shì xiàng dú qì shì chǎng jǐng nà yàng de bù fen.",
+      "key_vocabulary": [
+        {
+          "source_text": "유대감",
+          "target_text": "유대감",
+          "pinyin": "yóu dài gǎn"
+        },
+        {
+          "source_text": "血缘关系",
+          "target_text": "혈연관계",
+          "pinyin": "xuè yuán guān xì"
+        },
+        {
+          "source_text": "引人注目",
+          "target_text": "눈에 띄다",
+          "pinyin": "yǐn rén zhù mù"
+        },
+        {
+          "source_text": "爱情故事",
+          "target_text": "사랑 이야기",
+          "pinyin": "ài qíng gù shì"
+        },
+        {
+          "source_text": "毒气室",
+          "target_text": "가스실",
+          "pinyin": "dú qì shì"
+        }
+      ],
+      "grammar_points": [
+        {
+          "chinese_explanation": "表示原因或意图",
+          "korean_pattern": "~해서"
+        },
+        {
+          "chinese_explanation": "表示强调特点",
+          "korean_pattern": "~다는 점이"
+        }
+      ],
+      "interpreting_hints": [
+        "주제를 전환하며 새로운 질문을 던지는 부분을 명확히 구분합니다.",
+        "영화 '미키 17'의 제목을 정확히 전달합니다."
+      ],
+      "common_interpretation_challenges": [
+        "길고 복합적인 질문을 간결하게 요약하여 전달",
+        "원작 소설의 특정 장면 언급 시 정확한 정보 전달"
+      ],
+      "suggested_note_taking_points": [
+        "유대감",
+        "미키 17",
+        "전작과 다르게",
+        "혈연관계 X",
+        "의도적 선택",
+        "원작 소설",
+        "미키-나시 사랑",
+        "강렬",
+        "가스실 장면"
+      ],
+      "alternative_interpretations": [
+        " 主持人(女性): 两位的情谊真是令人感动。那么，我们现在深入探讨一下《米奇17》吧？这部电影与您之前的作品不同，几乎没有血缘关系出现，这点非常引人关注。这是否是有意的选择呢？当我读原著小说时，主人公米奇和纳西的爱情故事给我留下了非常深刻的印象。特别是毒气室的场景。"
+      ],
+      "recommended_delivery_tone": "질문을 던지며 적극적으로 대화를 이어나가는 어조",
+      "cultural_context": "영화감독 인터뷰에서 작품의 특징과 배경에 대해 질문하는 일반적인 대화 흐름입니다.",
+      "difficulty_analysis": "비교적 긴 문장과 구체적인 작품 내용 언급이 포함되어 있습니다.",
+      "audio_timing": {
+        "start_time_sec": 164.587,
+        "end_time_sec": 190.968,
+        "duration_sec": 26.381
+      },
+      "source_info": {
+        "source_file": "Mickey17interview_15개.json",
+        "original_id": 17,
+        "language_pair": "ko-KR -> zh-CN"
+      }
+    },
+    {
+      "id": 38,
+      "original_text": " 네, 그래서 그 둘의 관계에 최대한 집중하고 싶었습니다. 그러다 보니 자연스럽게 가족 서사는 좀 덜어내게 됐죠. 우주선이라는 폐쇄된 공간 안에서 임신과 출산이 가능한 젊은 남녀들 위주로 이야기를 끌고 가고 싶었어요. 부모 세대는 이제 토니 콜레트랑 마크 러팔로가 연기한 그 독재자 부부 정도로만 남겨 두고요. 어떻게 보면 처음으로 남녀 주인공의 사랑에만 집중해 본 작업인 셈이죠.",
+      "char_count": 223,
+      "difficulty_level": "advanced",
+      "target_interpretation": "奉俊昊导演: 是的，所以我想最大限度地集中于他们两人的关系。因此很自然地就减少了家庭叙事的部分。我想将故事主要围绕在宇宙飞船这个封闭空间内，那些能够怀孕和生育的年轻男女们。而父母辈的角色就只剩下托妮·科莱特和马克·鲁法洛饰演的那对独裁者夫妇了。从某种意义上说，这也可以看作是我第一次只专注于男女主人公爱情的创作。",
+      "pinyin_for_segment": "fèng jùn hào dǎo yǎn: shì de, suǒ yǐ wǒ xiǎng zuì dà xiàn dù de jí zhōng yú tā men liǎng rén de guān xì. yīn cǐ hěn zì rán de jiù jiǎn shǎo le jiā tíng xù shì de bù fen. wǒ xiǎng jiāng gù shì zhǔ yào wéi ráo zài yǔ zhòu fēi chuán zhè gè fēng bì kōng jiān nèi, nà xiē néng gòu huái yùn hé shēng yù de nián qīng nán nǚ men. ér fù mǔ bèi de jiǎo sè jiù zhī shèng xià tuō nī·kē lái tè hé mǎ kè·lǔ fǎ luò shì yǎn de nà duì dú cái zhě fū fù le. cóng mǒu zhǒng yì yì shàng shuō, zhè yě kě yǐ kàn zuò shì wǒ dì yī cì zhǐ zhuān zhù yú nán nǚ zhǔ rén gōng ài qíng de chuàng zuò.",
+      "key_vocabulary": [
+        {
+          "source_text": "最大限度地集中",
+          "target_text": "최대한 집중하다",
+          "pinyin": "zuì dà xiàn dù de jí zhōng"
+        },
+        {
+          "source_text": "家庭叙事",
+          "target_text": "가족 서사",
+          "pinyin": "jiā tíng xù shì"
+        },
+        {
+          "source_text": "封闭空间",
+          "target_text": "폐쇄된 공간",
+          "pinyin": "fēng bì kōng jiān"
+        },
+        {
+          "source_text": "独裁者夫妇",
+          "target_text": "독재자 부부",
+          "pinyin": "dú cái zhě fū fù"
+        }
+      ],
+      "grammar_points": [
+        {
+          "chinese_explanation": "表示结果的自然发生",
+          "korean_pattern": "그러다 보니"
+        },
+        {
+          "chinese_explanation": "表示某种意义上的总结",
+          "korean_pattern": "~인 셈이죠"
+        }
+      ],
+      "interpreting_hints": [
+        "감독의 의도와 작품의 핵심 아이디어를 명확하게 전달해야 합니다.",
+        "영화 제작자의 의도를 설명하는 부분이므로 전문적인 어휘를 사용합니다."
+      ],
+      "common_interpretation_challenges": [
+        "복잡한 문장 구조와 추상적인 개념의 명확한 번역",
+        "감독의 의도를 정확하게 전달하며 동시에 자연스러운 표현 유지"
+      ],
+      "suggested_note_taking_points": [
+        "둘 관계 집중",
+        "가족 서사 덜어냄",
+        "우주선 폐쇄 공간",
+        "젊은 남녀 위주",
+        "부모 세대",
+        "독재자 부부",
+        "사랑만 집중"
+      ],
+      "alternative_interpretations": [
+        " 奉俊昊导演: 是的，所以我希望能最大限度地专注于他们两人的关系。这样一来，很自然地就减少了家庭叙事的部分。我希望故事主要集中在宇宙飞船这个封闭空间内，那些能够怀孕和生产的年轻男女们身上。至于父母辈，就只留下托妮·科莱特和马克·鲁法洛饰演的独裁者夫妇了。从某种程度上看，这也可以说是我第一次完全专注于男女主人公的爱情创作。"
+      ],
+      "recommended_delivery_tone": "차분하고 논리적으로 설명하는 어조",
+      "cultural_context": "감독이 자신의 작품 의도와 제작 방향을 설명하는 전형적인 인터뷰 방식입니다.",
+      "difficulty_analysis": "긴 문장과 함께 구체적인 영화 설정 및 제작 의도가 포함되어 있어 난이도가 높습니다.",
+      "audio_timing": {
+        "start_time_sec": 191.03799999999998,
+        "end_time_sec": 216.53,
+        "duration_sec": 25.492
+      },
+      "source_info": {
+        "source_file": "Mickey17interview_15개.json",
+        "original_id": 18,
+        "language_pair": "ko-KR -> zh-CN"
+      }
+    }
+  ]
+}
