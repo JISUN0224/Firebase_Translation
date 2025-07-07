@@ -22,3 +22,16 @@ dist-ssr
 *.njsproj
 *.sln
 .env
+
+# YouTube 변환 도구 관련 파일들
+output/
+ffmpeg/
+*.mp3
+*.srt
+*.vtt
+*.tsv
+audio_*.txt
+audio_*.json
+install_ffmpeg.py
+ffmpeg.zip
+temp_ffmpeg/

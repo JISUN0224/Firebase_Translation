@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { collection, getDocs } from 'firebase/firestore';
 import { getStorage, ref, getDownloadURL } from 'firebase/storage';
 import { db } from '../../firebase';
@@ -90,6 +91,9 @@ interface InterpretationAnalysis {
 }
 
 const StepByStepInterpretation: React.FC = () => {
+  // 라우터 네비게이션
+  const navigate = useNavigate();
+  
   // 단계 관리
   const [currentStep, setCurrentStep] = useState(1);
   
@@ -193,7 +197,7 @@ const StepByStepInterpretation: React.FC = () => {
         setRecordingTime(0);
       }
     }
-  }, [filters.category, filters.difficulty, selectedProblem]);
+  }, [filters.category, filters.difficulty]); // selectedProblem 제거
 
 
 
@@ -340,30 +344,33 @@ const StepByStepInterpretation: React.FC = () => {
     loadAudioFile(problem);
     
     // 음성 인식 언어 설정 (통역 결과 언어로 설정)
-    // 새로운 구조에서는 첫 번째 세그먼트의 source_info에서 언어 쌍 정보를 가져옴
+    // 첫 번째 세그먼트의 필드를 확인하여 언어쌍 판단
     const firstSegment = problem.segments[0];
-    const languagePair = firstSegment?.source_info?.language_pair;
     
-    if (languagePair) {
+    if (firstSegment) {
       let targetLanguage: 'ko' | 'zh' = 'ko'; // 기본값
       
-      if (languagePair.includes('->')) {
-        // "ko-KR -> zh-CN" 형태
-        const parts = languagePair.split('->');
-        if (parts.length === 2) {
-          const target = parts[1].trim();
-          targetLanguage = target.startsWith('zh') ? 'zh' : 'ko';
-        }
-      } else if (languagePair.includes('-') && !languagePair.includes('->')) {
-        // "ko-zh" 형태
-        const parts = languagePair.split('-');
-        if (parts.length === 2) {
-          const secondPart = parts[1];
-          targetLanguage = secondPart.startsWith('zh') ? 'zh' : 'ko';
+      // 어떤 필드가 있는지 확인하여 언어쌍 판단
+      if (firstSegment.chinese_text && !firstSegment.original_text) {
+        // 중국어 원문 → 한국어 통역
+        targetLanguage = 'ko';
+      } else if (firstSegment.original_text && !firstSegment.chinese_text) {
+        // 한국어 원문 → 중국어 통역  
+        targetLanguage = 'zh';
+      } else {
+        // source_info의 language_pair로 판단 (fallback)
+        const languagePair = firstSegment?.source_info?.language_pair;
+        if (languagePair && languagePair.includes('->')) {
+          const parts = languagePair.split('->');
+          if (parts.length === 2) {
+            const target = parts[1].trim();
+            targetLanguage = target.startsWith('zh') ? 'zh' : 'ko';
+          }
         }
       }
       
       setSourceLanguage(targetLanguage);
+      console.log(`언어쌍 설정: ${firstSegment.chinese_text ? '중국어' : '한국어'} → ${targetLanguage === 'zh' ? '중국어' : '한국어'}, 음성 인식: ${targetLanguage === 'zh' ? '중국어' : '한국어'}`);
     }
     
     console.log(`문제 선택: ${problem.title} (${problem.segments?.length || 0}개 세그먼트)`);
@@ -474,7 +481,15 @@ const StepByStepInterpretation: React.FC = () => {
   // 녹음 시작
   const startRecording = async () => {
     try {
+      console.log('녹음 시작 시도...');
+      
+      if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+        alert('이 브라우저는 미디어 녹음을 지원하지 않습니다.');
+        return;
+      }
+
       if (!streamRef.current) {
+        console.log('마이크 접근 권한 요청 중...');
         const stream = await navigator.mediaDevices.getUserMedia({
           audio: {
             echoCancellation: true,
@@ -483,6 +498,7 @@ const StepByStepInterpretation: React.FC = () => {
           }
         });
         streamRef.current = stream;
+        console.log('마이크 접근 성공');
       }
 
       const mediaRecorder = new MediaRecorder(streamRef.current);
@@ -498,12 +514,14 @@ const StepByStepInterpretation: React.FC = () => {
       mediaRecorder.onstop = () => {
         const blob = new Blob(chunks, { type: 'audio/wav' });
         setAudioBlob(blob);
+        console.log('녹음 완료, 파일 크기:', blob.size);
       };
 
       mediaRecorder.start();
       setIsRecording(true);
       isRecordingRef.current = true;
       setRecordingTime(0);
+      console.log('MediaRecorder 시작됨');
 
       // 타이머 시작
       intervalRef.current = setInterval(() => {
@@ -513,8 +531,16 @@ const StepByStepInterpretation: React.FC = () => {
       // 음성 인식 시작
       startSpeechRecognition();
 
-    } catch (error) {
+    } catch (error: any) {
       console.error('녹음 시작 실패:', error);
+      
+      if (error.name === 'NotAllowedError') {
+        alert('마이크 접근 권한이 거부되었습니다. 브라우저 설정에서 마이크 권한을 허용해주세요.');
+      } else if (error.name === 'NotFoundError') {
+        alert('마이크를 찾을 수 없습니다. 마이크가 연결되어 있는지 확인해주세요.');
+      } else {
+        alert(`녹음 오류: ${error.message || error}`);
+      }
     }
   };
 
@@ -539,15 +565,28 @@ const StepByStepInterpretation: React.FC = () => {
 
   // 음성 인식 시작
   const startSpeechRecognition = () => {
+    console.log('음성 인식 시작 시도...');
+    
     const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
-    if (!SpeechRecognition) return;
+    if (!SpeechRecognition) {
+      console.error('이 브라우저는 음성 인식을 지원하지 않습니다.');
+      alert('이 브라우저는 음성 인식을 지원하지 않습니다. Chrome 브라우저를 사용해주세요.');
+      return;
+    }
+
+    console.log(`음성 인식 언어 설정: ${sourceLanguage === 'ko' ? 'ko-KR' : 'zh-CN'}`);
 
     const recognition = new SpeechRecognition();
     recognition.continuous = true;
     recognition.interimResults = true;
     recognition.lang = sourceLanguage === 'ko' ? 'ko-KR' : 'zh-CN';
 
+    recognition.onstart = () => {
+      console.log('음성 인식이 시작되었습니다.');
+    };
+
     recognition.onresult = (event: any) => {
+      console.log('음성 인식 결과 수신:', event);
       let finalTranscript = '';
       let interimTranscript = '';
 
@@ -559,14 +598,32 @@ const StepByStepInterpretation: React.FC = () => {
         }
       }
 
+      console.log('최종 텍스트:', finalTranscript, '임시 텍스트:', interimTranscript);
+
       if (finalTranscript) {
         setAccumulatedText(prev => prev + finalTranscript + ' ');
       }
       setCurrentText(interimTranscript);
     };
 
+    recognition.onerror = (event: any) => {
+      console.error('음성 인식 오류:', event.error);
+      
+      if (event.error === 'not-allowed') {
+        alert('마이크 접근 권한이 필요합니다. 브라우저 설정에서 마이크 권한을 허용해주세요.');
+      } else if (event.error === 'no-speech') {
+        console.log('음성이 감지되지 않았습니다.');
+      } else if (event.error === 'network') {
+        alert('네트워크 오류가 발생했습니다. 인터넷 연결을 확인해주세요.');
+      } else {
+        alert(`음성 인식 오류: ${event.error}`);
+      }
+    };
+
     recognition.onend = () => {
+      console.log('음성 인식이 종료되었습니다.');
       if (isRecordingRef.current) {
+        console.log('녹음 중이므로 음성 인식을 재시작합니다.');
         setTimeout(() => {
           if (isRecordingRef.current) {
             try {
@@ -579,8 +636,14 @@ const StepByStepInterpretation: React.FC = () => {
       }
     };
 
-    recognition.start();
-    recognitionRef.current = recognition;
+    try {
+      recognition.start();
+      recognitionRef.current = recognition;
+      console.log('음성 인식 시작 성공');
+    } catch (error) {
+      console.error('음성 인식 시작 실패:', error);
+      alert('음성 인식을 시작할 수 없습니다.');
+    }
   };
 
   // AI 분석 실행
@@ -1094,6 +1157,17 @@ const StepByStepInterpretation: React.FC = () => {
     }}>
       <div className="max-w-6xl mx-auto">
         
+        {/* 홈으로 버튼 */}
+        <div className="mb-6">
+          <button
+            onClick={() => navigate('/')}
+            className="flex items-center gap-2 px-4 py-2 text-gray-600 hover:text-blue-600 hover:bg-white hover:shadow-md rounded-lg transition-all bg-white/80 backdrop-blur-sm"
+          >
+            <span className="text-lg">🏠</span>
+            <span>홈으로</span>
+          </button>
+        </div>
+
         {/* 헤더 */}
         <Header />
         
