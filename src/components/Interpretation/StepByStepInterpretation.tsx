@@ -1,8 +1,9 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { collection, getDocs } from 'firebase/firestore';
 import { getStorage, ref, getDownloadURL } from 'firebase/storage';
-import { db } from '../../firebase';
+import { db, auth } from '../../firebase';
+import { saveStudySession } from '../Tran_Analysis/studyDataUtils';
 import axios from 'axios';
 
 // 인터페이스 정의 - 통합된 JSON 구조에 맞게 업데이트
@@ -106,14 +107,14 @@ const StepByStepInterpretation: React.FC = () => {
   const [currentAudioUrl, setCurrentAudioUrl] = useState<string | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [audioLoading, setAudioLoading] = useState(false);
-  const [isAudioPlaying, setIsAudioPlaying] = useState(false);
-  const [audioDuration, setAudioDuration] = useState(0);
-  const [audioCurrentTime, setAudioCurrentTime] = useState(0);
+  const [_isAudioPlaying, setIsAudioPlaying] = useState(false);
+  const [_audioDuration, setAudioDuration] = useState(0);
+  const [_audioCurrentTime, setAudioCurrentTime] = useState(0);
   
   // 녹음 관리
   const [isRecording, setIsRecording] = useState(false);
   const [recordingTime, setRecordingTime] = useState(0);
-  const [audioBlob, setAudioBlob] = useState<Blob | null>(null);
+  const [_audioBlob, setAudioBlob] = useState<Blob | null>(null);
   const [accumulatedText, setAccumulatedText] = useState('');
   const [currentText, setCurrentText] = useState('');
   
@@ -130,6 +131,11 @@ const StepByStepInterpretation: React.FC = () => {
   const [showOriginalText, setShowOriginalText] = useState(false);
   const [showLearningMaterials, setShowLearningMaterials] = useState(false);
   const [sourceLanguage, setSourceLanguage] = useState<'ko' | 'zh'>('ko');
+  
+  // 세션 관리
+  const [sessionStartTime, setSessionStartTime] = useState<number>(Date.now());
+  const [completedSegments, setCompletedSegments] = useState<number[]>([]);
+  const [totalScore, setTotalScore] = useState(0);
   
   // 필터 및 에러 관리 (AIFeedback.tsx와 동일)
   const [loading, setLoading] = useState(false);
@@ -221,7 +227,7 @@ const StepByStepInterpretation: React.FC = () => {
         if (data.segments && Array.isArray(data.segments)) {
           // 기존 필드들을 그대로 사용하고 없는 경우 기본값 설정
           const problem: Problem = {
-            id: doc.id,
+          id: doc.id, 
             title: data.title || '통역 연습',
             category: data.category || '통역 연습', 
             author: data.author || '미상',
@@ -340,6 +346,11 @@ const StepByStepInterpretation: React.FC = () => {
     setRecordingTime(0);
     setCurrentStep(1); // 문제 선택 시 1단계로 리셋
     
+    // 세션 초기화
+    setSessionStartTime(Date.now());
+    setCompletedSegments([]);
+    setTotalScore(0);
+    
     // 선택된 문제의 음성 파일 로드
     loadAudioFile(problem);
     
@@ -361,11 +372,11 @@ const StepByStepInterpretation: React.FC = () => {
         // source_info의 language_pair로 판단 (fallback)
         const languagePair = firstSegment?.source_info?.language_pair;
         if (languagePair && languagePair.includes('->')) {
-          const parts = languagePair.split('->');
-          if (parts.length === 2) {
-            const target = parts[1].trim();
-            targetLanguage = target.startsWith('zh') ? 'zh' : 'ko';
-          }
+        const parts = languagePair.split('->');
+        if (parts.length === 2) {
+          const target = parts[1].trim();
+          targetLanguage = target.startsWith('zh') ? 'zh' : 'ko';
+        }
         }
       }
       
@@ -386,7 +397,7 @@ const StepByStepInterpretation: React.FC = () => {
     }
   };
 
-      const getDifficultyBadge = (difficulty: string) => {
+  const getDifficultyBadge = (difficulty: string) => {
      switch(difficulty.toLowerCase()) {
        case 'beginner':
        case '초급':
@@ -399,8 +410,8 @@ const StepByStepInterpretation: React.FC = () => {
          return 'bg-red-500 text-white';
        default:
          return 'bg-gray-500 text-white';
-     }
-    };
+    }
+  };
 
   // 단계 이동 함수
   const goToStep = (step: number) => {
@@ -637,8 +648,8 @@ const StepByStepInterpretation: React.FC = () => {
     };
 
     try {
-      recognition.start();
-      recognitionRef.current = recognition;
+    recognition.start();
+    recognitionRef.current = recognition;
       console.log('음성 인식 시작 성공');
     } catch (error) {
       console.error('음성 인식 시작 실패:', error);
@@ -679,7 +690,7 @@ const StepByStepInterpretation: React.FC = () => {
         // 기본값 (한국어 → 중국어)
         return { source: 'ko', target: 'zh', sourceText: segment.original_text || '' };
       };
-
+      
       if (selectedSegmentIndex === -1) {
         // 전체 세그먼트 모드: 모든 세그먼트의 원문 통합
         const firstSegment = selectedProblem.segments[0];
@@ -747,6 +758,14 @@ const StepByStepInterpretation: React.FC = () => {
         processing_time: 2.5
       });
 
+      // 점수 업데이트 및 완료된 세그먼트 추가
+      const currentScore = analysis.overall_score || 0;
+      setTotalScore(prev => prev + currentScore);
+      
+      if (selectedSegmentIndex >= 0) {
+        setCompletedSegments(prev => [...prev, selectedSegmentIndex]);
+      }
+
     } catch (error: any) {
       console.error('분석 오류:', error);
       setAnalysisError('분석 중 오류가 발생했습니다. 다시 시도해주세요.');
@@ -811,6 +830,46 @@ const StepByStepInterpretation: React.FC = () => {
       speechSynthesis.cancel();
       setIsTTSPlaying(false);
       setCurrentTTSText(null);
+    }
+  };
+
+  // 세션 저장 함수
+  const saveInterpretationSession = async () => {
+    if (!auth.currentUser || !selectedProblem || completedSegments.length === 0) {
+      return;
+    }
+
+    try {
+      const studyTime = Math.floor((Date.now() - sessionStartTime) / 1000);
+      const averageScore = totalScore / completedSegments.length;
+      
+      const sessionData = {
+        date: new Date().toISOString().split('T')[0],
+        gameType: '단계별_통역',
+        totalScore: totalScore,
+        problemCount: completedSegments.length,
+        studyTime: studyTime,
+        averageScore: averageScore,
+        metadata: {
+          difficulty: selectedProblem.difficulty,
+          domain: selectedProblem.category,
+          targetLanguage: sourceLanguage === 'ko' ? '한국어' : '중국어',
+          problemTitle: selectedProblem.title,
+          totalSegments: selectedProblem.segments.length,
+          completedSegments: completedSegments.length,
+          completionRate: (completedSegments.length / selectedProblem.segments.length) * 100
+        }
+      };
+
+      await saveStudySession(sessionData);
+      console.log('단계별 통역 세션 저장 완료:', sessionData);
+      
+      // 성공 알림
+      alert('🎉 학습 데이터가 저장되었습니다! 대시보드에서 확인할 수 있습니다.');
+      
+    } catch (error) {
+      console.error('세션 저장 실패:', error);
+      alert('❌ 데이터 저장에 실패했습니다. 나중에 다시 시도해주세요.');
     }
   };
 
@@ -1094,7 +1153,7 @@ const StepByStepInterpretation: React.FC = () => {
                 {/* 가로 스크롤 가능한 세그먼트 버튼들 */}
                 <div className="overflow-x-auto py-2">
                   <div className="flex gap-2 min-w-max">
-                    {selectedProblem.segments.map((segment, index) => (
+                    {selectedProblem.segments.map((_segment, index) => (
                       <button
                         key={index}
                         onClick={() => {
@@ -1167,7 +1226,7 @@ const StepByStepInterpretation: React.FC = () => {
             <span>홈으로</span>
           </button>
         </div>
-
+        
         {/* 헤더 */}
         <Header />
         
@@ -1189,7 +1248,7 @@ const StepByStepInterpretation: React.FC = () => {
               ) : (
                 currentSegment && (
                   <p className="text-lg text-gray-600">
-                    세그먼트 {selectedSegmentIndex + 1} / {selectedProblem?.total_segments}
+                    세그먼트 {selectedSegmentIndex + 1} / {selectedProblem?.total_segments} 
                   </p>
                 )
               )}
@@ -1495,6 +1554,28 @@ const StepByStepInterpretation: React.FC = () => {
             {/* 분석 결과 */}
             {analysisResult && (
               <div className="bg-gradient-to-r from-purple-50 to-blue-50 border-2 border-purple-200 rounded-2xl p-8">
+                {/* 진행 상황 표시 */}
+                <div className="bg-white rounded-xl p-4 mb-6 border border-purple-200">
+                  <div className="flex items-center justify-between text-sm">
+                    <div className="flex items-center gap-2">
+                      <span className="text-purple-600 font-semibold">📊 진행 상황:</span>
+                      <span className="text-gray-700">
+                        {completedSegments.length}/{selectedProblem?.segments.length || 0} 세그먼트 완료
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span className="text-purple-600 font-semibold">🎯 총 점수:</span>
+                      <span className="text-gray-700 font-bold">{totalScore.toFixed(1)}점</span>
+                    </div>
+                  </div>
+                  <div className="mt-2 bg-gray-200 rounded-full h-2">
+                    <div 
+                      className="bg-gradient-to-r from-purple-500 to-blue-500 h-2 rounded-full transition-all duration-300"
+                      style={{ width: `${(completedSegments.length / (selectedProblem?.segments.length || 1)) * 100}%` }}
+                    ></div>
+                  </div>
+                </div>
+
                 {/* 점수 표시 */}
                 <div className="text-center mb-8">
                   <div className="w-24 h-24 bg-gradient-to-r from-green-500 to-green-600 rounded-full flex items-center justify-center text-3xl font-bold text-white mx-auto mb-4 shadow-lg">
@@ -2074,7 +2155,8 @@ const StepByStepInterpretation: React.FC = () => {
                           setAnalysisResult(null);
                           setRecordingTime(0);
                         } else {
-                          alert('모든 세그먼트를 완료했습니다! 🎉');
+                          // 모든 세그먼트 완료 시 세션 저장
+                          saveInterpretationSession();
                         }
                       }
                     }}
@@ -2102,6 +2184,16 @@ const StepByStepInterpretation: React.FC = () => {
               >
                 ← 이전: 다시 녹음
               </button>
+              
+              {/* 수동 저장 버튼 - 로그인된 사용자만 표시 */}
+              {auth.currentUser && completedSegments.length > 0 && (
+                <button
+                  onClick={saveInterpretationSession}
+                  className="py-4 px-6 bg-gradient-to-r from-green-500 to-green-600 text-white font-semibold rounded-xl hover:from-green-600 hover:to-green-700 transition-all duration-300 shadow-lg hover:shadow-xl"
+                >
+                  💾 학습 기록 저장
+                </button>
+              )}
             </div>
           </div>
         )}
