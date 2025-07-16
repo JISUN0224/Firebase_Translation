@@ -84,7 +84,7 @@ input, select {
 
 button:hover {
   background: rgba(0,0,0,0.05);
-}
+  }
 
 button:active {
   background: rgba(0,0,0,0.1);
@@ -102,4 +102,24 @@ html, body, #root {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
+  zoom: 1;
+}
+
+/* 주요 콘텐츠 영역은 zoom 1로 덮어쓰기 (공백 없이 꽉 차게) */
+.ppt-area, .subtitle-area, .main-content-area, .video-area, .content-full {
+  zoom: 1 !important;
+}
+
+/* 파도 애니메이션 */
+@keyframes wave {
+  0%, 100% {
+    transform: translateX(-100%);
+  }
+  50% {
+    transform: translateX(100%);
+  }
+}
+
+.text-shadow {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }

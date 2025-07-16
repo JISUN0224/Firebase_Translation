@@ -67,6 +67,12 @@ const VisualInterpretation: React.FC = () => {
   const [completedSegments, setCompletedSegments] = useState<number[]>([]);
   const [totalScore, setTotalScore] = useState(0);
   
+  // 음성 재생 관련 상태
+  const [isPlayingUserAudio, setIsPlayingUserAudio] = useState(false);
+  const [isPlayingModelAudio, setIsPlayingModelAudio] = useState(false);
+  const userAudioRef = useRef<HTMLAudioElement>(null);
+  const modelAudioRef = useRef<HTMLAudioElement>(null);
+  
   // 고정 YouTube URL - 원래 작동했던 영상으로 복원
   const youtubeUrl = 'https://www.youtube.com/watch?v=2sfSd89akeE';
   const youtubeVideoId = '2sfSd89akeE'; // 원본 ID로 다시 시도
@@ -642,6 +648,152 @@ const VisualInterpretation: React.FC = () => {
     }
   };
 
+  // 사용자 녹음 음성 재생/일시정지
+  const toggleUserRecording = () => {
+    if (audioBlob && userAudioRef.current) {
+      if (isPlayingUserAudio) {
+        // 일시정지
+        userAudioRef.current.pause();
+        setIsPlayingUserAudio(false);
+      } else {
+        if (userAudioRef.current.src && !userAudioRef.current.ended) {
+          // 재개
+          userAudioRef.current.play();
+          setIsPlayingUserAudio(true);
+        } else {
+          // 새로 시작 - 실제 녹음된 오디오 재생
+          const audioUrl = URL.createObjectURL(audioBlob);
+          userAudioRef.current.src = audioUrl;
+          userAudioRef.current.play();
+          setIsPlayingUserAudio(true);
+          
+          userAudioRef.current.onended = () => {
+            setIsPlayingUserAudio(false);
+            URL.revokeObjectURL(audioUrl);
+          };
+          
+          userAudioRef.current.onpause = () => {
+            if (!userAudioRef.current?.ended) {
+              setIsPlayingUserAudio(false);
+            }
+          };
+        }
+      }
+    }
+  };
+
+  // 최적의 한국어 음성 선택 함수
+  const getBestKoreanVoice = () => {
+    const voices = speechSynthesis.getVoices();
+    console.log('사용 가능한 음성들:', voices.map(v => ({ name: v.name, lang: v.lang, localService: v.localService })));
+    
+    // 우선순위별로 한국어 음성 찾기
+    const koreanVoicePreferences = [
+      // 구글 음성 (가장 자연스러움)
+      'Google 한국의',
+      'Google Korean',
+      'Google 한국어',
+      // 마이크로소프트 음성
+      'Microsoft Heami - Korean (Korea)',
+      'Microsoft Heami Desktop - Korean (Korea)', 
+      'Microsoft InSun Desktop - Korean (Korea)',
+      'Microsoft 한국어',
+      // 애플 음성 (macOS/iOS)
+      'Yuna',
+      'Siri Female (Korean)',
+      // 기타 한국어 음성
+      'Korean Female',
+      'Korean Male',
+      'ko-KR-Standard-A',
+      'ko-KR-Standard-B',
+      'ko-KR-Wavenet-A',
+      'ko-KR-Wavenet-B'
+    ];
+    
+    // 우선순위에 따라 음성 선택
+    for (const preference of koreanVoicePreferences) {
+      const voice = voices.find(v => 
+        v.name.includes(preference) && 
+        (v.lang.startsWith('ko') || v.lang.includes('KR'))
+      );
+      if (voice) {
+        console.log('선택된 음성:', voice.name, voice.lang);
+        return voice;
+      }
+    }
+    
+    // 대안: 한국어 언어 코드를 가진 모든 음성 중 첫 번째
+    const koreanVoice = voices.find(v => 
+      v.lang.startsWith('ko') || v.lang.includes('KR')
+    );
+    
+    if (koreanVoice) {
+      console.log('대안 음성 선택:', koreanVoice.name, koreanVoice.lang);
+      return koreanVoice;
+    }
+    
+    console.log('한국어 음성을 찾을 수 없어 기본 음성 사용');
+    return null;
+  };
+
+  // TTS로 AI 제안 답안 음성 생성/일시정지
+  const toggleModelInterpretation = () => {
+    if ('speechSynthesis' in window) {
+      if (isPlayingModelAudio) {
+        // 일시정지
+        speechSynthesis.pause();
+        setIsPlayingModelAudio(false);
+      } else {
+        if (speechSynthesis.paused) {
+          // 재개
+          speechSynthesis.resume();
+          setIsPlayingModelAudio(true);
+        } else {
+          // 새로 시작
+          speechSynthesis.cancel();
+          
+          // 음성이 로드될 때까지 대기
+          const initVoices = () => {
+            const utterance = new SpeechSynthesisUtterance(segments[practiceSegmentIndex].translation_suggestion);
+            
+            // 최적의 한국어 음성 선택
+            const bestVoice = getBestKoreanVoice();
+            if (bestVoice) {
+              utterance.voice = bestVoice;
+            }
+            
+            utterance.lang = 'ko-KR'; // 한국어 설정
+            utterance.rate = 0.85; // 조금 더 느리게 (더 자연스럽게)
+            utterance.pitch = 1.0; // 자연스러운 음높이
+            utterance.volume = 0.9; // 볼륨
+            
+            utterance.onstart = () => {
+              console.log('TTS 재생 시작 - 음성:', utterance.voice?.name || '기본');
+              setIsPlayingModelAudio(true);
+            };
+            utterance.onend = () => setIsPlayingModelAudio(false);
+            utterance.onerror = (e) => {
+              console.error('TTS 오류:', e);
+              setIsPlayingModelAudio(false);
+            };
+            
+            speechSynthesis.speak(utterance);
+          };
+          
+          // 음성 목록이 로드되지 않았다면 대기
+          if (speechSynthesis.getVoices().length === 0) {
+            speechSynthesis.onvoiceschanged = () => {
+              initVoices();
+              speechSynthesis.onvoiceschanged = null; // 한 번만 실행
+            };
+          } else {
+            initVoices();
+          }
+        }
+      }
+    }
+  };
+
   // 세션 저장 함수
   const saveVisualInterpretationSession = async () => {
     if (!auth.currentUser || completedSegments.length === 0) {
@@ -682,6 +834,24 @@ const VisualInterpretation: React.FC = () => {
     }
   };
 
+  // TTS 음성 목록 미리 로드
+  useEffect(() => {
+    // 컴포넌트 마운트 시 음성 목록 미리 로드
+    if ('speechSynthesis' in window) {
+      // 음성 목록이 비어있다면 강제로 로드
+      if (speechSynthesis.getVoices().length === 0) {
+        speechSynthesis.onvoiceschanged = () => {
+          console.log('음성 목록 로드 완료:', speechSynthesis.getVoices().length, '개');
+          getBestKoreanVoice(); // 최적 음성 미리 확인
+        };
+        // 강제로 음성 목록 로드 트리거
+        speechSynthesis.getVoices();
+      } else {
+        getBestKoreanVoice(); // 최적 음성 미리 확인
+      }
+    }
+  }, []);
+
   // 컴포넌트 언마운트 시 리소스 정리
   useEffect(() => {
     return () => {
@@ -707,6 +877,9 @@ const VisualInterpretation: React.FC = () => {
         recognitionRef.current.abort();
         recognitionRef.current = null;
       }
+      
+      // TTS 정리
+      speechSynthesis.cancel();
     };
   }, []);
 
@@ -758,6 +931,10 @@ const VisualInterpretation: React.FC = () => {
             <div className="lg:col-span-2 bg-white rounded-2xl p-6 shadow-lg">
               {/* 비디오 플레이어 */}
               <div className="mb-5">
+                {/* 숨겨진 오디오 엘리먼트들 */}
+                <audio ref={userAudioRef} style={{ display: 'none' }} />
+                <audio ref={modelAudioRef} style={{ display: 'none' }} />
+                
                 <div className="w-full h-96 rounded-xl overflow-hidden bg-black relative">
                   <div id="youtube-player" className="w-full h-full"></div>
                   
@@ -931,7 +1108,9 @@ const VisualInterpretation: React.FC = () => {
                   <h4 className="text-lg font-semibold text-blue-800 mb-4 flex items-center gap-2">
                     <span>🔊</span> 원문 듣기 단계
                   </h4>
-                  <div className="text-center">
+                  
+                  {/* 버튼을 정가운데 배치 */}
+                  <div className="flex justify-center mb-4">
                     <button 
                       onClick={() => {
                         if (player && segments[currentScript]) {
@@ -941,21 +1120,26 @@ const VisualInterpretation: React.FC = () => {
                         }
                       }}
                       disabled={!player || segments.length === 0}
-                      className={`w-24 h-24 rounded-full text-4xl font-bold transition-all duration-300 shadow-lg ${
+                      className={`w-24 h-24 rounded-full text-4xl font-bold transition-all duration-300 shadow-lg flex items-center justify-center ${
                         !player || segments.length === 0
                           ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
                           : isPlaying
                           ? 'bg-orange-500 text-white hover:bg-orange-600 animate-pulse'
                           : 'bg-blue-500 text-white hover:bg-blue-600 hover:scale-105'
                       }`}
+                      style={{ lineHeight: '1' }}
                     >
                       {isPlaying ? '⏸️' : '▶️'}
                     </button>
-                    <div className="mt-4 text-gray-600">
+                  </div>
+                  
+                  {/* 텍스트들을 별도로 중앙 정렬 */}
+                  <div className="text-center">
+                    <div className="text-gray-600 mb-2">
                       {isPlaying ? '재생 중...' : '현재 세그먼트 재생'}
                     </div>
                     {isAutoMode && (
-                      <div className="mt-2 text-sm text-blue-600">
+                      <div className="text-sm text-blue-600">
                         자동 모드: 세그먼트가 끝나면 통역 단계로 자동 전환됩니다
                       </div>
                     )}
@@ -970,27 +1154,28 @@ const VisualInterpretation: React.FC = () => {
                     <span>🎙️</span> 통역 녹음 단계
                   </h4>
                   
-                  {/* 녹음 버튼과 타이머 */}
-                  <div className="text-center mb-6">
+                  {/* 녹음 버튼을 정가운데 배치 */}
+                  <div className="flex justify-center mb-4">
                     <button
                       onClick={toggleRecording}
-                      className={`w-24 h-24 rounded-full text-4xl font-bold transition-all duration-300 shadow-lg ${
+                      className={`w-24 h-24 rounded-full text-4xl font-bold transition-all duration-300 shadow-lg flex items-center justify-center ${
                         isRecording
                           ? 'bg-red-600 text-white animate-pulse hover:bg-red-700'
                           : 'bg-red-500 text-white hover:bg-red-600 hover:scale-105'
                       }`}
+                      style={{ lineHeight: '1' }}
                     >
                       {isRecording ? '⏹️' : '🎙️'}
                     </button>
-                    
-                    {/* 녹음 타이머 */}
-                    <div className="mt-4">
-                      <div className="text-3xl font-mono font-bold text-red-600">
-                        {formatTime(recordingTime)}
-                      </div>
-                      <div className="text-gray-600">
-                        {isRecording ? '녹음 중... 한국어로 통역해주세요' : '녹음 시작하기'}
-                      </div>
+                  </div>
+                  
+                  {/* 녹음 타이머와 텍스트를 별도로 중앙 정렬 */}
+                  <div className="text-center mb-6">
+                    <div className="text-3xl font-mono font-bold text-red-600 mb-2">
+                      {formatTime(recordingTime)}
+                    </div>
+                    <div className="text-gray-600">
+                      {isRecording ? '녹음 중... 한국어로 통역해주세요' : '녹음 시작하기'}
                     </div>
                   </div>
 
@@ -1042,9 +1227,22 @@ const VisualInterpretation: React.FC = () => {
                   
                   {/* 내 통역 결과 */}
                   <div className="bg-white border border-green-200 rounded-lg p-4 mb-4">
-                    <h5 className="font-semibold text-green-700 mb-2">
-                      내 통역 결과 (세그먼트 {practiceSegmentIndex + 1}):
-                    </h5>
+                    <div className="flex justify-between items-center mb-2">
+                      <h5 className="font-semibold text-green-700">
+                        내 통역 결과 (세그먼트 {practiceSegmentIndex + 1}):
+                      </h5>
+                      <button
+                        onClick={toggleUserRecording}
+                        disabled={!audioBlob}
+                        className={`px-3 py-1 rounded text-xs ${
+                          isPlayingUserAudio
+                            ? 'bg-red-100 text-red-600 hover:bg-red-200'
+                            : 'bg-green-100 text-green-600 hover:bg-green-200'
+                        }`}
+                      >
+                        {isPlayingUserAudio ? '⏸️ 일시정지' : '🔊 듣기'}
+                      </button>
+                    </div>
                     <p className="text-gray-800 leading-relaxed">
                       {recordedSegments[practiceSegmentIndex] || accumulatedText || '녹음된 내용이 없습니다.'}
                     </p>
@@ -1057,9 +1255,21 @@ const VisualInterpretation: React.FC = () => {
                   {/* AI 제안 답안 */}
                   {segments[practiceSegmentIndex] && (
                     <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-4">
-                      <h5 className="font-semibold text-blue-700 mb-2">
-                        AI 제안 답안 (세그먼트 {practiceSegmentIndex + 1}):
-                      </h5>
+                      <div className="flex justify-between items-center mb-2">
+                        <h5 className="font-semibold text-blue-700">
+                          AI 제안 답안 (세그먼트 {practiceSegmentIndex + 1}):
+                        </h5>
+                        <button
+                          onClick={toggleModelInterpretation}
+                          className={`px-3 py-1 rounded text-xs ${
+                            isPlayingModelAudio
+                              ? 'bg-red-100 text-red-600 hover:bg-red-200'
+                              : 'bg-blue-100 text-blue-600 hover:bg-blue-200'
+                          }`}
+                        >
+                          {isPlayingModelAudio ? '⏸️ 일시정지' : '🔊 듣기'}
+                        </button>
+                      </div>
                       <p className="text-gray-800 leading-relaxed mb-3">
                         {segments[practiceSegmentIndex].translation_suggestion}
                       </p>

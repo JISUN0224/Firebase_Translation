@@ -37,6 +37,11 @@
   padding: 2em;
 }
 
+button {
+  font-size: 0.75rem;
+  padding: 0.4em 1em;
+}
+
 .read-the-docs {
   color: #888;
 }
@@ -243,6 +248,33 @@
 /* 점수 표시 개선 */
 .score-badge {
   background: linear-gradient(45deg, #4f46e5, #7c3aed);
+}
+
+/* Wave 애니메이션 */
+@keyframes wave {
+  0%, 100% { 
+    transform: translateY(0px); 
+  }
+  50% { 
+    transform: translateY(-10px); 
+  }
+}
+
+.wave-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.wave {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  border-radius: 50% 50% 0 0;
+  transform-origin: center bottom;
+}
+
+.score-badge {
   color: white;
   font-weight: bold;
   padding: 0.25rem 0.75rem;

@@ -12,6 +12,7 @@ import SubtitleIntro from './components/Trans_Training/SubtitleIntro';
 import SubtitleTranslation from './components/Trans_Training/SubtitleTranslation';
 import StudyStats from './components/Tran_Analysis/StudyStats';
 import AIAnalysis from './components/Tran_Analysis/AIAnalysis';
+import InterStats from './components/Tran_Analysis/InterStats';
 import StepByStepInterpretation from './components/Interpretation/StepByStepInterpretation';
 import ShadowingPractice from './components/Interpretation/ShadowingPractice';
 import MemoryTraining from './components/Inter_Training/MemoryTraining';
@@ -40,6 +41,7 @@ const AppRouter = () => (
     {/* 분석 관련 라우트 */}
     <Route path="/analysis/stats" element={<StudyStats />} />
     <Route path="/analysis/ai" element={<AIAnalysis />} />
+            <Route path="/analysis/translation-stats" element={<InterStats />} />
 
     {/* 통역 관련 라우트 */}
     <Route path="/interpreting/feedback" element={<StepByStepInterpretation />} />

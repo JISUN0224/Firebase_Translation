@@ -62,8 +62,8 @@ const interpretingCards = [
     title: 'AI 비교 분석',
     description: 'AI와 함께 통역 실력을 키워보세요',
     links: [
-      { label: '🎯 단계별 통역 연습', to: '/interpreting/feedback' },
-      { label: '🎤 쉐도잉 평가', to: '/interpreting/shadowing' },
+      { label: '단계별 통역 연습', to: '/interpreting/feedback' },
+      { label: '쉐도잉 평가', to: '/interpreting/shadowing' },
     ] as MenuLink[],
     border: 'border-purple-400',
     hover: 'hover:border-purple-500',
@@ -73,13 +73,13 @@ const interpretingCards = [
     title: '실전 연습',
     description: '다양한 방식으로 통역 실력을 향상시켜보세요',
     links: [
-      { label: '🧠 메모리 트레이닝', to: '/interpreting/memory' },
+      { label: '메모리 트레이닝', to: '/interpreting/memory' },
       { 
-        label: '🎥 시각자료 통역연습', 
+        label: '시각자료 통역연습', 
         isToggle: true,
         subMenu: [
-          { label: '📺 영상 통역', to: '/translation/visual-interpretation' },
-          { label: '📊 PPT 통역', to: '/translation/ppt-interpretation' },
+          { label: '영상 통역', to: '/translation/visual-interpretation' },
+          { label: 'PPT 통역', to: '/translation/ppt-interpretation' },
         ]
       },
     ] as MenuLink[],
@@ -90,7 +90,9 @@ const interpretingCards = [
     icon: '📈',
     title: '학습 분석',
     description: '나의 통역 학습 데이터를 분석해보세요',
-    links: [] as MenuLink[],
+    links: [
+      { label: '학습 통계', to: '/analysis/translation-stats' },
+    ] as MenuLink[],
     border: 'border-teal-400',
     hover: 'hover:border-teal-500',
   },
@@ -177,12 +179,12 @@ const MainDashboard = () => {
       <div className="w-full bg-blue-400/80 mb-8 relative">
         <div className="max-w-5xl mx-auto px-4 py-6">
           <div className="flex justify-center items-center">
-            <h1 className="text-4xl md:text-5xl font-bold text-white">
+            <h1 className="text-3xl md:text-4xl font-bold text-white">
               번역 학습 플랫폼
             </h1>
           </div>
         </div>
-
+        
         {/* 로그인 버튼 */}
         <div className="absolute right-12 top-1/2 -translate-y-1/2">
           <button 
@@ -200,24 +202,24 @@ const MainDashboard = () => {
       <div className="max-w-5xl mx-auto px-4">
         {/* 번역 섹션 */}
         <div className="mb-12">
-          <h2 className="text-3xl font-bold text-gray-800 mb-6 pl-2 border-l-4 border-blue-500">
+          <h2 className="text-2xl font-bold text-gray-800 mb-6 pl-2 border-l-4 border-blue-500">
             번역
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 lg:gap-6">
             {menuCards.map((card) => (
               <div
                 key={card.title}
-                className={`rounded-xl bg-white shadow-lg p-3 sm:p-4 lg:p-5 border-2 ${card.border} ${card.hover} transition-all duration-200 cursor-pointer group
+                className={`rounded-xl bg-white shadow-lg p-2 sm:p-3 lg:p-4 border-2 ${card.border} ${card.hover} transition-all duration-200 cursor-pointer group
                   hover:shadow-2xl hover:scale-105 hover:bg-blue-50 w-full
                 `}
                 tabIndex={0}
                 onClick={() => handleCardClick(card)}
                 onKeyDown={e => { if (e.key === 'Enter') handleCardClick(card); }}
               >
-                <div className="text-3xl mb-2">{card.icon}</div>
-                <div className="font-bold text-lg mb-1">{card.title}</div>
-                <div className="text-gray-600 mb-2 text-sm">{card.description}</div>
-                <ul className="space-y-1 mt-2">
+                <div className="text-2xl mb-1">{card.icon}</div>
+                <div className="font-bold text-base mb-0.5">{card.title}</div>
+                <div className="text-gray-600 mb-1 text-xs">{card.description}</div>
+                <ul className="space-y-2 mt-1">
                   {card.links.map(link => (
                     <li key={link.label}>
                       <button
@@ -231,7 +233,7 @@ const MainDashboard = () => {
                         {link.label}
                       </button>
                       {link.isToggle && link.subMenu && toggledMenus[link.label] && (
-                        <ul className="ml-3 mt-1 space-y-1">
+                        <ul className="ml-3 mt-2 space-y-2">
                           {link.subMenu.map(subLink => (
                             <li key={subLink.label}>
                               <button
@@ -254,28 +256,28 @@ const MainDashboard = () => {
 
         {/* 통역 섹션 */}
         <div className="mb-12">
-          <h2 className="text-3xl font-bold text-gray-800 mb-6 pl-2 border-l-4 border-blue-500">
+          <h2 className="text-2xl font-bold text-gray-800 mb-6 pl-2 border-l-4 border-blue-500">
             통역
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {interpretingCards.map((card) => (
               <div
                 key={card.title}
-                className={`rounded-xl bg-white shadow-lg p-5 border-2 ${card.border} ${card.hover} transition-all duration-200 cursor-pointer group
-                  hover:shadow-2xl hover:scale-105 hover:bg-purple-50 max-w-sm mx-auto w-full
+                className={`rounded-xl bg-white shadow-lg p-4 border-2 ${card.border} ${card.hover} transition-all duration-200 cursor-pointer group
+                  hover:shadow-2xl hover:scale-105 hover:bg-purple-50 max-w-xs mx-auto w-full
                 `}
                 tabIndex={0}
                 onClick={() => handleCardClick(card)}
                 onKeyDown={e => { if (e.key === 'Enter') handleCardClick(card); }}
               >
-                <div className="text-3xl mb-2">{card.icon}</div>
-                <div className="font-bold text-lg mb-1">{card.title}</div>
-                <div className="text-gray-600 mb-2 text-sm">{card.description}</div>
-                <ul className="space-y-1 mt-2">
+                <div className="text-2xl mb-1">{card.icon}</div>
+                <div className="font-bold text-base mb-0.5">{card.title}</div>
+                <div className="text-gray-600 mb-1 text-xs">{card.description}</div>
+                <ul className="space-y-2 mt-1">
                   {card.links.map(link => (
                     <li key={link.label}>
                       <button
-                        className={`flex items-center gap-2 text-purple-700 hover:underline text-sm ${link.disabled ? 'text-gray-400 cursor-not-allowed' : ''}`}
+                        className={`flex items-center gap-2 text-blue-700 hover:underline text-sm ${link.disabled ? 'text-gray-400 cursor-not-allowed' : ''}`}
                         onClick={e => handleMenuClick(link, e)}
                         disabled={!!link.disabled}
                       >
@@ -285,11 +287,11 @@ const MainDashboard = () => {
                         {link.label}
                       </button>
                       {link.isToggle && link.subMenu && toggledMenus[link.label] && (
-                        <ul className="ml-3 mt-1 space-y-1">
+                        <ul className="ml-3 mt-2 space-y-2">
                           {link.subMenu.map(subLink => (
                             <li key={subLink.label}>
                               <button
-                                className="flex items-center gap-2 text-purple-600 hover:underline text-xs"
+                                className="flex items-center gap-2 text-blue-600 hover:underline text-xs"
                                 onClick={e => handleMenuClick(subLink, e)}
                               >
                                 <span className="text-xs">•</span> {subLink.label}
@@ -308,18 +310,18 @@ const MainDashboard = () => {
 
         {/* 학습 분석 섹션 */}
         <div>
-          <h2 className="text-3xl font-bold text-gray-800 mb-6 pl-2 border-l-4 border-blue-500">
+          <h2 className="text-2xl font-bold text-gray-800 mb-6 pl-2 border-l-4 border-blue-500">
             학습 분석
           </h2>
-          <div className="bg-blue-50 rounded-xl p-6 mt-8">
-            <div className="font-bold text-blue-700 mb-2 flex items-center gap-2">
-              <span role="img" aria-label="bulb">💡</span> 추천 학습 경로
-            </div>
-            <ul className="text-gray-700 text-base ml-2 space-y-1">
-              <li>• <b>초급자</b>: 어휘카드 → 번역 대결 → 일치도</li>
-              <li>• <b>중급자</b>: 번역 대결 → 번역평가 → 시간제한</li>
-              <li>• <b>고급자</b>: 시간제한 → AI분석 → 학습통계</li>
-            </ul>
+        <div className="bg-blue-50 rounded-xl p-6 mt-8">
+          <div className="font-bold text-blue-700 mb-2 flex items-center gap-2">
+            <span role="img" aria-label="bulb">💡</span> 추천 학습 경로
+          </div>
+          <ul className="text-gray-700 text-base ml-2 space-y-1">
+            <li>• <b>초급자</b>: 어휘카드 → 번역 대결 → 일치도</li>
+            <li>• <b>중급자</b>: 번역 대결 → 번역평가 → 시간제한</li>
+            <li>• <b>고급자</b>: 시간제한 → AI분석 → 학습통계</li>
+          </ul>
           </div>
         </div>
       </div>

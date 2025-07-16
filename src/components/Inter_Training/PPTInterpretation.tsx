@@ -1180,11 +1180,13 @@ const PPTInterpretation = () => {
     return () => document.removeEventListener('keydown', handleKeyDown);
   }, [currentSlide]);
 
-  // 슬라이드 변경 시 isFirstPlay 초기화
+  // 슬라이드 변경 시 isFirstPlay 초기화 및 통역 기록 초기화
   const handlePrevSlide = () => {
     if (currentSlide > 0) {
       setCurrentSlide(currentSlide - 1);
       setIsFirstPlay(true);
+      // 통역 기록 초기화
+      clearAllRecords();
     }
   };
 
@@ -1192,6 +1194,8 @@ const PPTInterpretation = () => {
     if (currentSlide < slides.length - 1) {
       setCurrentSlide(currentSlide + 1);
       setIsFirstPlay(true);
+      // 통역 기록 초기화
+      clearAllRecords();
     }
   };
 
@@ -1400,7 +1404,9 @@ const PPTInterpretation = () => {
       const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
       const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
       
-      const analysisPrompt = `당신은 중국어 통역 전문가입니다. 간단하고 실용적인 평가를 해주세요.
+      const analysisPrompt = `당신은 중국어 통역 전문가입니다. 구체적이고 상세한 평가를 해주세요.
+
+중요: 모든 설명과 피드백은 반드시 한국어로 작성해주세요. 중국어 단어나 표현을 인용할 때만 중국어를 사용하세요.
 
 [원문 한국어]
 ${currentSlideData.koreanScript}
@@ -1415,6 +1421,18 @@ ${recordedText}
 - 성조 차이로 인한 오인식 가능성 (重要→中药, 公司→工厂, 会议→回忆, 市场→时常 등)
 - 사용자가 실제 의도했을 올바른 표현 추정
 - PPT 통역 상황에 적합한 평가
+
+평가 시 다음 사항을 구체적으로 언급해주세요:
+- 실제 사용된 중국어 단어나 표현 (잘못 인식된 경우 올바른 표현과 비교)
+- PPT 상황에 적합한 공식적 표현 사용 여부
+- 문법적 오류나 어색한 표현
+- 성조나 발음 문제로 인한 오인식 사례
+
+응답 언어 규칙:
+- 모든 설명과 평가는 한국어로 작성
+- 중국어 단어나 표현을 예시로 들 때만 중국어 사용 (예: "重要(중요)의 성조가 잘못되어 中药(중약)로 인식됨")
+- 점수와 피드백 내용은 모두 한국어로 작성
+- 마크다운 형식(** **)을 사용하지 말고 일반 텍스트로 작성
 
 JSON 형식으로 응답:
 {
@@ -1435,7 +1453,7 @@ JSON 형식으로 응답:
       const data = { contents: [{ parts: [{ text: analysisPrompt }] }] };
       const response = await axios.post(url, data, { 
         headers: { 'Content-Type': 'application/json' },
-        timeout: 30000
+        timeout: 60000
       });
       
       const text = response.data.candidates?.[0]?.content?.parts?.[0]?.text || '';
@@ -1500,7 +1518,12 @@ JSON 형식으로 응답:
           {slides.map((SlideComponent, index) => (
             <div
               key={index}
-              onClick={() => setCurrentSlide(index)}
+              onClick={() => {
+                if (currentSlide !== index) {
+                  setCurrentSlide(index);
+                  clearAllRecords();
+                }
+              }}
               className={`relative cursor-pointer transition-all duration-200 border-2 rounded-lg overflow-hidden ${
                 currentSlide === index
                   ? 'border-blue-500 shadow-md scale-105'
