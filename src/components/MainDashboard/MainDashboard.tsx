@@ -63,7 +63,7 @@ const interpretingCards = [
     description: 'AI와 함께 통역 실력을 키워보세요',
     links: [
       { label: '단계별 통역 연습', to: '/interpreting/feedback' },
-      { label: '쉐도잉 평가', to: '/interpreting/shadowing' },
+      { label: '쉐도잉 평가', to: '/interpreting/shadowuing2' },
     ] as MenuLink[],
     border: 'border-purple-400',
     hover: 'hover:border-purple-500',
@@ -115,34 +115,26 @@ function GoogleLoginButton() {
     await signOut(auth);
   };
   return user ? (
-    <div className="flex items-center gap-3 mb-4 justify-end">
-      <img src={user.photoURL || ''} alt="프로필" className="w-8 h-8 rounded-full border" />
-      <span className="font-semibold text-gray-700">{user.displayName || user.email}</span>
-      <button onClick={handleLogout} className="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300 text-sm">로그아웃</button>
+    <div className="absolute right-12 top-1/2 -translate-y-1/2 flex items-center gap-3">
+      <img src={user.photoURL || ''} alt="프로필" className="w-8 h-8 rounded-full border-2 border-white" />
+      <span className="text-white font-semibold text-sm">{user.displayName || user.email?.split('@')[0]}</span>
+      <button 
+        onClick={handleLogout} 
+        className="px-3 py-1 bg-white/20 text-white rounded-lg hover:bg-white/30 transition-colors text-sm"
+      >
+        로그아웃
+      </button>
     </div>
   ) : (
-    <div style={{ position: 'absolute', top: '4.5rem', right: '2rem', zIndex: 50 }}>
+    <div className="absolute right-12 top-1/2 -translate-y-1/2">
       <button
         onClick={handleLogin}
-        className="flex flex-col items-center px-6 py-3 bg-white border border-gray-300 rounded-xl shadow hover:shadow-md hover:bg-gray-50 transition-all"
-        style={{ minWidth: 160 }}
+        className="flex flex-col items-center gap-1 bg-white/20 px-4 py-3 rounded-lg hover:bg-white/30 transition-colors"
       >
-        <span className="flex items-center justify-center">
-          <svg width="28" height="28" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <g clipPath="url(#clip0_17_40)">
-              <path d="M47.5 24.5C47.5 22.8333 47.3333 21.3333 47.0833 19.8333H24V28.5H37.3333C36.8333 31.3333 35.1667 33.6667 32.6667 35.1667V40.1667H40.1667C44.1667 36.5 47.5 31.1667 47.5 24.5Z" fill="#4285F4"/>
-              <path d="M24 48C30.5 48 35.8333 45.8333 40.1667 40.1667L32.6667 35.1667C30.6667 36.5 28.1667 37.3333 24 37.3333C17.8333 37.3333 12.5 33.1667 10.6667 27.6667H2.83334V32.8333C7.16667 41.1667 15.1667 48 24 48Z" fill="#34A853"/>
-              <path d="M10.6667 27.6667C10.1667 26.3333 10 24.8333 10 23.3333C10 21.8333 10.1667 20.3333 10.6667 19H10.6667V13.8333H2.83334C1.16667 17.1667 0 20.8333 0 24.5C0 28.1667 1.16667 31.8333 2.83334 35.1667L10.6667 27.6667Z" fill="#FBBC05"/>
-              <path d="M24 9.66667C28.1667 9.66667 31.1667 11.3333 32.8333 12.8333L40.3333 6.16667C35.8333 2.16667 30.5 0 24 0C15.1667 0 7.16667 6.83333 2.83334 13.8333L10.6667 19C12.5 13.5 17.8333 9.66667 24 9.66667Z" fill="#EA4335"/>
-            </g>
-            <defs>
-              <clipPath id="clip0_17_40">
-                <rect width="48" height="48" fill="white"/>
-              </clipPath>
-            </defs>
-          </svg>
-        </span>
-        <span className="mt-2 text-gray-800 font-semibold text-base">구글로 로그인</span>
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+        </svg>
+        <span className="text-white text-sm font-medium">Login</span>
       </button>
     </div>
   );
@@ -186,17 +178,7 @@ const MainDashboard = () => {
         </div>
         
         {/* 로그인 버튼 */}
-        <div className="absolute right-12 top-1/2 -translate-y-1/2">
-          <button 
-            className="flex flex-col items-center gap-1 bg-white/20 px-4 py-3 rounded-lg hover:bg-white/30 transition-colors"
-            onClick={() => {/* 로그인 처리 */}}
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-            </svg>
-            <span className="text-white text-sm font-medium">Login</span>
-          </button>
-        </div>
+        <GoogleLoginButton />
       </div>
 
       <div className="max-w-5xl mx-auto px-4">
@@ -308,20 +290,108 @@ const MainDashboard = () => {
           </div>
         </div>
 
-        {/* 학습 분석 섹션 */}
+        {/* 학습 분석 섹션 - 번역/통역 루트 카드 */}
         <div>
           <h2 className="text-2xl font-bold text-gray-800 mb-6 pl-2 border-l-4 border-blue-500">
-            학습 분석
+            추천 루트
           </h2>
-        <div className="bg-blue-50 rounded-xl p-6 mt-8">
-          <div className="font-bold text-blue-700 mb-2 flex items-center gap-2">
-            <span role="img" aria-label="bulb">💡</span> 추천 학습 경로
-          </div>
-          <ul className="text-gray-700 text-base ml-2 space-y-1">
-            <li>• <b>초급자</b>: 어휘카드 → 번역 대결 → 일치도</li>
-            <li>• <b>중급자</b>: 번역 대결 → 번역평가 → 시간제한</li>
-            <li>• <b>고급자</b>: 시간제한 → AI분석 → 학습통계</li>
-          </ul>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* 번역 루트 카드 */}
+            <div className="rounded-2xl bg-white shadow-lg p-6 border-2 border-blue-300 hover:border-blue-500 transition-all duration-200">
+              <h3 className="text-xl font-bold text-blue-700 mb-4">번역 학습 루트</h3>
+              <div className="mb-3">
+                <span className="inline-block px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-semibold mr-2">초급</span>
+                {[
+                  { label: '어휘카드', url: '/practice/vocabquiz' },
+                  { label: '번역 대결', url: '/practice/timed' },
+                  { label: '일치도', url: '/translation/similarity' }
+                ].map((item, idx, arr) => (
+                  <span key={item.label} className="inline-flex items-center">
+                    <span
+                      className="font-bold text-blue-700 underline cursor-pointer hover:text-blue-900 transition-colors px-1"
+                      onClick={() => navigate(item.url)}
+                      onMouseOver={e => (e.currentTarget.style.textDecoration = 'underline')}
+                      onMouseOut={e => (e.currentTarget.style.textDecoration = 'underline')}
+                      tabIndex={0}
+                      style={{ cursor: 'pointer' }}
+                    >
+                      {item.label}
+                    </span>
+                    {idx < arr.length - 1 && <span className="mx-1 text-gray-400">→</span>}
+                  </span>
+                ))}
+              </div>
+              <div>
+                <span className="inline-block px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-semibold mr-2">중급</span>
+                {[
+                  { label: '번역 대결', url: '/practice/timed' },
+                  { label: '번역평가', url: '/translation/grading' },
+                  { label: '시간제한', url: '/practice/timed' }
+                ].map((item, idx, arr) => (
+                  <span key={item.label} className="inline-flex items-center">
+                    <span
+                      className="font-bold text-blue-700 underline cursor-pointer hover:text-blue-900 transition-colors px-1"
+                      onClick={() => navigate(item.url)}
+                      onMouseOver={e => (e.currentTarget.style.textDecoration = 'underline')}
+                      onMouseOut={e => (e.currentTarget.style.textDecoration = 'underline')}
+                      tabIndex={0}
+                      style={{ cursor: 'pointer' }}
+                    >
+                      {item.label}
+                    </span>
+                    {idx < arr.length - 1 && <span className="mx-1 text-gray-400">→</span>}
+                  </span>
+                ))}
+              </div>
+            </div>
+            {/* 통역 루트 카드 */}
+            <div className="rounded-2xl bg-white shadow-lg p-6 border-2 border-purple-300 hover:border-purple-500 transition-all duration-200">
+              <h3 className="text-xl font-bold text-purple-700 mb-4">통역 학습 루트</h3>
+              <div className="mb-3">
+                <span className="inline-block px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm font-semibold mr-2">초급</span>
+                {[
+                  { label: '메모리 트레이닝', url: '/interpreting/memory' },
+                  { label: '쉐도잉', url: '/interpreting/shadowing' },
+                  { label: '단계별 통역', url: '/interpreting/feedback' }
+                ].map((item, idx, arr) => (
+                  <span key={item.label} className="inline-flex items-center">
+                    <span
+                      className="font-bold text-purple-700 underline cursor-pointer hover:text-purple-900 transition-colors px-1"
+                      onClick={() => navigate(item.url)}
+                      onMouseOver={e => (e.currentTarget.style.textDecoration = 'underline')}
+                      onMouseOut={e => (e.currentTarget.style.textDecoration = 'underline')}
+                      tabIndex={0}
+                      style={{ cursor: 'pointer' }}
+                    >
+                      {item.label}
+                    </span>
+                    {idx < arr.length - 1 && <span className="mx-1 text-gray-400">→</span>}
+                  </span>
+                ))}
+              </div>
+              <div>
+                <span className="inline-block px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm font-semibold mr-2">중급</span>
+                {[
+                  { label: '쉐도잉', url: '/interpreting/shadowing' },
+                  { label: '영상 통역', url: '/translation/visual-interpretation' },
+                  { label: 'PPT 통역', url: '/translation/ppt-interpretation' }
+                ].map((item, idx, arr) => (
+                  <span key={item.label} className="inline-flex items-center">
+                    <span
+                      className="font-bold text-purple-700 underline cursor-pointer hover:text-purple-900 transition-colors px-1"
+                      onClick={() => navigate(item.url)}
+                      onMouseOver={e => (e.currentTarget.style.textDecoration = 'underline')}
+                      onMouseOut={e => (e.currentTarget.style.textDecoration = 'underline')}
+                      tabIndex={0}
+                      style={{ cursor: 'pointer' }}
+                    >
+                      {item.label}
+                    </span>
+                    {idx < arr.length - 1 && <span className="mx-1 text-gray-400">→</span>}
+                  </span>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </div>

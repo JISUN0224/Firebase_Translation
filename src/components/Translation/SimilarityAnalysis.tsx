@@ -46,6 +46,7 @@ export default function SimilarityAnalysis() {
   const radarRef = useRef<any>(null);
   const [targetLanguage, setTargetLanguage] = useState<string>('한-중');
   const languagePairs = ['한-중', '중-한'];
+  const [showIntro, setShowIntro] = useState(true);
 
   useEffect(() => {
     const fetchProblems = async () => {
@@ -261,6 +262,19 @@ ${userTranslation}
         >
           <span className="text-lg">🏠</span> &lt;- 이전
         </button>
+        {showIntro && (
+          <div className="mb-6 p-4 bg-blue-50 border-l-4 border-blue-400 rounded shadow flex items-start justify-between gap-4">
+            <div>
+              <div className="font-bold text-lg mb-1">📊 AI 번역 유사도/분석</div>
+              <div className="text-gray-800 text-sm">
+                이 페이지에서는 여러분의 번역과 AI 번역(ChatGPT, Gemini) 간의 유사도를 다양한 기준(어휘, 문법, 의미 등)으로 분석합니다.<br/>
+                AI가 점수와 그래프, 상세 피드백을 제공하여, 내 번역이 어떤 AI와 더 비슷한지, 어떤 부분이 강점/약점인지 한눈에 확인할 수 있습니다.<br/>
+                직접 번역을 입력하고, AI와의 차이와 개선점을 분석해보세요!
+              </div>
+            </div>
+            <button className="ml-4 text-xs text-gray-500 hover:text-gray-700 px-2 py-1" onClick={() => setShowIntro(false)}>닫기 ✖</button>
+          </div>
+        )}
 
         {/* 필터 영역 */}
         <div className="flex flex-wrap gap-4 mb-6">

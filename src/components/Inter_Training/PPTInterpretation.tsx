@@ -145,80 +145,80 @@ const BrandPositioningSlide = () => {
   };
 
   return (
-    <div className="h-full w-full bg-white flex flex-col" style={{ padding: '20px 60px 120px 60px' }}>
+    <div className="h-full w-full bg-white flex flex-col" style={{ padding: '10px 60px 70px 60px' }}>
       <div className="absolute top-8 right-8 bg-opacity-10 text-amber-800 px-4 py-2 rounded-full text-sm font-medium" style={{ background: 'rgba(139, 69, 19, 0.1)' }}>
         2 / 8
       </div>
       
       {/* 상단 섹션 - 제목과 카드들 */}
-      <div className="mb-6 text-center">
+      <div className="mb-3 text-center">
         <h2 style={{ 
           fontFamily: 'Playfair Display, serif',
-          fontSize: '48px',
+          fontSize: '40px',
           fontWeight: 700,
           color: '#8B4513',
-          marginBottom: '12px'
+          marginBottom: '6px'
         }}>
           브랜드 포지셔닝
         </h2>
         <p style={{ 
-          fontSize: '18px',
+          fontSize: '15px',
           color: '#A0937D',
-          marginBottom: '20px'
+          marginBottom: '12px'
         }}>
           클린 뷰티 시장에서의 프리미엄 포지션
         </p>
         
-        <div className="grid grid-cols-2 gap-6 max-w-4xl mx-auto">
+        <div className="grid grid-cols-2 gap-3 max-w-4xl mx-auto">
           <div style={{ 
             background: '#FAF7F2',
-            padding: '16px',
+            padding: '12px',
             borderRadius: '15px',
             boxShadow: '0 8px 20px rgba(139, 69, 19, 0.1)'
           }}>
-            <div style={{ color: '#8B4513', fontSize: '20px', fontWeight: 600, marginBottom: '8px' }}>
+            <div style={{ color: '#8B4513', fontSize: '17px', fontWeight: 600, marginBottom: '5px' }}>
               타겟 가격대
             </div>
-            <div style={{ color: '#A0937D', fontSize: '16px' }}>
+            <div style={{ color: '#A0937D', fontSize: '13px' }}>
               ₩50,000 - ₩120,000
             </div>
           </div>
           <div style={{ 
             background: '#FAF7F2',
-            padding: '16px',
+            padding: '12px',
             borderRadius: '15px',
             boxShadow: '0 8px 20px rgba(139, 69, 19, 0.1)'
           }}>
-            <div style={{ color: '#8B4513', fontSize: '20px', fontWeight: 600, marginBottom: '8px' }}>
+            <div style={{ color: '#8B4513', fontSize: '17px', fontWeight: 600, marginBottom: '5px' }}>
               경쟁 브랜드
             </div>
-            <div style={{ color: '#A0937D', fontSize: '16px' }}>
+            <div style={{ color: '#A0937D', fontSize: '13px' }}>
               설화수, 라프레리, 에스티로더
             </div>
           </div>
           <div style={{ 
             background: '#FAF7F2',
-            padding: '16px',
+            padding: '12px',
             borderRadius: '15px',
             boxShadow: '0 8px 20px rgba(139, 69, 19, 0.1)'
           }}>
-            <div style={{ color: '#8B4513', fontSize: '20px', fontWeight: 600, marginBottom: '8px' }}>
+            <div style={{ color: '#8B4513', fontSize: '17px', fontWeight: 600, marginBottom: '5px' }}>
               차별화 포인트
             </div>
-            <div style={{ color: '#A0937D', fontSize: '16px' }}>
+            <div style={{ color: '#A0937D', fontSize: '13px' }}>
               친환경 + 프리미엄
             </div>
           </div>
           <div style={{ 
             background: '#FAF7F2',
-            padding: '16px',
+            padding: '12px',
             borderRadius: '15px',
             boxShadow: '0 8px 20px rgba(139, 69, 19, 0.1)'
           }}>
-            <div style={{ color: '#8B4513', fontSize: '20px', fontWeight: 600, marginBottom: '8px' }}>
+            <div style={{ color: '#8B4513', fontSize: '17px', fontWeight: 600, marginBottom: '5px' }}>
               유통 채널
             </div>
-            <div style={{ color: '#A0937D', fontSize: '16px' }}>
+            <div style={{ color: '#A0937D', fontSize: '13px' }}>
               백화점, 온라인 플래그십
             </div>
           </div>
@@ -226,13 +226,13 @@ const BrandPositioningSlide = () => {
       </div>
 
       {/* 하단 차트 섹션 */}
-      <div className="mx-auto flex-1" style={{ width: '750px', minHeight: '450px' }}>
+      <div className="mx-auto flex-1" style={{ width: '680px', minHeight: '350px' }}>
         <div style={{ 
           width: '100%',
           height: '100%',
           background: 'white',
           borderRadius: '15px',
-          padding: '24px',
+          padding: '18px',
           boxShadow: '0 10px 30px rgba(139, 69, 19, 0.1)'
         }}>
           <Scatter data={chartData} options={chartOptions} />

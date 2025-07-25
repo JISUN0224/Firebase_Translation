@@ -136,6 +136,7 @@ export default function GradingPage() {
   const navigate = useNavigate();
   // AI 순위 상세 토글 상태 (5단계용)
   const [aiRankDetailOpen, setAiRankDetailOpen] = useState<{ [key: string]: boolean }>({});
+  const [showIntro, setShowIntro] = useState(true);
 
   // 5단계에서 대응되는 섹션들의 높이를 맞추는 효과
   useEffect(() => {
@@ -380,6 +381,20 @@ export default function GradingPage() {
               type="radio"
               name="worstTranslation"
               className="custom-radio appearance-none focus:outline-none transition-colors duration-200"
+              style={{
+                width: '18px',
+                height: '18px',
+                minWidth: '18px',
+                minHeight: '18px',
+                borderRadius: '50%',
+                border: '2px solid #bbb',
+                background: '#fff',
+                display: 'inline-block',
+                marginRight: '8px',
+                verticalAlign: 'middle',
+                boxShadow: improvement.worstTranslation === card.key ? '0 0 0 2px #f472b6' : 'none',
+                accentColor: improvement.worstTranslation === card.key ? '#ec4899' : '#bbb',
+              }}
               checked={improvement.worstTranslation === card.key}
               onChange={() => setImprovement(impr => ({ ...impr, worstTranslation: card.key }))}
               disabled={currentStep !== 1}
@@ -742,6 +757,22 @@ export default function GradingPage() {
         </button>
       )}
       <div className="w-full max-w-7xl mx-auto" style={{ minWidth: '1000px' }}>
+        {/* 안내 카드: 오른쪽 상단에 작게 */}
+        {currentStep === 1 && showIntro && (
+          <div style={{ position: 'absolute', right: 40, top: 40, zIndex: 10 }}>
+            <div className="bg-green-50 border border-green-300 rounded-lg shadow p-4 w-[280px] flex flex-col gap-2">
+              <div className="flex items-center gap-2 mb-1">
+                <span className="text-xl">🎯</span>
+                <span className="font-bold text-base">AI 번역 평가자</span>
+                <button className="ml-auto text-xs text-gray-400 hover:text-gray-700" onClick={() => setShowIntro(false)}>닫기✖</button>
+              </div>
+              <div className="text-gray-700 text-xs leading-relaxed">
+                여러 번역문(AI/인간/내 번역)을 직접 평가하고, AI의 평가 결과와 비교할 수 있습니다.<br/>
+                다양한 평가 활동을 통해 번역 실력을 진단하고, AI와의 관점 차이도 경험할 수 있습니다.
+              </div>
+            </div>
+          </div>
+        )}
         {/* 상단 필터/문제 카드 */}
         <div className="bg-white border border-gray-200 rounded-xl p-8 mb-8 shadow" style={{ minWidth: 0 }}>
           <div className="flex flex-wrap gap-4 mb-6">

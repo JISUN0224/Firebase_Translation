@@ -1256,24 +1256,27 @@ const StepByStepInterpretation: React.FC = () => {
 
             {/* 대형 재생 버튼 */}
             <div className="text-center mb-8">
-              <button
-                onClick={toggleAudio}
-                disabled={audioLoading || !currentAudioUrl}
-                className={`w-32 h-32 rounded-full text-5xl font-bold transition-all duration-300 shadow-2xl ${
-                  audioLoading 
-                    ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
-                    : isPlaying
-                    ? 'bg-gradient-to-r from-orange-500 to-orange-600 text-white hover:scale-105 animate-pulse'
-                    : 'bg-gradient-to-r from-blue-500 to-blue-700 text-white hover:scale-105'
-                }`}
-              >
-                {audioLoading ? '⏳' : isPlaying ? '⏸️' : '▶️'}
-              </button>
-              <div className="text-lg text-gray-600 mt-4">
-                {audioLoading ? '음성 로딩 중...' : 
-                 audioError ? '음성 로딩 실패' :
-                 isPlaying ? '재생 중...' : 
-                 '원문 재생'}
+              <div className="flex flex-col items-center">
+                <button
+                  onClick={toggleAudio}
+                  disabled={audioLoading || !currentAudioUrl}
+                  className={`w-32 h-32 rounded-full text-6xl font-bold transition-all duration-300 shadow-2xl flex items-center justify-center ${
+                    audioLoading 
+                      ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                      : isPlaying
+                      ? 'bg-gradient-to-r from-orange-500 to-orange-600 text-white hover:scale-105 animate-pulse'
+                      : 'bg-gradient-to-r from-blue-500 to-blue-700 text-white hover:scale-105'
+                  }`}
+                  style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                >
+                  {audioLoading ? '⏳' : isPlaying ? '⏸️' : '▶️'}
+                </button>
+                <div className="text-lg text-gray-600 mt-4">
+                  {audioLoading ? '음성 로딩 중...' : 
+                   audioError ? '음성 로딩 실패' :
+                   isPlaying ? '재생 중...' : 
+                   '원문 재생'}
+                </div>
               </div>
               
               {/* 오디오 에러 표시 */}
@@ -1443,16 +1446,19 @@ const StepByStepInterpretation: React.FC = () => {
 
             {/* 대형 녹음 버튼 */}
             <div className="text-center mb-8">
-              <button
-                onClick={toggleRecording}
-                className={`w-32 h-32 rounded-full text-5xl font-bold transition-all duration-300 shadow-2xl ${
-                  isRecording
-                    ? 'bg-gradient-to-r from-red-500 to-red-600 text-white animate-pulse hover:scale-105'
-                    : 'bg-gradient-to-r from-blue-500 to-blue-700 text-white hover:scale-105'
-                }`}
-              >
-                {isRecording ? '⏹️' : '🎙️'}
-              </button>
+              <div className="flex flex-col items-center">
+                <button
+                  onClick={toggleRecording}
+                  className={`w-32 h-32 rounded-full text-6xl font-bold transition-all duration-300 shadow-2xl flex items-center justify-center ${
+                    isRecording
+                      ? 'bg-gradient-to-r from-red-500 to-red-600 text-white animate-pulse hover:scale-105'
+                      : 'bg-gradient-to-r from-blue-500 to-blue-700 text-white hover:scale-105'
+                  }`}
+                  style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                >
+                  {isRecording ? '⏹️' : '🎙️'}
+                </button>
+              </div>
               
               {/* 타이머 */}
               <div className="text-4xl font-mono font-bold text-gray-700 mt-4">

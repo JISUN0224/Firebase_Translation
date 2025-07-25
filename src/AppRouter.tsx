@@ -14,10 +14,10 @@ import StudyStats from './components/Tran_Analysis/StudyStats';
 import AIAnalysis from './components/Tran_Analysis/AIAnalysis';
 import InterStats from './components/Tran_Analysis/InterStats';
 import StepByStepInterpretation from './components/Interpretation/StepByStepInterpretation';
-import ShadowingPractice from './components/Interpretation/ShadowingPractice';
 import MemoryTraining from './components/Inter_Training/MemoryTraining';
 import VisualInterpretation from './components/Inter_Training/VisualInterpretation';
 import PPTInterpretation from './components/Inter_Training/PPTInterpretation';
+import Shadowuing from './components/Interpretation/Shadowuing';
 
 const AppRouter = () => (
   <Routes>
@@ -46,7 +46,8 @@ const AppRouter = () => (
     {/* 통역 관련 라우트 */}
     <Route path="/interpreting/feedback" element={<StepByStepInterpretation />} />
     <Route path="/interpreting/memory" element={<MemoryTraining />} />
-    <Route path="/interpreting/shadowing" element={<ShadowingPractice />} />
+    <Route path="/interpreting/shadowing" element={<Shadowuing />} />
+    <Route path="/interpreting/shadowuing2" element={<Shadowuing />} />
   </Routes>
 );
 

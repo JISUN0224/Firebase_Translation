@@ -184,24 +184,37 @@ button {
 }
 
 .custom-radio {
-  width: 0.6rem !important;
-  height: 0.6rem !important;
-  min-width: 0.6rem !important;
-  min-height: 0.6rem !important;
-  max-width: 0.6rem !important;
-  max-height: 0.6rem !important;
+  width: 18px !important;
+  height: 18px !important;
+  min-width: 18px !important;
+  min-height: 18px !important;
+  max-width: 18px !important;
+  max-height: 18px !important;
   border-radius: 50% !important;
   aspect-ratio: 1 / 1 !important;
   flex-shrink: 0 !important;
   display: block !important;
   position: relative !important;
-  border: 2px solid #d1d5db !important; /* gray-300 */
+  border: 2px solid #bbb !important;
   background: #fff !important;
   transition: border-color 0.2s, background 0.2s;
+  box-sizing: border-box !important;
 }
 .custom-radio:checked {
   border-color: #ec4899 !important; /* pink-500 */
-  background: #ec4899 !important;
+  background: #fff !important;
+}
+.custom-radio:checked::after {
+  content: '';
+  display: block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #ec4899;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 /* 5단계 개선된 스타일 */

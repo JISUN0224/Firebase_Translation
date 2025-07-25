@@ -18,6 +18,57 @@ interface TranslationProblem {
   "Gemini_번역"?: string;
 }
 
+// === [복구: 피드백 하이라이트 및 연동 기능 함수 정의] ===
+function parseFeedback6(feedback: string) {
+  const sections = { summary: '', good: '', bad: '', recommend: '', learn: '', example: '' };
+  const matches = feedback.match(/\d[\).\-] ?[\s\S]*?(?=\n\d[\).\-]|$)/g) || [];
+  if (matches[0]) sections.summary = matches[0].replace(/^1[\).\-] ?/, '').trim();
+  if (matches[1]) sections.good = matches[1].replace(/^2[\).\-] ?/, '').trim();
+  if (matches[2]) sections.bad = matches[2].replace(/^3[\).\-] ?/, '').trim();
+  if (matches[3]) sections.recommend = matches[3].replace(/^4[\).\-] ?/, '').trim();
+  if (matches[4]) sections.learn = matches[4].replace(/^5[\).\-] ?/, '').trim();
+  if (matches[5]) sections.example = matches[5].replace(/^6[\).\-] ?/, '').trim();
+  const isEmpty = Object.values(sections).every(v => !v || v.trim() === '');
+  const summaryTooLong = sections.summary.length > feedback.length * 0.8;
+  if (isEmpty || summaryTooLong) {
+    return {
+      summary: feedback,
+      good: '',
+      bad: '',
+      recommend: '',
+      learn: '',
+      example: ''
+    };
+  }
+  return sections;
+}
+function extractQuotedPhrases(text: string) {
+  // 작은따옴표 또는 큰따옴표 모두 지원
+  const matches = text.match(/['"]([^'"]+)['"]/g) || [];
+  return matches.map(m => m.replace(/['"]/g, ''));
+}
+function renderFeedbackWithClickableQuotes(text: string, allPhrases: string[], setHighlightWord: (w: string|null)=>void) {
+  // 작은따옴표 또는 큰따옴표 모두 지원
+  const parts = text.split(/(['"][^'"]+['"])/g);
+  return parts.map((part, idx) => {
+    const match = part.match(/^['"]([^'"]+)['"]$/);
+    if (match && allPhrases.includes(match[1])) {
+      return (
+        <span
+          key={idx}
+          className="bg-yellow-200 font-bold rounded px-1 cursor-pointer"
+          onMouseEnter={() => setHighlightWord(match[1])}
+          onMouseLeave={() => setHighlightWord(null)}
+          style={{ position: 'relative', transition: 'background 0.2s' }}
+        >
+          {part}
+        </span>
+      );
+    }
+    return <span key={idx}>{part}</span>;
+  });
+}
+
 export default function MainFeedback() {
   const [problems, setProblems] = useState<TranslationProblem[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -36,6 +87,7 @@ export default function MainFeedback() {
   const [selectedVocab, setSelectedVocab] = useState<any | null>(null);
   const navigate = useNavigate();
   const [availableDomains, setAvailableDomains] = useState<string[]>(['전체']);
+  const [showIntro, setShowIntro] = useState(true);
 
   useEffect(() => {
     const fetchProblems = async () => {
@@ -199,6 +251,17 @@ ${aiTranslations["ChatGPT_번역"] || aiTranslations["Gemini_번역"] || ''}
     );
   }
 
+  // === [복구: 피드백 하이라이트용 상태 및 구문 추출] ===
+  const normalizedFeedback = feedback.replace(/^[ \t]*[●•*-]/gm, '‧');
+  const feedbackSections = parseFeedback6(normalizedFeedback);
+  const allPhrases = Array.from(new Set([
+    ...extractQuotedPhrases(feedbackSections.summary),
+    ...extractQuotedPhrases(feedbackSections.good),
+    ...extractQuotedPhrases(feedbackSections.bad),
+    ...extractQuotedPhrases(feedbackSections.recommend),
+    ...extractQuotedPhrases(feedbackSections.learn),
+  ]));
+
   return (
     <div className="min-h-screen bg-slate-50 py-10 px-2" style={{ fontFamily: `'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', 'SimSun', 'Noto Sans KR', 'Apple SD Gothic Neo', Arial, sans-serif` }}>
       <div className="w-full max-w-6xl mx-auto" style={{ minWidth: '1152px' }}>
@@ -209,6 +272,19 @@ ${aiTranslations["ChatGPT_번역"] || aiTranslations["Gemini_번역"] || ''}
         >
           <span className="text-lg">🏠</span> &lt;- 이전
         </button>
+        {showIntro && (
+          <div className="mb-6 p-4 bg-yellow-50 border-l-4 border-yellow-400 rounded shadow flex items-start justify-between gap-4">
+            <div>
+              <div className="font-bold text-lg mb-1">📝 AI 피드백 결과 안내</div>
+              <div className="text-gray-800 text-sm">
+                이 페이지에서는 여러분이 제출한 번역에 대해 AI가 6가지 항목(종합 평가, 좋은 점, 아쉬운 점, 추천 표현/개선, 학습 제안, 주요 표현/예문)으로 상세하게 피드백을 제공합니다.<br/>
+                각 항목별로 번역의 강점과 개선점을 확인하고, 실제 예문과 추천 표현을 통해 실력을 높일 수 있습니다.<br/>
+                하이라이트된 구문에 마우스를 올리면 원문에서도 해당 부분이 강조되어, 번역의 포인트를 직관적으로 파악할 수 있습니다.
+              </div>
+            </div>
+            <button className="ml-4 text-xs text-gray-500 hover:text-gray-700 px-2 py-1" onClick={() => setShowIntro(false)}>닫기 ✖</button>
+          </div>
+        )}
         {/* 필터 영역 */}
         <div className="flex flex-wrap gap-4 mb-6">
           <select className="bg-white text-black px-3 py-2 rounded-md border border-gray-300 appearance-none" value={difficulty} onChange={handleDifficultyChange}>
@@ -317,15 +393,7 @@ ${aiTranslations["ChatGPT_번역"] || aiTranslations["Gemini_번역"] || ''}
                   {feedbackError && <div className="text-red-500 mt-2">{feedbackError}</div>}
                   {feedback && (
                     <div className="mt-4 p-4 bg-yellow-50 border rounded whitespace-pre-line text-sm">
-                      {feedback.split(/(✅|⚠️|💡|\*\*|\*|\-|\n)/g).map((part, idx) => {
-                        if (part === '✅' || part === '⚠️' || part === '💡') {
-                          return <span key={idx} className="feedback-highlight">{part}</span>;
-                        }
-                        if (part.startsWith('- ')) {
-                          return <span key={idx} className="feedback-suggestion">{part}</span>;
-                        }
-                        return part;
-                      })}
+                      {renderFeedbackWithClickableQuotes(feedback, allPhrases, setHighlightWord)}
                     </div>
                   )}
                 </div>

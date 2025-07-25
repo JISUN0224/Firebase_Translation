@@ -17,6 +17,8 @@ import {
   Filler,
 } from 'chart.js';
 import { onAuthStateChanged } from 'firebase/auth';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 
 ChartJS.register(
   CategoryScale,
@@ -610,14 +612,7 @@ const InterStats: React.FC = () => {
           </div>
         </div>
       )}
-      <div className="dashboard-container" style={{ maxWidth: '1400px', width: '100%', margin: '0 auto', background: 'rgba(255,255,255,0.95)', borderRadius: 28, padding: '32px', boxShadow: '0 20px 60px rgba(0,0,0,0.1)', backdropFilter: 'blur(20px)', boxSizing: 'border-box', position: 'relative' }}>
-        
-        {/* 예시 라벨 (로그인 안된 경우에만) */}
-        {!isLoggedIn && (
-          <div style={{ position: 'absolute', top: '10px', right: '20px', background: 'linear-gradient(135deg, #fbbf24, #f59e0b)', color: 'white', padding: '8px 16px', borderRadius: '20px', fontSize: '14px', fontWeight: '600', boxShadow: '0 4px 15px rgba(251,191,36,0.3)' }}>
-            📊 예시 대시보드
-          </div>
-        )}
+      <div className="dashboard-container" style={{ maxWidth: '1400px', width: '100%', margin: '0 auto', background: 'rgba(255,255,255,0.95)', borderRadius: 28, padding: '32px', boxShadow: '0 20px 60px rgba(0,0,0,0.1)', backdropFilter: 'blur(20px)', boxSizing: 'border-box', position: 'relative' }} id="dashboard-root">
         {/* 헤더 */}
         <div className="header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20, paddingBottom: 15, borderBottom: '2px solid #f8fafc' }}>
           <div className="welcome-section">
@@ -629,6 +624,27 @@ const InterStats: React.FC = () => {
               <div className="streak-number" style={{ fontSize: 20, fontWeight: 700, marginBottom: 3 }}>{stats?.streakDays || 0}</div>
               <div className="streak-label" style={{ fontSize: 11, opacity: 0.9 }}>연속 학습일</div>
             </div>
+            {/* PDF로 다운받기 버튼을 streak-info 오른쪽에 배치 */}
+            <button
+              style={{ background: 'linear-gradient(135deg, #667eea, #764ba2)', color: 'white', border: 'none', borderRadius: 16, padding: '10px 22px', fontWeight: 700, fontSize: 15, boxShadow: '0 4px 15px rgba(102,126,234,0.15)', cursor: 'pointer', transition: 'all 0.2s' }}
+              onClick={async () => {
+                const dashboard = document.getElementById('dashboard-root');
+                if (!dashboard) return;
+                const html2canvas = (await import('html2canvas')).default;
+                const jsPDF = (await import('jspdf')).default;
+                const canvas = await html2canvas(dashboard, { useCORS: true, scale: 2 });
+                const imgData = canvas.toDataURL('image/png');
+                const pdf = new jsPDF('p', 'mm', 'a4');
+                const pageWidth = pdf.internal.pageSize.getWidth();
+                const pageHeight = pdf.internal.pageSize.getHeight();
+                const imgProps = { width: canvas.width, height: canvas.height };
+                const ratio = Math.min(pageWidth / imgProps.width, pageHeight / imgProps.height);
+                const pdfWidth = imgProps.width * ratio;
+                const pdfHeight = imgProps.height * ratio;
+                pdf.addImage(imgData, 'PNG', (pageWidth - pdfWidth) / 2, 10, pdfWidth, pdfHeight - 20);
+                pdf.save('dashboard.pdf');
+              }}
+            >PDF로 다운받기</button>
           </div>
         </div>
         {/* 메인 그리드 */}

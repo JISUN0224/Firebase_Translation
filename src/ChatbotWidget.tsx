@@ -104,10 +104,13 @@ const ChatbotWidget: React.FC<ChatbotWidgetProps> = ({ initialContext }) => {
             borderRadius: '50%',
             background: '#2563eb',
             color: '#fff',
-            fontSize: '2rem',
+            fontSize: '1.5rem',
             boxShadow: '0 2px 12px rgba(30,64,175,0.13)',
             border: 'none',
             cursor: 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
           }}
           title="Gemini 챗봇 열기"
         >
